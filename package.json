@@ -1,0 +1,39 @@
+{
+  "name": "@kikiutils/mongoose",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "kiki-kanri",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kiki-kanri/kikiutils-node-mongoose.git"
+  },
+  "scripts": {
+    "build": "rm -rf ./dist && tsc-multi",
+    "bumplog": "changelogen --bump"
+  },
+  "devDependencies": {
+    "@kikiutils/prettierrc": "^1.3.1",
+    "@kikiutils/tsconfigs": "^2.2.0",
+    "@types/node": "^20.12.7",
+    "changelogen": "^0.5.5",
+    "tsc-multi": "^1.1.0",
+    "typescript": "^5.4.5"
+  },
+  "keywords": [
+    "mongooose",
+    "mongooose-plugins",
+    "mongooose-utils"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "exports": {
+    "./*": {
+      "default": "./*.mjs",
+      "import": "./*.mjs",
+      "require": "./*.cjs",
+      "types": "./*.d.ts"
+    }
+  },
+  "prettier": "@kikiutils/prettierrc"
+}
