@@ -1,6 +1,7 @@
 import Decimal from 'decimal.js';
 import { merge } from 'lodash';
 import { Schema } from 'mongoose';
+import type { PaginateModel, Model as MongooseModel, Types } from 'mongoose';
 
 import type { CreateCommonMongooseSchemasOptions, MongooseStringSchemaAttribute, MongooseStringSchema } from './types/schema';
 
@@ -131,3 +132,13 @@ export const createMongooseStringSchema = <T extends MongooseStringSchemaAttribu
 
 	return schema as MongooseStringSchema<T>;
 };
+
+export const setupDecimal128FieldsToStringGetter = <
+	DocType,
+	Model extends PaginateModel<DocType, QueryHelpers, InstanceMethodsAndOverrides> | MongooseModel<DocType, QueryHelpers, InstanceMethodsAndOverrides>,
+	InstanceMethodsAndOverrides = {},
+	QueryHelpers = {}
+>(
+	fields: string[],
+	schema: Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>
+) => fields.forEach((field) => schema.path(field).get((value?: Types.Decimal128) => value?.toString()));
