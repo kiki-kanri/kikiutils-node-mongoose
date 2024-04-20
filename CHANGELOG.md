@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.1.1
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v0.1.0...v0.1.1)
+
+### 🩹 Fixes
+
+- Correct type errors in some cases when using `createCommonMongooseSchemas` ([4b1a7d9](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/4b1a7d9))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v0.1.0
 
 ### 🚀 Enhancements
