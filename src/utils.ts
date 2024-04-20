@@ -1,9 +1,17 @@
+import Decimal from 'decimal.js';
 import { merge } from 'lodash';
 import { Schema } from 'mongoose';
 
-import type { MongooseStringSchemaAttribute, MongooseStringSchema } from './types/schema';
+import type { CreateCommonMongooseSchemasOptions, MongooseStringSchemaAttribute, MongooseStringSchema } from './types/schema';
 
-export const createCommonMongooseSchemas = <T extends {}>(customSchemas?: T) => {
+export const createCommonMongooseSchemas = <T extends {}>(customSchemas?: T, options?: CreateCommonMongooseSchemasOptions) => {
+	const autoRoundAndToFixedDecimal128Places = options?.autoRoundAndToFixedDecimal128?.places || 2;
+	const autoRoundAndToFixedDecimal128Rounding = options?.autoRoundAndToFixedDecimal128?.rounding || Decimal.ROUND_DOWN;
+	const baseAutoRoundAndToFixedDecimal128 = {
+		set: (value: Decimal.Value | { toString(): string }) => new Decimal(value.toString()).toFixed(autoRoundAndToFixedDecimal128Places, autoRoundAndToFixedDecimal128Rounding),
+		type: Schema.Types.Decimal128
+	} as const;
+
 	const baseRequiredBoolean = { required: true, type: Boolean } as const;
 	const baseRequiredNumber = { required: true, type: Number } as const;
 	const baseRequiredObjectId = { required: true, type: Schema.Types.ObjectId } as const;
@@ -20,6 +28,14 @@ export const createCommonMongooseSchemas = <T extends {}>(customSchemas?: T) => 
 				},
 				nonRequired: { type: Boolean },
 				required: baseRequiredBoolean
+			},
+			decimal128: {
+				autoRoundAndToFixed: {
+					nonRequired: baseAutoRoundAndToFixedDecimal128,
+					required: { ...baseAutoRoundAndToFixedDecimal128, required: true }
+				},
+				nonRequired: { type: Schema.Types.Decimal128 },
+				required: { required: true, type: Schema.Types.Decimal128 }
 			},
 			number: {
 				nonRequired: { type: Number },

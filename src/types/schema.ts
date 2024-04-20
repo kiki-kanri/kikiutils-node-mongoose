@@ -1,6 +1,21 @@
+import type Decimal from 'decimal.js';
 import type { SchemaTypeOptions } from 'mongoose';
 
 export type MongooseStringSchemaAttribute = 'lowercase' | 'private' | 'required' | 'short' | 'trim' | 'unique' | 'uppercase';
+
+export interface CreateCommonMongooseSchemasOptions {
+	autoRoundAndToFixedDecimal128?: {
+		/**
+		 * @default 2
+		 */
+		places?: number;
+
+		/**
+		 * @default Decimal.ROUND_DOWN
+		 */
+		rounding?: Decimal.Rounding;
+	};
+}
 
 export interface MongooseStringSchema<T extends MongooseStringSchemaAttribute[]> extends SchemaTypeOptions<string> {
 	lowercase: 'lowercase' extends T[number] ? boolean : SchemaTypeOptions<string>['lowercase'];
