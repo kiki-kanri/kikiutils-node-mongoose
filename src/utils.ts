@@ -38,7 +38,7 @@ export const createCommonMongooseSchemas = <T extends {}>(customSchemas?: T, opt
 	const autoRoundAndToFixedDecimal128Places = options?.autoRoundAndToFixedDecimal128?.places || 2;
 	const autoRoundAndToFixedDecimal128Rounding = options?.autoRoundAndToFixedDecimal128?.rounding || Decimal.ROUND_DOWN;
 	const baseAutoRoundAndToFixedDecimal128 = {
-		set: (value: Decimal.Value | { toString(): string }) => new Decimal(value.toString()).toFixed(autoRoundAndToFixedDecimal128Places, autoRoundAndToFixedDecimal128Rounding),
+		set: (value: number | string | { toString(): string }) => new Decimal(value.toString()).toFixed(autoRoundAndToFixedDecimal128Places, autoRoundAndToFixedDecimal128Rounding),
 		type: Schema.Types.Decimal128
 	} as const;
 
