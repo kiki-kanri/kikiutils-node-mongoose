@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.2.0
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v0.1.1...v0.2.0)
+
+### 🚀 Enhancements
+
+- Add `createMongooseObjectIdRefSchema` utils and related types ([0abd723](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/0abd723))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v0.1.1
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v0.1.0...v0.1.1)
