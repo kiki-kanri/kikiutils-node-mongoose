@@ -12,6 +12,7 @@
     "bumplog": "changelogen --bump"
   },
   "dependencies": {
+    "decimal.js": "^10.4.3",
     "lodash": "^4.17.21",
     "mongoose": "^8.3.2"
   },
