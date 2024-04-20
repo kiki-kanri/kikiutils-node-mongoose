@@ -1,9 +1,38 @@
 import Decimal from 'decimal.js';
 import { merge } from 'lodash';
 import { Schema } from 'mongoose';
-import type { PaginateModel, Model as MongooseModel, Types } from 'mongoose';
+import type { Model as MongooseModel, PaginateModel, Types } from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate-v2';
 
+import { defaultMongooseConnection } from './constants';
+import mongooseNormalizePlugin from './plugins/normalize';
+import type { BuildMongooseModelOptions } from './types/options';
 import type { CreateCommonMongooseSchemasOptions, MongooseStringSchemaAttribute, MongooseStringSchema } from './types/schema';
+
+export function buildMongooseModel<DocType, Model extends MongooseModel<DocType, QueryHelpers, InstanceMethods>, InstanceMethods = {}, QueryHelpers = {}>(
+	collectionName: string,
+	name: string,
+	schema: Schema<DocType, Model, InstanceMethods, QueryHelpers>,
+	options: BuildMongooseModelOptions<DocType, Model, InstanceMethods, QueryHelpers> & { enablePaginatePlugin: false }
+): Model;
+export function buildMongooseModel<DocType, Model extends PaginateModel<DocType, QueryHelpers, InstanceMethods>, InstanceMethods = {}, QueryHelpers = {}>(
+	collection: string,
+	name: string,
+	schema: Schema<DocType, Model, InstanceMethods, QueryHelpers>,
+	options?: BuildMongooseModelOptions<DocType, Model, InstanceMethods, QueryHelpers>
+): Model;
+export function buildMongooseModel<DocType, Model extends MongooseModel<DocType, QueryHelpers, InstanceMethods> | PaginateModel<DocType, QueryHelpers, InstanceMethods>, InstanceMethods = {}, QueryHelpers = {}>(
+	collection: string,
+	name: string,
+	schema: Schema<DocType, Model, InstanceMethods, QueryHelpers>,
+	options?: BuildMongooseModelOptions<DocType, Model, InstanceMethods, QueryHelpers>
+) {
+	if (options?.enableNormalizePlugin !== false) schema.plugin(mongooseNormalizePlugin);
+	if (options?.enablePaginatePlugin !== false) schema.plugin(mongoosePaginate);
+	schema.set('timestamps', options?.timestamps === undefined ? true : options.timestamps);
+	options?.beforeBuild?.(schema);
+	return (options?.connection || defaultMongooseConnection).model<DocType, Model, QueryHelpers>(name, schema, collection);
+}
 
 export const createCommonMongooseSchemas = <T extends {}>(customSchemas?: T, options?: CreateCommonMongooseSchemasOptions) => {
 	const autoRoundAndToFixedDecimal128Places = options?.autoRoundAndToFixedDecimal128?.places || 2;
@@ -135,7 +164,7 @@ export const createMongooseStringSchema = <T extends MongooseStringSchemaAttribu
 
 export const setupDecimal128FieldsToStringGetter = <
 	DocType,
-	Model extends PaginateModel<DocType, QueryHelpers, InstanceMethodsAndOverrides> | MongooseModel<DocType, QueryHelpers, InstanceMethodsAndOverrides>,
+	Model extends MongooseModel<DocType, QueryHelpers, InstanceMethodsAndOverrides> | PaginateModel<DocType, QueryHelpers, InstanceMethodsAndOverrides>,
 	InstanceMethodsAndOverrides = {},
 	QueryHelpers = {}
 >(
