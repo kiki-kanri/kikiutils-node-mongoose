@@ -7,7 +7,7 @@ import mongoosePaginate from 'mongoose-paginate-v2';
 import { defaultMongooseConnection } from './constants';
 import mongooseNormalizePlugin from './plugins/normalize';
 import type { BuildMongooseModelOptions } from './types/options';
-import type { CreateCommonMongooseSchemasOptions, MongooseStringSchemaAttribute, MongooseStringSchema } from './types/schema';
+import type { BaseSchemaAttribute, CreateCommonMongooseSchemasOptions, MongooseObjectIdRefSchema, MongooseStringSchema, MongooseStringSchemaAttribute } from './types/schema';
 
 export function buildMongooseModel<DocType, Model extends MongooseModel<DocType, QueryHelpers, InstanceMethods>, InstanceMethods = {}, QueryHelpers = {}>(
 	collectionName: string,
@@ -152,7 +152,13 @@ export const createCommonMongooseSchemas = <T extends {}>(customSchemas?: T, opt
 	);
 };
 
-export const createMongooseStringSchema = <T extends MongooseStringSchemaAttribute[]>(...attributes: T): MongooseStringSchema<T> => {
+export const createMongooseObjectIdRefSchema = <R extends string, T extends BaseSchemaAttribute[]>(refModelName: R, ...attributes: T) => {
+	const schema: Partial<MongooseObjectIdRefSchema<BaseSchemaAttribute[], R>> = { ref: refModelName, type: Schema.Types.ObjectId };
+	new Set(attributes).forEach((attribute) => (schema[attribute] = true));
+	return schema as MongooseObjectIdRefSchema<T, R>;
+};
+
+export const createMongooseStringSchema = <T extends MongooseStringSchemaAttribute[]>(...attributes: T) => {
 	const schema: Partial<MongooseStringSchema<MongooseStringSchemaAttribute[]>> = { type: String };
 	new Set(attributes).forEach((attribute) => {
 		if (attribute === 'short') return (schema.maxlength = 16);
