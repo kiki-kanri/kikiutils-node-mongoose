@@ -40,6 +40,18 @@
       "import": "./*.mjs",
       "require": "./*.cjs",
       "types": "./*.d.ts"
+    },
+    "./plugins/*": {
+      "default": "./plugins/*.mjs",
+      "import": "./plugins/*.mjs",
+      "require": "./plugins/*.cjs",
+      "types": "./plugins/*.d.ts"
+    },
+    "./types": {
+      "types": "./types/index.d.ts"
+    },
+    "./types/*": {
+      "types": "./types/*.d.ts"
     }
   },
   "prettier": "@kikiutils/prettierrc"
