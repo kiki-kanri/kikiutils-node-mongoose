@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.4.1
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v0.4.0...v0.4.1)
+
+### 🩹 Fixes
+
+- Change import method for mongoose functions in utils file to resolve issues ([0bae4b2](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/0bae4b2))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v0.4.0
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v0.3.0...v0.4.0)
