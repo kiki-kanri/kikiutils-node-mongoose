@@ -1,6 +1,6 @@
 import Decimal from 'decimal.js';
 import { merge } from 'lodash-es';
-import { createConnection, Schema } from 'mongoose';
+import mongoose from 'mongoose';
 import type { Model as MongooseModel, PaginateModel, Types } from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2';
 
@@ -12,26 +12,26 @@ import type { BaseSchemaAttribute, CreateCommonMongooseSchemasOptions, MongooseO
 export function buildMongooseModel<DocType, Model extends MongooseModel<DocType, QueryHelpers, InstanceMethodsAndOverrides>, InstanceMethodsAndOverrides = {}, QueryHelpers = {}>(
 	collectionName: string,
 	name: string,
-	schema: Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>,
+	schema: mongoose.Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>,
 	options: BuildMongooseModelOptions<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers> & { enablePaginatePlugin: false }
 ): Model;
 export function buildMongooseModel<DocType, Model extends PaginateModel<DocType, QueryHelpers, InstanceMethodsAndOverrides>, InstanceMethodsAndOverrides = {}, QueryHelpers = {}>(
 	collection: string,
 	name: string,
-	schema: Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>,
+	schema: mongoose.Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>,
 	options?: BuildMongooseModelOptions<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>
 ): Model;
 export function buildMongooseModel<DocType, Model extends MongooseModel<DocType, QueryHelpers, InstanceMethodsAndOverrides> | PaginateModel<DocType, QueryHelpers, InstanceMethodsAndOverrides>, InstanceMethodsAndOverrides = {}, QueryHelpers = {}>(
 	collection: string,
 	name: string,
-	schema: Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>,
+	schema: mongoose.Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>,
 	options?: BuildMongooseModelOptions<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>
 ) {
 	if (options?.enableNormalizePlugin !== false) schema.plugin(mongooseNormalizePlugin);
 	if (options?.enablePaginatePlugin !== false) schema.plugin(mongoosePaginate);
 	schema.set('timestamps', options?.timestamps === undefined ? true : options.timestamps);
 	options?.beforeBuild?.(schema);
-	return (options?.connection || mongooseConnections.default || (mongooseConnections.default = createConnection(process.env.MONGODB_URI || 'mongodb://localhost:27017'))).model<DocType, Model, QueryHelpers>(name, schema, collection);
+	return (options?.connection || mongooseConnections.default || (mongooseConnections.default = mongoose.createConnection(process.env.MONGODB_URI || 'mongodb://localhost:27017'))).model<DocType, Model, QueryHelpers>(name, schema, collection);
 }
 
 export const createCommonMongooseSchemas = <T extends {}>(customSchemas?: T, options?: CreateCommonMongooseSchemasOptions) => {
@@ -39,12 +39,12 @@ export const createCommonMongooseSchemas = <T extends {}>(customSchemas?: T, opt
 	const autoRoundAndToFixedDecimal128Rounding = options?.autoRoundAndToFixedDecimal128?.rounding || Decimal.ROUND_DOWN;
 	const baseAutoRoundAndToFixedDecimal128 = {
 		set: (value: number | string | { toString(): string }) => new Decimal(value.toString()).toFixed(autoRoundAndToFixedDecimal128Places, autoRoundAndToFixedDecimal128Rounding),
-		type: Schema.Types.Decimal128
+		type: mongoose.Schema.Types.Decimal128
 	} as const;
 
 	const baseRequiredBoolean = { required: true, type: Boolean } as const;
 	const baseRequiredNumber = { required: true, type: Number } as const;
-	const baseRequiredObjectId = { required: true, type: Schema.Types.ObjectId } as const;
+	const baseRequiredObjectId = { required: true, type: mongoose.Schema.Types.ObjectId } as const;
 	return merge(
 		{
 			boolean: {
@@ -64,8 +64,8 @@ export const createCommonMongooseSchemas = <T extends {}>(customSchemas?: T, opt
 					nonRequired: baseAutoRoundAndToFixedDecimal128,
 					required: { ...baseAutoRoundAndToFixedDecimal128, required: true }
 				},
-				nonRequired: { type: Schema.Types.Decimal128 },
-				required: { required: true, type: Schema.Types.Decimal128 }
+				nonRequired: { type: mongoose.Schema.Types.Decimal128 },
+				required: { required: true, type: mongoose.Schema.Types.Decimal128 }
 			},
 			number: {
 				nonRequired: { type: Number },
@@ -76,10 +76,10 @@ export const createCommonMongooseSchemas = <T extends {}>(customSchemas?: T, opt
 				}
 			},
 			objectId: {
-				nonRequired: { type: Schema.Types.ObjectId },
+				nonRequired: { type: mongoose.Schema.Types.ObjectId },
 				required: baseRequiredObjectId,
 				unique: {
-					nonRequired: { type: Schema.Types.ObjectId, unique: true },
+					nonRequired: { type: mongoose.Schema.Types.ObjectId, unique: true },
 					required: { ...baseRequiredObjectId, unique: true }
 				}
 			},
@@ -153,7 +153,7 @@ export const createCommonMongooseSchemas = <T extends {}>(customSchemas?: T, opt
 };
 
 export const createMongooseObjectIdRefSchema = <R extends string, T extends BaseSchemaAttribute[]>(refModelName: R, ...attributes: T) => {
-	const schema: Partial<MongooseObjectIdRefSchema<R, T>> = { ref: refModelName, type: Schema.Types.ObjectId };
+	const schema: Partial<MongooseObjectIdRefSchema<R, T>> = { ref: refModelName, type: mongoose.Schema.Types.ObjectId };
 	new Set(attributes).forEach((attribute) => (schema[attribute] = true));
 	return schema as MongooseObjectIdRefSchema<R, T>;
 };
@@ -174,6 +174,6 @@ export const setupDecimal128FieldsToStringGetter = <
 	InstanceMethodsAndOverrides = {},
 	QueryHelpers = {}
 >(
-	schema: Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>,
+	schema: mongoose.Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>,
 	...fields: string[]
 ) => fields.forEach((field) => schema.path(field).get((value?: Types.Decimal128) => value?.toString()));
