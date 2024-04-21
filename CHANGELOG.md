@@ -1,5 +1,26 @@
 # Changelog
 
+## v0.3.0
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v0.2.1...v0.3.0)
+
+### 🚀 Enhancements
+
+- Add global data utils types ([fd75b2c](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/fd75b2c))
+
+### 🩹 Fixes
+
+- Correct schema type errors ([229ea2c](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/229ea2c))
+
+### 💅 Refactors
+
+- Rename type generic parameter names ([d183367](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/d183367))
+- Change default connection creation and usage ([50d05b1](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/50d05b1))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v0.2.1
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v0.2.0...v0.2.1)
