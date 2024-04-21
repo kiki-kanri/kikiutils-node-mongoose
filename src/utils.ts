@@ -1,10 +1,10 @@
 import Decimal from 'decimal.js';
 import { merge } from 'lodash-es';
-import { Schema } from 'mongoose';
+import { createConnection, Schema } from 'mongoose';
 import type { Model as MongooseModel, PaginateModel, Types } from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2';
 
-import { defaultMongooseConnection } from './constants';
+import { mongooseConnections } from './constants';
 import mongooseNormalizePlugin from './plugins/normalize';
 import type { BuildMongooseModelOptions } from './types/options';
 import type { BaseSchemaAttribute, CreateCommonMongooseSchemasOptions, MongooseObjectIdRefSchema, MongooseStringSchema, MongooseStringSchemaAttribute } from './types/schema';
@@ -31,7 +31,7 @@ export function buildMongooseModel<DocType, Model extends MongooseModel<DocType,
 	if (options?.enablePaginatePlugin !== false) schema.plugin(mongoosePaginate);
 	schema.set('timestamps', options?.timestamps === undefined ? true : options.timestamps);
 	options?.beforeBuild?.(schema);
-	return (options?.connection || defaultMongooseConnection).model<DocType, Model, QueryHelpers>(name, schema, collection);
+	return (options?.connection || mongooseConnections.default || (mongooseConnections.default = createConnection(process.env.MONGODB_URI || 'mongodb://localhost:27017'))).model<DocType, Model, QueryHelpers>(name, schema, collection);
 }
 
 export const createCommonMongooseSchemas = <T extends {}>(customSchemas?: T, options?: CreateCommonMongooseSchemasOptions) => {
