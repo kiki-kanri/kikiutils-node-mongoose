@@ -1,5 +1,5 @@
 import Decimal from 'decimal.js';
-import { merge } from 'lodash';
+import { merge } from 'lodash-es';
 import { Schema } from 'mongoose';
 import type { Model as MongooseModel, PaginateModel, Types } from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2';

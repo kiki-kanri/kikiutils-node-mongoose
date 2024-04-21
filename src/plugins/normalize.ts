@@ -1,4 +1,4 @@
-import { get as lodashGet, set as lodashSet, unset as lodashUnset } from 'lodash';
+import { get as lodashGet, set as lodashSet, unset as lodashUnset } from 'lodash-es';
 import type { Schema, Types } from 'mongoose';
 
 export const mongooseNormalizePlugin = <S extends Schema>(schema: S) => {
