@@ -3,16 +3,16 @@ import type { HydratedDocument, Model as MongooseModel, PaginateModel, QueryWith
 export {} from 'mongoose-paginate-v2';
 
 // @ts-ignore
-export interface BaseModelStatics<T, TMO = {}, TQ = {}> {}
+export interface BaseModelStatics<RawDocType, InstanceMethodsAndOverrides = {}, QueryHelpers = {}> {}
 
 declare global {
 	type BaseMongooseDocType<T, CreatedAtField extends boolean = true, UpdatedAtField extends boolean = true> = Omit<T, 'createdAt' | 'id' | 'updatedAt'> &
 		(CreatedAtField extends true ? { createdAt: Date } : {}) &
 		(UpdatedAtField extends true ? { updatedAt: Date } : {});
 
-	type BaseMongooseModel<T, TMO = {}, TQ = {}> = MongooseModel<T, TQ, TMO> & BaseModelStatics<T, TMO, TQ>;
-	type BaseMongoosePaginateModel<T, TMO = {}, TQ = {}> = PaginateModel<T, TQ, TMO> & BaseModelStatics<T, TMO, TQ>;
+	type BaseMongooseModel<RawDocType, InstanceMethodsAndOverrides = {}, QueryHelpers = {}> = MongooseModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> & BaseModelStatics<RawDocType, InstanceMethodsAndOverrides, QueryHelpers>;
+	type BaseMongoosePaginateModel<RawDocType, InstanceMethodsAndOverrides = {}, QueryHelpers = {}> = PaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> & BaseModelStatics<RawDocType, InstanceMethodsAndOverrides, QueryHelpers>;
 	type MongooseDocumentOrObjectId<D> = D | string | Types.ObjectId;
-	type MongooseFindOneReturnType<T, TD, TQ = {}> = QueryWithHelpers<TD | null, TD, TQ, T, 'findOne'>;
-	type MongooseHydratedDocument<D, TMO = {}, TQ = {}> = HydratedDocument<D, TMO, TQ>;
+	type MongooseFindOneReturnType<RawDocType, DocType, QueryHelpers = {}> = QueryWithHelpers<DocType | null, DocType, QueryHelpers, RawDocType, 'findOne'>;
+	type MongooseHydratedDocument<DocType, InstanceMethodsAndOverrides = {}, QueryHelpers = {}> = HydratedDocument<DocType, InstanceMethodsAndOverrides, QueryHelpers>;
 }

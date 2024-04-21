@@ -9,23 +9,23 @@ import mongooseNormalizePlugin from './plugins/normalize';
 import type { BuildMongooseModelOptions } from './types/options';
 import type { BaseSchemaAttribute, CreateCommonMongooseSchemasOptions, MongooseObjectIdRefSchema, MongooseStringSchema, MongooseStringSchemaAttribute } from './types/schema';
 
-export function buildMongooseModel<DocType, Model extends MongooseModel<DocType, QueryHelpers, InstanceMethods>, InstanceMethods = {}, QueryHelpers = {}>(
+export function buildMongooseModel<DocType, Model extends MongooseModel<DocType, QueryHelpers, InstanceMethodsAndOverrides>, InstanceMethodsAndOverrides = {}, QueryHelpers = {}>(
 	collectionName: string,
 	name: string,
-	schema: Schema<DocType, Model, InstanceMethods, QueryHelpers>,
-	options: BuildMongooseModelOptions<DocType, Model, InstanceMethods, QueryHelpers> & { enablePaginatePlugin: false }
+	schema: Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>,
+	options: BuildMongooseModelOptions<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers> & { enablePaginatePlugin: false }
 ): Model;
-export function buildMongooseModel<DocType, Model extends PaginateModel<DocType, QueryHelpers, InstanceMethods>, InstanceMethods = {}, QueryHelpers = {}>(
+export function buildMongooseModel<DocType, Model extends PaginateModel<DocType, QueryHelpers, InstanceMethodsAndOverrides>, InstanceMethodsAndOverrides = {}, QueryHelpers = {}>(
 	collection: string,
 	name: string,
-	schema: Schema<DocType, Model, InstanceMethods, QueryHelpers>,
-	options?: BuildMongooseModelOptions<DocType, Model, InstanceMethods, QueryHelpers>
+	schema: Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>,
+	options?: BuildMongooseModelOptions<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>
 ): Model;
-export function buildMongooseModel<DocType, Model extends MongooseModel<DocType, QueryHelpers, InstanceMethods> | PaginateModel<DocType, QueryHelpers, InstanceMethods>, InstanceMethods = {}, QueryHelpers = {}>(
+export function buildMongooseModel<DocType, Model extends MongooseModel<DocType, QueryHelpers, InstanceMethodsAndOverrides> | PaginateModel<DocType, QueryHelpers, InstanceMethodsAndOverrides>, InstanceMethodsAndOverrides = {}, QueryHelpers = {}>(
 	collection: string,
 	name: string,
-	schema: Schema<DocType, Model, InstanceMethods, QueryHelpers>,
-	options?: BuildMongooseModelOptions<DocType, Model, InstanceMethods, QueryHelpers>
+	schema: Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>,
+	options?: BuildMongooseModelOptions<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>
 ) {
 	if (options?.enableNormalizePlugin !== false) schema.plugin(mongooseNormalizePlugin);
 	if (options?.enablePaginatePlugin !== false) schema.plugin(mongoosePaginate);
