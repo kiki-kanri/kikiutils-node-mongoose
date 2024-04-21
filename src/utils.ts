@@ -174,6 +174,6 @@ export const setupDecimal128FieldsToStringGetter = <
 	InstanceMethodsAndOverrides = {},
 	QueryHelpers = {}
 >(
-	fields: string[],
-	schema: Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>
+	schema: Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>,
+	...fields: string[]
 ) => fields.forEach((field) => schema.path(field).get((value?: Types.Decimal128) => value?.toString()));
