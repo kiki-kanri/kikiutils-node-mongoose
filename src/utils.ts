@@ -153,13 +153,13 @@ export const createCommonMongooseSchemas = <T extends {}>(customSchemas?: T, opt
 };
 
 export const createMongooseObjectIdRefSchema = <R extends string, T extends BaseSchemaAttribute[]>(refModelName: R, ...attributes: T) => {
-	const schema: Partial<MongooseObjectIdRefSchema<BaseSchemaAttribute[], R>> = { ref: refModelName, type: Schema.Types.ObjectId };
+	const schema: Partial<MongooseObjectIdRefSchema<R, T>> = { ref: refModelName, type: Schema.Types.ObjectId };
 	new Set(attributes).forEach((attribute) => (schema[attribute] = true));
-	return schema as MongooseObjectIdRefSchema<T, R>;
+	return schema as MongooseObjectIdRefSchema<R, T>;
 };
 
 export const createMongooseStringSchema = <T extends MongooseStringSchemaAttribute[]>(...attributes: T) => {
-	const schema: Partial<MongooseStringSchema<MongooseStringSchemaAttribute[]>> = { type: String };
+	const schema: Partial<MongooseStringSchema<T>> = { type: String };
 	new Set(attributes).forEach((attribute) => {
 		if (attribute === 'short') return (schema.maxlength = 16);
 		schema[attribute] = true;
