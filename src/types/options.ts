@@ -12,10 +12,5 @@ export interface BuildMongooseModelOptions<DocType, Model, InstanceMethodsAndOve
 	/**
 	 * @default true
 	 */
-	enablePaginatePlugin?: boolean;
-
-	/**
-	 * @default true
-	 */
 	timestamps?: boolean | SchemaTimestampsConfig;
 }

@@ -1,7 +1,7 @@
 import Decimal from 'decimal.js';
 import { merge } from 'lodash-es';
 import mongoose from 'mongoose';
-import type { Model as MongooseModel, PaginateModel, Types } from 'mongoose';
+import type { PaginateModel, Types } from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2';
 
 import { mongooseConnections } from './constants';
@@ -9,26 +9,14 @@ import mongooseNormalizePlugin from './plugins/normalize';
 import type { BuildMongooseModelOptions } from './types/options';
 import type { BaseSchemaAttribute, CreateCommonMongooseSchemasOptions, MongooseObjectIdRefSchema, MongooseStringSchema, MongooseStringSchemaAttribute } from './types/schema';
 
-export function buildMongooseModel<DocType, Model extends MongooseModel<DocType, QueryHelpers, InstanceMethodsAndOverrides>, InstanceMethodsAndOverrides = {}, QueryHelpers = {}>(
-	collectionName: string,
-	name: string,
-	schema: mongoose.Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>,
-	options: BuildMongooseModelOptions<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers> & { enablePaginatePlugin: false }
-): Model;
 export function buildMongooseModel<DocType, Model extends PaginateModel<DocType, QueryHelpers, InstanceMethodsAndOverrides>, InstanceMethodsAndOverrides = {}, QueryHelpers = {}>(
-	collection: string,
-	name: string,
-	schema: mongoose.Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>,
-	options?: BuildMongooseModelOptions<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>
-): Model;
-export function buildMongooseModel<DocType, Model extends MongooseModel<DocType, QueryHelpers, InstanceMethodsAndOverrides> | PaginateModel<DocType, QueryHelpers, InstanceMethodsAndOverrides>, InstanceMethodsAndOverrides = {}, QueryHelpers = {}>(
 	collection: string,
 	name: string,
 	schema: mongoose.Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>,
 	options?: BuildMongooseModelOptions<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>
 ) {
 	if (options?.enableNormalizePlugin !== false) schema.plugin(mongooseNormalizePlugin);
-	if (options?.enablePaginatePlugin !== false) schema.plugin(mongoosePaginate);
+	schema.plugin(mongoosePaginate);
 	schema.set('timestamps', options?.timestamps === undefined ? true : options.timestamps);
 	options?.beforeBuild?.(schema);
 	return (options?.connection || mongooseConnections.default || (mongooseConnections.default = mongoose.createConnection(process.env.MONGODB_URI || 'mongodb://localhost:27017'))).model<DocType, Model, QueryHelpers>(name, schema, collection);
@@ -168,12 +156,7 @@ export const createMongooseStringSchema = <T extends MongooseStringSchemaAttribu
 	return schema as MongooseStringSchema<T>;
 };
 
-export const setupDecimal128FieldsToStringGetter = <
-	DocType,
-	Model extends MongooseModel<DocType, QueryHelpers, InstanceMethodsAndOverrides> | PaginateModel<DocType, QueryHelpers, InstanceMethodsAndOverrides>,
-	InstanceMethodsAndOverrides = {},
-	QueryHelpers = {}
->(
+export const setupDecimal128FieldsToStringGetter = <DocType, Model extends PaginateModel<DocType, QueryHelpers, InstanceMethodsAndOverrides>, InstanceMethodsAndOverrides = {}, QueryHelpers = {}>(
 	schema: mongoose.Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>,
 	...fields: string[]
 ) => fields.forEach((field) => schema.path(field).get((value?: Types.Decimal128) => value?.toString()));
