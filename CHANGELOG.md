@@ -1,5 +1,27 @@
 # Changelog
 
+## v0.5.0
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v0.4.1...v0.5.0)
+
+### 💅 Refactors
+
+- ⚠️ Convert paginate plugin to a universally registered plugin ([2d4a7d6](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/2d4a7d6))
+- ⚠️ Remove beforeBuild attribute from options in buildMongooseModel ([1817898](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/1817898))
+
+### 🏡 Chore
+
+- Change declaration method of buildMongooseModel ([3e03996](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/3e03996))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️ Convert paginate plugin to a universally registered plugin ([2d4a7d6](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/2d4a7d6))
+- ⚠️ Remove beforeBuild attribute from options in buildMongooseModel ([1817898](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/1817898))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v0.4.1
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v0.4.0...v0.4.1)
