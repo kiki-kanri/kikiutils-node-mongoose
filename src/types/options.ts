@@ -1,7 +1,6 @@
-import type { Connection, Schema, SchemaTimestampsConfig } from 'mongoose';
+import type { Connection, SchemaTimestampsConfig } from 'mongoose';
 
-export interface BuildMongooseModelOptions<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers> {
-	beforeBuild?: (schema: Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>) => void;
+export interface BuildMongooseModelOptions {
 	connection?: Connection;
 
 	/**
