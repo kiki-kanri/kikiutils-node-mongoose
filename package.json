@@ -30,6 +30,7 @@
   "keywords": [
     "mongooose",
     "mongooose-plugins",
+    "mongooose-types",
     "mongooose-utils"
   ],
   "engines": {
