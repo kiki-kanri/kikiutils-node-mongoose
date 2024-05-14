@@ -1,7 +1,8 @@
 import Decimal from 'decimal.js';
 import { merge } from 'lodash-es';
 import mongoose from 'mongoose';
-import type { PaginateModel, Types } from 'mongoose';
+import { Types } from 'mongoose';
+import type { PaginateModel } from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2';
 
 import { mongooseConnections } from './constants';
@@ -153,6 +154,15 @@ export const createMongooseStringSchema = <T extends MongooseStringSchemaAttribu
 	});
 
 	return schema as MongooseStringSchema<T>;
+};
+
+export const mongooseDocumentOrObjectIdToDocument = async <D extends MongooseHydratedDocument<DocType, InstanceMethodsAndOverrides, QueryHelpers>, DocType, InstanceMethodsAndOverrides, QueryHelpers>(
+	documentOrObjectId: MongooseDocumentOrObjectId<D>,
+	model: BaseMongoosePaginateModel<DocType, InstanceMethodsAndOverrides, QueryHelpers>,
+	selectFields?: string[]
+): Promise<D | null> => {
+	if (typeof documentOrObjectId === 'string' || documentOrObjectId instanceof Types.ObjectId) return (await model.findById(documentOrObjectId).select(selectFields || [])) as D | null;
+	return documentOrObjectId;
 };
 
 export const setupDecimal128FieldsToStringGetter = <DocType, Model extends PaginateModel<DocType, QueryHelpers, InstanceMethodsAndOverrides>, InstanceMethodsAndOverrides = {}, QueryHelpers = {}>(
