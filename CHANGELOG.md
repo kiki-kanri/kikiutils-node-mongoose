@@ -1,5 +1,23 @@
 # Changelog
 
+## v0.6.0
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v0.5.0...v0.6.0)
+
+### 🚀 Enhancements
+
+- Add `mongooseDocumentOrObjectIdToDocument` utils ([555b70e](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/555b70e))
+
+### 🏡 Chore
+
+- Copy LICENSE into dist folder during build ([06d4a5e](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/06d4a5e))
+- Modify keywords field in package.json ([f69c5ad](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/f69c5ad))
+- Upgrade dependencies ([f7476c9](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/f7476c9))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v0.5.0
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v0.4.1...v0.5.0)
