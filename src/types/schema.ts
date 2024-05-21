@@ -5,13 +5,20 @@ export type BaseSchemaAttribute = 'private' | 'required' | 'unique';
 export type MongooseStringSchemaAttribute = BaseSchemaAttribute | 'lowercase' | 'short' | 'trim' | 'uppercase';
 
 export interface CreateCommonMongooseSchemasOptions {
+	/**
+	 * Options for auto-rounding and fixing decimal places for Decimal128 fields.
+	 */
 	autoRoundAndToFixedDecimal128?: {
 		/**
+		 * Number of decimal places to round to.
+		 *
 		 * @default 2
 		 */
 		places?: number;
 
 		/**
+		 * Rounding strategy to use.
+		 *
 		 * @default Decimal.ROUND_DOWN
 		 */
 		rounding?: Decimal.Rounding;
