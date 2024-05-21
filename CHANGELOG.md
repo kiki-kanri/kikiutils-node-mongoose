@@ -1,5 +1,33 @@
 # Changelog
 
+## v1.0.0-rc.0
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v0.6.0...v1.0.0-rc.0)
+
+### 🚀 Enhancements
+
+- Add type definitions for mongoose-aggregate-paginate-v2 ([f0b5db3](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/f0b5db3))
+- Add mongoose-aggregate-paginate-v2 plugin to mongoose schema ([af4ef3f](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/af4ef3f))
+
+### 💅 Refactors
+
+- Replace all mongoose-paginate-v2 types with custom definitions and rename some types ([608fb46](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/608fb46))
+- Remove explicit undefined from mongoose-paginate-v2 type definitions ([31cebf8](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/31cebf8))
+
+### 📖 Documentation
+
+- Add comments to specific types ([faa826c](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/faa826c))
+- Edit readme ([9ab49eb](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/9ab49eb))
+
+### 🏡 Chore
+
+- Upgrade dependencies ([7172259](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/7172259))
+- Add `mongoose-aggregate-paginate-v2` dependency ([b9c7c55](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/b9c7c55))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v0.6.0
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v0.5.0...v0.6.0)
