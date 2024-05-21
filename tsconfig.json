@@ -5,6 +5,7 @@
     "declaration": true,
     "outDir": "./dist",
     "paths": {
+      "mongoose-aggregate-paginate-v2": ["./types/paginate/aggregate"],
       "mongoose-paginate-v2": ["./types/paginate"]
     }
   }
