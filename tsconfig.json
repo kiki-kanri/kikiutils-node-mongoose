@@ -3,6 +3,9 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "declaration": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "paths": {
+      "mongoose-paginate-v2": ["./types/paginate"]
+    }
   }
 }
