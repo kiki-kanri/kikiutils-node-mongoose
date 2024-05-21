@@ -17,43 +17,43 @@ declare module 'mongoose' {
 
 	interface PaginateReadOptions {
 		pref: string;
-		tags?: any[] | undefined;
+		tags?: any[];
 	}
 
 	interface PaginateOptions {
-		select?: object | string | undefined;
-		collation?: mongo.CollationOptions | undefined;
-		sort?: object | string | undefined;
-		populate?: PopulateOptions[] | string[] | PopulateOptions | string | PopulateOptions | undefined;
+		select?: object | string;
+		collation?: mongo.CollationOptions;
+		sort?: object | string;
+		populate?: PopulateOptions[] | string[] | PopulateOptions | string | PopulateOptions;
 		projection?: any;
-		lean?: boolean | undefined;
-		leanWithId?: boolean | undefined;
-		offset?: number | undefined;
-		page?: number | undefined;
-		limit?: number | undefined;
-		customLabels?: PaginateCustomLabels | undefined;
+		lean?: boolean;
+		leanWithId?: boolean;
+		offset?: number;
+		page?: number;
+		limit?: number;
+		customLabels?: PaginateCustomLabels;
 		/* If pagination is set to `false`, it will return all docs without adding limit condition. (Default: `true`) */
-		pagination?: boolean | undefined;
-		useEstimatedCount?: boolean | undefined;
-		useCustomCountFn?: (() => Promise<number>) | undefined;
-		forceCountFn?: boolean | undefined;
-		allowDiskUse?: boolean | undefined;
-		read?: PaginateReadOptions | undefined;
-		options?: QueryOptions | undefined;
+		pagination?: boolean;
+		useEstimatedCount?: boolean;
+		useCustomCountFn?: () => Promise<number>;
+		forceCountFn?: boolean;
+		allowDiskUse?: boolean;
+		read?: PaginateReadOptions;
+		options?: QueryOptions;
 	}
 
 	interface SubPaginateOptions {
-		select?: object | string | undefined;
-		populate?: PopulateOptions[] | string[] | PopulateOptions | string | PopulateOptions | undefined;
-		pagination?: boolean | undefined;
-		read?: PaginateReadOptions | undefined;
+		select?: object | string;
+		populate?: PopulateOptions[] | string[] | PopulateOptions | string | PopulateOptions;
+		pagination?: boolean;
+		read?: PaginateReadOptions;
 		pagingOptions: SubDocumentPagingOptions | undefined;
 	}
 
 	interface SubDocumentPagingOptions {
-		populate?: PopulateOptions[] | string[] | PopulateOptions | string | PopulateOptions | undefined;
-		page?: number | undefined;
-		limit?: number | undefined;
+		populate?: PopulateOptions[] | string[] | PopulateOptions | string | PopulateOptions;
+		page?: number;
+		limit?: number;
 	}
 
 	interface PaginateResult<T> {
@@ -62,11 +62,11 @@ declare module 'mongoose' {
 		limit: number;
 		hasPrevPage: boolean;
 		hasNextPage: boolean;
-		page?: number | undefined;
+		page?: number;
 		totalPages: number;
 		offset: number;
-		prevPage?: number | null | undefined;
-		nextPage?: number | null | undefined;
+		prevPage?: number | null;
+		nextPage?: number | null;
 		pagingCounter: number;
 		meta?: any;
 		[customLabel: string]: T[] | number | boolean | null | undefined;
@@ -96,7 +96,6 @@ declare module 'mongoose' {
 }
 
 declare function _(schema: Schema): void;
-export default _;
 declare namespace _ {
 	const paginate: { options: PaginateOptions };
 	const paginateSubDocs: { options: PaginateOptions };
@@ -107,3 +106,5 @@ declare namespace _ {
 		getQuery: () => FilterQuery<T>;
 	}
 }
+
+export default _;
