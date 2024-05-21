@@ -3,6 +3,7 @@ import { merge } from 'lodash-es';
 import mongoose from 'mongoose';
 import { Types } from 'mongoose';
 import type { PaginateModel } from 'mongoose';
+import mongooseAggregatePaginate from 'mongoose-aggregate-paginate-v2';
 import mongoosePaginate from 'mongoose-paginate-v2';
 
 import { mongooseConnections } from './constants';
@@ -17,6 +18,7 @@ export const buildMongooseModel = <DocType, Model extends PaginateModel<DocType,
 	options?: BuildMongooseModelOptions
 ) => {
 	if (options?.enableNormalizePlugin !== false) schema.plugin(mongooseNormalizePlugin);
+	schema.plugin(mongooseAggregatePaginate);
 	schema.plugin(mongoosePaginate);
 	schema.set('timestamps', options?.timestamps === undefined ? true : options.timestamps);
 	return (options?.connection || mongooseConnections.default || (mongooseConnections.default = mongoose.createConnection(process.env.MONGODB_URI || 'mongodb://localhost:27017'))).model<DocType, Model, QueryHelpers>(name, schema, collection);
