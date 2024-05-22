@@ -3,7 +3,6 @@
 //
 // Thanks to knyuwork <https://github.com/knyuwork>
 // and LiRen Tu <https://github.com/tuliren> for their contribution
-
 // Used with mongoose-paginate, redefined and renamed here to avoid conflicts.
 
 import type { AggregatePaginateOptions, Schema } from 'mongoose';
@@ -66,7 +65,7 @@ declare module 'mongoose' {
 		[customLabel: string]: T[] | number | boolean | null | undefined;
 	}
 
-	interface AggregatePaginateModel<D> extends Model<D> {
+	interface AggregatePaginateModel<RawDocType, QueryHelpers = {}, InstanceMethodsAndOverrides = {}> extends Model<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> {
 		aggregatePaginate<T>(query?: Aggregate<T[]>, options?: AggregatePaginateOptions, callback?: (err: any, result: AggregatePaginateResult<T>) => void): Promise<AggregatePaginateResult<T>>;
 	}
 }
