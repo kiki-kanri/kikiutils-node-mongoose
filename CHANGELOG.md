@@ -1,5 +1,18 @@
 # Changelog
 
+## v1.0.0-rc.1
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.0.0-rc.0...v1.0.0-rc.1)
+
+### 🚀 Enhancements
+
+- Update `AggregatePaginateModel` interface to support `QueryHelpers` and `InstanceMethodsAndOverrides` ([1cc3e99](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/1cc3e99))
+- Extend `BaseMongoosePaginateModel` to include `AggregatePaginateModel` ([a72e682](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/a72e682))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v1.0.0-rc.0
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v0.6.0...v1.0.0-rc.0)
