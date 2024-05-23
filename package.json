@@ -29,10 +29,10 @@
     "typescript": "^5.4.5"
   },
   "keywords": [
-    "mongooose",
-    "mongooose-plugins",
-    "mongooose-types",
-    "mongooose-utils"
+    "mongoose",
+    "mongoose-plugins",
+    "mongoose-types",
+    "mongoose-utils"
   ],
   "engines": {
     "node": ">=18"
