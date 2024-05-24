@@ -16,6 +16,12 @@ import type { BaseSchemaAttribute, CreateCommonMongooseSchemasOptions, MongooseO
  * This function sets up a Mongoose model with optional plugins and timestamp settings.
  * It can optionally use a specified connection or the default connection.
  *
+ * Determine the connection to use:
+ * 1. Use the connection provided in the options, if available.
+ * 2. Otherwise, use the default connection stored in `mongooseConnections`.
+ * 3. If there's no default connection, create one using the MongoDB URI from the environment variables,
+ *    or fallback to a local MongoDB instance.
+ *
  * @template DocType - The type of the document.
  * @template Model - The type of the model, which extends `BaseMongoosePaginateModel`.
  * @template InstanceMethodsAndOverrides - The type for instance methods and overrides.
