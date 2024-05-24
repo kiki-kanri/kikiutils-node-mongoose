@@ -1,5 +1,27 @@
 # Changelog
 
+## v1.0.0-rc.2
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.0.0-rc.1...v1.0.0-rc.2)
+
+### 🩹 Fixes
+
+- Correct keyword list in package.json ([005ab15](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/005ab15))
+
+### 💅 Refactors
+
+- Change file location of paginate type definitions ([74d18e4](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/74d18e4))
+
+### 📖 Documentation
+
+- Add comments to functions and types ([9439b01](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/9439b01))
+- Edit readme ([940dc84](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/940dc84))
+- Update comment for `buildMongooseModel` function ([179da14](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/179da14))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v1.0.0-rc.1
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.0.0-rc.0...v1.0.0-rc.1)
