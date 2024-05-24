@@ -10,12 +10,17 @@ For mongoose v8 types and utils.
 
 ## Features
 
-- Enhanced `toJSON` method with normalization functions, auto-converts `_id` to `id`, and more.
-- Commonly used schema settings for fast schema creation.
-- Automatic timestamp field settings.
-- Pre-registered `mongoose-paginate-v2` and `mongoose-aggregate-paginate-v2` plugins.
-- Automatic Decimal128 field conversion and processing.
-- TypeScript support.
+- Enhanced `toJSON` method with normalization functions:
+  - Auto-converts `_id` to `id`
+  - Removes `private` fields from the JSON output (if using the normalize plugin)
+  - Converts `Decimal128` fields to strings
+  - Removes `__v` version key
+- Commonly used schema settings for fast schema creation with `createCommonMongooseSchemas`.
+- Automatic timestamp field settings based on configuration.
+- Pre-registered `mongoose-paginate-v2` and `mongoose-aggregate-paginate-v2` plugins for pagination support.
+- Automatic Decimal128 field conversion and rounding configuration.
+- TypeScript support for better type safety and IntelliSense.
+- Flexible model creation with `buildMongooseModel`, supporting custom connections and plugin configurations.
 
 ## Installation
 
@@ -27,7 +32,7 @@ pnpm add @kikiutils/mongoose
 yarn add @kikiutils/mongoose
 
 # Using npm
-npm install @kikiutils/mongoose
+npm i @kikiutils/mongoose
 ```
 
 ## Environmental Requirements
