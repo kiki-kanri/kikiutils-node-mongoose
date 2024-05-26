@@ -34,18 +34,18 @@ import type { BaseSchemaAttribute, CreateCommonMongooseSchemasOptions, MongooseO
  *
  * @returns The created Mongoose model.
  */
-export const buildMongooseModel = <DocType, Model extends BaseMongoosePaginateModel<DocType, InstanceMethodsAndOverrides, QueryHelpers>, InstanceMethodsAndOverrides = {}, QueryHelpers = {}>(
+export function buildMongooseModel<DocType, Model extends BaseMongoosePaginateModel<DocType, InstanceMethodsAndOverrides, QueryHelpers>, InstanceMethodsAndOverrides = {}, QueryHelpers = {}>(
 	collection: string,
 	name: string,
 	schema: mongoose.Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>,
 	options?: BuildMongooseModelOptions
-) => {
+) {
 	if (options?.enableNormalizePlugin !== false) schema.plugin(mongooseNormalizePlugin);
 	schema.plugin(mongooseAggregatePaginate);
 	schema.plugin(mongoosePaginate);
 	schema.set('timestamps', options?.timestamps === undefined ? true : options.timestamps);
 	return (options?.connection || mongooseConnections.default || (mongooseConnections.default = mongoose.createConnection(process.env.MONGODB_URI || 'mongodb://localhost:27017'))).model<DocType, Model, QueryHelpers>(name, schema, collection);
-};
+}
 
 /**
  * Creates common Mongoose schema definitions with optional custom schemas and settings.
@@ -61,7 +61,7 @@ export const buildMongooseModel = <DocType, Model extends BaseMongoosePaginateMo
  *
  * @returns The merged common and custom schemas.
  */
-export const createCommonMongooseSchemas = <T extends {}>(customSchemas?: T, options?: CreateCommonMongooseSchemasOptions) => {
+export function createCommonMongooseSchemas<T extends {}>(customSchemas?: T, options?: CreateCommonMongooseSchemasOptions) {
 	const autoRoundAndToFixedDecimal128Places = options?.autoRoundAndToFixedDecimal128?.places || 2;
 	const autoRoundAndToFixedDecimal128Rounding = options?.autoRoundAndToFixedDecimal128?.rounding || Decimal.ROUND_DOWN;
 	const baseAutoRoundAndToFixedDecimal128 = {
@@ -177,7 +177,7 @@ export const createCommonMongooseSchemas = <T extends {}>(customSchemas?: T, opt
 		} as const,
 		customSchemas
 	);
-};
+}
 
 /**
  * Creates a Mongoose schema definition for an ObjectId reference with specified attributes.
@@ -193,11 +193,11 @@ export const createCommonMongooseSchemas = <T extends {}>(customSchemas?: T, opt
  *
  * @returns The generated ObjectId reference schema definition.
  */
-export const createMongooseObjectIdRefSchema = <R extends string, T extends BaseSchemaAttribute[]>(refModelName: R, ...attributes: T) => {
+export function createMongooseObjectIdRefSchema<R extends string, T extends BaseSchemaAttribute[]>(refModelName: R, ...attributes: T) {
 	const schema: Partial<MongooseObjectIdRefSchema<R, T>> = { ref: refModelName, type: mongoose.Schema.Types.ObjectId };
 	new Set(attributes).forEach((attribute) => (schema[attribute] = true));
 	return schema as MongooseObjectIdRefSchema<R, T>;
-};
+}
 
 /**
  * Creates a Mongoose schema definition for a string field with specified attributes.
@@ -212,7 +212,7 @@ export const createMongooseObjectIdRefSchema = <R extends string, T extends Base
  *
  * @returns The generated string schema definition.
  */
-export const createMongooseStringSchema = <T extends MongooseStringSchemaAttribute[]>(...attributes: T) => {
+export function createMongooseStringSchema<T extends MongooseStringSchemaAttribute[]>(...attributes: T) {
 	const schema: Partial<MongooseStringSchema<T>> = { type: String };
 	new Set(attributes).forEach((attribute) => {
 		if (attribute === 'short') return (schema.maxlength = 16);
@@ -220,7 +220,7 @@ export const createMongooseStringSchema = <T extends MongooseStringSchemaAttribu
 	});
 
 	return schema as MongooseStringSchema<T>;
-};
+}
 
 /**
  * Converts a document or ObjectId to a document using the specified model.
@@ -239,14 +239,14 @@ export const createMongooseStringSchema = <T extends MongooseStringSchemaAttribu
  *
  * @returns The corresponding document or null if not found.
  */
-export const mongooseDocumentOrObjectIdToDocument = async <D extends MongooseHydratedDocument<DocType, InstanceMethodsAndOverrides, QueryHelpers>, DocType, InstanceMethodsAndOverrides, QueryHelpers>(
+export async function mongooseDocumentOrObjectIdToDocument<D extends MongooseHydratedDocument<DocType, InstanceMethodsAndOverrides, QueryHelpers>, DocType, InstanceMethodsAndOverrides, QueryHelpers>(
 	documentOrObjectId: MongooseDocumentOrObjectId<D>,
 	model: BaseMongoosePaginateModel<DocType, InstanceMethodsAndOverrides, QueryHelpers>,
 	selectFields?: string[]
-): Promise<D | null> => {
+): Promise<D | null> {
 	if (typeof documentOrObjectId === 'string' || documentOrObjectId instanceof Types.ObjectId) return (await model.findById(documentOrObjectId).select(selectFields || [])) as D | null;
 	return documentOrObjectId;
-};
+}
 
 /**
  * Sets up a getter to convert Decimal128 fields to strings in a Mongoose schema.
@@ -262,7 +262,9 @@ export const mongooseDocumentOrObjectIdToDocument = async <D extends MongooseHyd
  * @param schema - The Mongoose schema to modify.
  * @param fields - The Decimal128 fields to add the getter to.
  */
-export const setupDecimal128FieldsToStringGetter = <DocType, Model extends BaseMongoosePaginateModel<DocType, InstanceMethodsAndOverrides, QueryHelpers>, InstanceMethodsAndOverrides = {}, QueryHelpers = {}>(
+export function setupDecimal128FieldsToStringGetter<DocType, Model extends BaseMongoosePaginateModel<DocType, InstanceMethodsAndOverrides, QueryHelpers>, InstanceMethodsAndOverrides = {}, QueryHelpers = {}>(
 	schema: mongoose.Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>,
 	...fields: string[]
-) => fields.forEach((field) => schema.path(field).get((value?: Types.Decimal128) => value?.toString()));
+) {
+	fields.forEach((field) => schema.path(field).get((value?: Types.Decimal128) => value?.toString()));
+}
