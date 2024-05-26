@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.0.0-rc.3
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.0.0-rc.2...v1.0.0-rc.3)
+
+### 🩹 Fixes
+
+- Modify function definition to resolve issues ([44a5b93](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/44a5b93))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v1.0.0-rc.2
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.0.0-rc.1...v1.0.0-rc.2)

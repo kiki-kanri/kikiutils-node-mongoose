@@ -676,8 +676,8 @@ packages:
   tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
-  type-fest@4.18.2:
-    resolution: {integrity: sha512-+suCYpfJLAe4OXS6+PPXjW3urOS4IoP9waSiLuXfLgqZODKw/aWwASvzqE886wA0kQgGy0mIWyhd87VpqIy6Xg==}
+  type-fest@4.18.3:
+    resolution: {integrity: sha512-Q08/0IrpvM+NMY9PA2rti9Jb+JejTddwmwmVQGskAlhtcrw1wsRzoR6ode6mR+OAabNa75w/dxedSUY2mlphaQ==}
     engines: {node: '>=16'}
 
   typescript@5.4.5:
@@ -741,13 +741,13 @@ snapshots:
     dependencies:
       browser-or-node: 2.1.1
       run-time-assertions: 1.5.1
-      type-fest: 4.18.2
+      type-fest: 4.18.3
 
   '@augment-vir/common@28.0.2':
     dependencies:
       browser-or-node: 2.1.1
       run-time-assertions: 1.5.1
-      type-fest: 4.18.2
+      type-fest: 4.18.3
 
   '@kikiutils/prettierrc@1.3.1':
     dependencies:
@@ -1266,7 +1266,7 @@ snapshots:
     dependencies:
       '@augment-vir/common': 28.0.2
       expect-type: 0.15.0
-      type-fest: 4.18.2
+      type-fest: 4.18.3
 
   safe-buffer@5.2.1: {}
 
@@ -1353,7 +1353,7 @@ snapshots:
 
   tslib@2.6.2: {}
 
-  type-fest@4.18.2: {}
+  type-fest@4.18.3: {}
 
   typescript@5.4.5: {}
 
