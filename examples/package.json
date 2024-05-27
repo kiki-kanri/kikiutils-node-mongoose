@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc-multi"
+  },
+  "dependencies": {
+    "@kikiutils/mongoose": "1.0.0-rc.3",
+    "mongoose": "^8.4.0",
+    "tsc-multi": "^1.1.0"
+  },
+  "devDependencies": {
+    "@kikiutils/tsconfigs": "^2.2.0",
+    "typescript": "^5.4.5"
+  }
+}

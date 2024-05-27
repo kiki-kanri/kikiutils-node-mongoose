@@ -8,5 +8,6 @@
       "mongoose-aggregate-paginate-v2": ["./types/aggregate-paginate"],
       "mongoose-paginate-v2": ["./types/paginate.ts"]
     }
-  }
+  },
+  "include": ["./src"]
 }
