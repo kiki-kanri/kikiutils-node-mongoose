@@ -1,5 +1,21 @@
 # Changelog
 
+## v1.0.0
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.0.0-rc.3...v1.0.0)
+
+### 🚀 Enhancements
+
+- Add example code and related files ([466a95b](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/466a95b))
+
+### 📖 Documentation
+
+- Edit readme ([30f3ccc](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/30f3ccc))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v1.0.0-rc.3
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.0.0-rc.2...v1.0.0-rc.3)
