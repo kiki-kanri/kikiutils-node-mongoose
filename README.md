@@ -4,7 +4,7 @@
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
 [![License][license-src]][license-href]
 
-For mongoose v8 types and utils.
+This project provides types and utilities for Mongoose v8.
 
 - [✨ Release Notes](/CHANGELOG.md)
 
@@ -12,7 +12,7 @@ For mongoose v8 types and utils.
 
 - Enhanced `toJSON` method with normalization functions:
   - Auto-converts `_id` to `id`
-  - Removes `private` fields from the JSON output (if using the normalize plugin)
+  - Removes `private` fields from the JSON output
   - Converts `Decimal128` fields to strings
   - Removes `__v` version key
 - Commonly used schema settings for fast schema creation with `createCommonMongooseSchemas`.
@@ -63,7 +63,7 @@ pnpm i
 cp .env.example .env
 ```
 
-4. Set the MONGODB_URI in the .env file with your MongoDB connection string.
+4. Set the MONGODB_URI in the .env file with your MongoDB connection string
 5. Run the example code
 
 - If you use bun, run this command directly

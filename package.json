@@ -1,6 +1,7 @@
 {
   "name": "@kikiutils/mongoose",
   "version": "1.0.0",
+  "description": "Types and utilities for Mongoose v8.",
   "license": "MIT",
   "author": "kiki-kanri",
   "repository": {
