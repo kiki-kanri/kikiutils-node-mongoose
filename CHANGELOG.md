@@ -1,5 +1,21 @@
 # Changelog
 
+## v1.0.1
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.0.0...v1.0.1)
+
+### 📖 Documentation
+
+- Update README and add description field to package.json ([7a1fe77](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/7a1fe77))
+
+### 🏡 Chore
+
+- Upgrade dependencies ([4c6f790](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/4c6f790))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v1.0.0
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.0.0-rc.3...v1.0.0)
