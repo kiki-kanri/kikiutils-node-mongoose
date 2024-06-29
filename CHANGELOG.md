@@ -1,5 +1,21 @@
 # Changelog
 
+## v1.0.2
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.0.1...v1.0.2)
+
+### 💅 Refactors
+
+- Modify type definitions for `mongoose-aggregate-paginate-v2` ([396db5c](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/396db5c))
+
+### 🏡 Chore
+
+- Upgrade dependencies ([c05d677](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/c05d677))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v1.0.1
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.0.0...v1.0.1)
