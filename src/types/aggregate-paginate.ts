@@ -47,7 +47,7 @@ declare module 'mongoose' {
 		/** optional query options like sort, limit, etc */
 		options?: any;
 		/** deep populate */
-		populate?: AggregatePaginateQueryPopulateOptions | AggregatePaginateQueryPopulateOptions[] | undefined;
+		populate?: AggregatePaginateQueryPopulateOptions | AggregatePaginateQueryPopulateOptions[];
 	}
 
 	interface AggregatePaginateResult<T> {
@@ -72,6 +72,7 @@ declare module 'mongoose' {
 
 declare function mongooseAggregatePaginate(schema: Schema): void;
 declare namespace mongooseAggregatePaginate {
+	const PREPAGINATION_PLACEHOLDER: string;
 	const aggregatePaginate: { options: AggregatePaginateOptions };
 }
 
