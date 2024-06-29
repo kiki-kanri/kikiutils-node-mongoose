@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.0.3
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.0.2...v1.0.3)
+
+### 🩹 Fixes
+
+- Ensure all relevant types are exported ([a03b33f](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/a03b33f))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v1.0.2
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.0.1...v1.0.2)
