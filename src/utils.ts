@@ -10,9 +10,6 @@ import mongooseNormalizePlugin from './plugins/normalize';
 import type { BuildMongooseModelOptions } from './types/options';
 import type { BaseSchemaAttribute, CreateCommonMongooseSchemasOptions, MongooseObjectIdRefSchema, MongooseStringSchema, MongooseStringSchemaAttribute } from './types/schema';
 
-export type {} from './types/aggregate-paginate';
-export type {} from './types/paginate';
-
 /**
  * Builds and returns a Mongoose model with specified schema and options.
  *

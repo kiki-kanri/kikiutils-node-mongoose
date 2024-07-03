@@ -1,5 +1,8 @@
 import type { AggregatePaginateModel, HydratedDocument, PaginateModel, QueryWithHelpers, Types } from 'mongoose';
 
+export type {} from './aggregate-paginate';
+export type {} from './paginate';
+
 // @ts-ignore
 export interface BaseModelStatics<RawDocType, InstanceMethodsAndOverrides = {}, QueryHelpers = {}> {}
 
