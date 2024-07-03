@@ -27,7 +27,7 @@
     "@types/node": "^20.14.9",
     "changelogen": "^0.5.5",
     "tsc-multi": "^1.1.0",
-    "typescript": "^5.5.2"
+    "typescript": "^5.5.3"
   },
   "keywords": [
     "mongoose",
