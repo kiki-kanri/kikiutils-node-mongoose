@@ -1,5 +1,21 @@
 # Changelog
 
+## v1.0.4
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.0.3...v1.0.4)
+
+### 🩹 Fixes
+
+- Correct incorrect type export method ([9ff7bc0](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/9ff7bc0))
+
+### 🏡 Chore
+
+- Upgrade dependencies ([48e0d96](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/48e0d96))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v1.0.3
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.0.2...v1.0.3)
