@@ -6,7 +6,7 @@
 
 This project provides types and utilities for Mongoose v8.
 
-- [✨ Release Notes](/CHANGELOG.md)
+- [✨ Release Notes](./CHANGELOG.md)
 
 ## Features
 
@@ -33,6 +33,9 @@ yarn add @kikiutils/mongoose
 
 # Using npm
 npm i @kikiutils/mongoose
+
+# Using bun
+bun add @kikiutils/mongoose
 ```
 
 ## Environmental Requirements
@@ -93,4 +96,4 @@ You can modify the code in examples/src/index.ts and run it to test other functi
 [npm-downloads-href]: https://npmjs.com/package/@kikiutils/mongoose
 
 [license-src]: https://img.shields.io/npm/l/@kikiutils/mongoose.svg?style=flat&colorA=18181B&colorB=28CF8D
-[license-href]: https://npmjs.com/package/@kikiutils/mongoose
+[license-href]: https://github.com/kiki-kanri/kikiutils-node-mongoose/blob/main/LICENSE
