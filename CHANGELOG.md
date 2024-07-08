@@ -1,5 +1,21 @@
 # Changelog
 
+## v1.0.5
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.0.4...v1.0.5)
+
+### 📖 Documentation
+
+- Fix incorrect links in README and add bun installation instructions ([3899267](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/3899267))
+
+### 🏡 Chore
+
+- Upgrade dependencies ([8538c26](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/8538c26))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v1.0.4
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.0.3...v1.0.4)
