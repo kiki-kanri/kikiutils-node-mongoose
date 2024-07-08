@@ -15,11 +15,11 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       mongoose:
-        specifier: ^8.4.4
-        version: 8.4.4
+        specifier: ^8.4.5
+        version: 8.4.5
       mongoose-aggregate-paginate-v2:
-        specifier: ^1.1.0
-        version: 1.1.0
+        specifier: ^1.1.1
+        version: 1.1.1
       mongoose-paginate-v2:
         specifier: ^1.8.2
         version: 1.8.2
@@ -34,17 +34,14 @@ importers:
         specifier: ^4.17.12
         version: 4.17.12
       '@types/node':
-        specifier: ^20.14.9
-        version: 20.14.9
+        specifier: ^20.14.10
+        version: 20.14.10
       changelogen:
         specifier: ^0.5.5
         version: 0.5.5
       tsc-multi:
         specifier: ^1.1.0
         version: 1.1.0(typescript@5.5.3)
-      typescript:
-        specifier: ^5.5.3
-        version: 5.5.3
 
 packages:
 
@@ -81,8 +78,8 @@ packages:
   '@types/lodash@4.17.6':
     resolution: {integrity: sha512-OpXEVoCKSS3lQqjx9GGGOapBeuW5eUboYHRlHP9urXPX25IKZ6AnP5ZRxtVf63iieUbsHxLn8NQ5Nlftc6yzAA==}
 
-  '@types/node@20.14.9':
-    resolution: {integrity: sha512-06OCtnTXtWOZBJlRApleWndH4JsRVs1pDCc8dLSQp+7PpUpX3ePdHyeNSFTeSe7FtKyQkrlPvHwJOW3SLd8Oyg==}
+  '@types/node@20.14.10':
+    resolution: {integrity: sha512-MdiXf+nDuMvY0gJKxyfZ7/6UFsETO7mGKF54MVD/ekJS6HdFtpZFBgrh6Pseu64XTb2MLyFPlbW6hj8HYRQNOQ==}
 
   '@types/webidl-conversions@7.0.3':
     resolution: {integrity: sha512-CiJJvcRtIgzadHCYXw7dqEnMNRjhGZlYK05Mj9OyktqV8uVT8fD2BFOB7S1uwBE3Kj2Z+4UyPmFw/Ixgw/LAlA==}
@@ -448,16 +445,16 @@ packages:
       socks:
         optional: true
 
-  mongoose-aggregate-paginate-v2@1.1.0:
-    resolution: {integrity: sha512-4sGXBUfGjmG4CEhgMQh94uw/BVKprtR+/I/C4jRv6xyZ15hGppPD1C8zgPHdDEwjKMLdBlBZJKJ8Fg/4s8BvTA==}
+  mongoose-aggregate-paginate-v2@1.1.1:
+    resolution: {integrity: sha512-6RfDrdDWXx83z3IrlMGna78KpcBge6hKBM+IhUwTNbExjjkY3xKXwH6EcSAVc7LH5MrkKcDASQmZ0AmcD30D8g==}
     engines: {node: '>=4.0.0'}
 
   mongoose-paginate-v2@1.8.2:
     resolution: {integrity: sha512-T/Z3qKyKnPUa6UkH1IjHxdYnYApCAKk9zb2C0GF5hg3QETcI62AUAUQGCBE2tIw7fF4feUaDARMajj/bersyvg==}
     engines: {node: '>=4.0.0'}
 
-  mongoose@8.4.4:
-    resolution: {integrity: sha512-Nya808odIJoHP4JuJKbWA2eIaerXieu59kE8pQlvJpUBoSKWUyhLji0g1WMVaYXWmzPYXP2Jd6XdR4KJE8RELw==}
+  mongoose@8.4.5:
+    resolution: {integrity: sha512-E5KjBThxST2uFSKKXuiMa9H9Zx4DLTSLuxodAnIzJRixNwc1ARTlJUK1m0a80EB+ZKGP4QNTasyUYRG9DUSHOA==}
     engines: {node: '>=16.20.1'}
 
   mpath@0.9.0:
@@ -786,7 +783,7 @@ snapshots:
 
   '@types/lodash@4.17.6': {}
 
-  '@types/node@20.14.9':
+  '@types/node@20.14.10':
     dependencies:
       undici-types: 5.26.5
 
@@ -1125,11 +1122,11 @@ snapshots:
       bson: 6.8.0
       mongodb-connection-string-url: 3.0.1
 
-  mongoose-aggregate-paginate-v2@1.1.0: {}
+  mongoose-aggregate-paginate-v2@1.1.1: {}
 
   mongoose-paginate-v2@1.8.2: {}
 
-  mongoose@8.4.4:
+  mongoose@8.4.5:
     dependencies:
       bson: 6.8.0
       kareem: 2.6.3
