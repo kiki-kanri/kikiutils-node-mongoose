@@ -10,13 +10,13 @@
   },
   "type": "module",
   "scripts": {
-    "build": "rm -rf ./dist && tsc-multi",
+    "build": "tsc-multi --clean && tsc-multi",
     "bumplog": "changelogen --bump"
   },
   "dependencies": {
     "decimal.js": "^10.4.3",
     "lodash-es": "^4.17.21",
-    "mongoose": "^8.4.5",
+    "mongoose": "^8.5.1",
     "mongoose-aggregate-paginate-v2": "^1.1.1",
     "mongoose-paginate-v2": "^1.8.2"
   },
