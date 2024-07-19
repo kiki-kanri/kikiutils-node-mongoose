@@ -2,6 +2,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=node
 
 ### Node ###
+
 # Logs
 logs
 *.log
@@ -91,8 +92,20 @@ web_modules/
 .next
 out
 
-# Nuxt.js build / generate output
+# Misc
+.DS_Store
+.fleet
+.idea
+
+# Nitro build / generate output
+.nitro
+.output
+
+# Nuxt dev / build / generate output
+.cache
+.data
 .nuxt
+.output
 dist
 
 # Gatsby files
