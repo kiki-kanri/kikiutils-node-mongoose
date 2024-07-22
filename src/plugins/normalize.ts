@@ -1,4 +1,4 @@
-import { get as lodashGet, set as lodashSet, unset as lodashUnset } from 'lodash-es';
+import { get as lodashGet, set as lodashSet, unset as lodashUnset } from 'lodash';
 import type { Schema, Types } from 'mongoose';
 
 /**

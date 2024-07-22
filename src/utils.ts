@@ -1,5 +1,5 @@
 import Decimal from 'decimal.js';
-import { merge } from 'lodash-es';
+import { merge } from 'lodash';
 import mongoose from 'mongoose';
 import { Types } from 'mongoose';
 import mongooseAggregatePaginate from 'mongoose-aggregate-paginate-v2';
