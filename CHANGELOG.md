@@ -1,5 +1,32 @@
 # Changelog
 
+## v1.1.0
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.0.5...v1.1.0)
+
+### 💅 Refactors
+
+- Update dependencies and modify build script ([170c966](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/170c966))
+- Update dependency list and build script for examples ([973ef15](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/973ef15))
+
+### 📖 Documentation
+
+- Update README and package.json ([a78c80c](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/a78c80c))
+
+### 📦 Build
+
+- Switch to rollup and update related configurations ([5c2e3c5](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/5c2e3c5))
+
+### 🏡 Chore
+
+- Update .gitignore ([bf6a68d](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/bf6a68d))
+- Replace lodash-es with lodash ([d407b71](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/d407b71))
+- Upgrade dependencies ([9b6858e](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/9b6858e))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v1.0.5
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.0.4...v1.0.5)
