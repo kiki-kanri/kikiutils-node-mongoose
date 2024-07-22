@@ -2,13 +2,17 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc-multi --clean && tsc-multi"
+    "build": "del-cli ./dist && tsc-multi",
+    "dev": "tsx watch ./src/index.ts"
   },
   "dependencies": {
-    "@kikiutils/mongoose": "1.0.5"
+    "@kikiutils/mongoose": "^1.1.0",
+    "dotenv": "^16.4.5"
   },
   "devDependencies": {
-    "@kikiutils/tsconfigs": "^2.2.0",
-    "tsc-multi": "^1.1.0"
+    "@kikiutils/tsconfigs": "^3.0.1",
+    "del-cli": "^5.1.0",
+    "tsc-multi": "^1.1.0",
+    "tsx": "^4.16.2"
   }
 }

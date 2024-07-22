@@ -1,3 +1,4 @@
+import './configs';
 import { UserGroupModel, UserLogModel, UserModel } from './models';
 import type { UserGroupDocument } from './models';
 
