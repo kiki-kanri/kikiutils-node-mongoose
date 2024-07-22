@@ -2,6 +2,9 @@
 
 ## v1.1.0
 
+> [!IMPORTANT]
+> Deprecated.
+
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.0.5...v1.1.0)
 
 ### 💅 Refactors
