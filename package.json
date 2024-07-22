@@ -1,7 +1,7 @@
 {
   "name": "@kikiutils/mongoose",
   "version": "1.0.5",
-  "description": "Types and utilities for Mongoose v8.",
+  "description": "A Mongoose plugin for enhanced JSON normalization and common schema creation, with built-in support for pagination and automatic Decimal128 conversion.",
   "license": "MIT",
   "author": "kiki-kanri",
   "repository": {
@@ -32,10 +32,14 @@
     "rollup-plugin-node-externals": "^7.1.2"
   },
   "keywords": [
+    "Decimal128",
+    "json",
+    "mongo",
     "mongoose",
-    "mongoose-plugins",
-    "mongoose-types",
-    "mongoose-utils"
+    "normalization",
+    "pagination",
+    "plugin",
+    "schema"
   ],
   "engines": {
     "node": ">=18"

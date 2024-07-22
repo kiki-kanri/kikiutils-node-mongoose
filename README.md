@@ -4,85 +4,42 @@
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
 [![License][license-src]][license-href]
 
-This project provides types and utilities for Mongoose v8.
+A Mongoose plugin for enhanced JSON normalization and common schema creation, with built-in support for pagination and automatic Decimal128 conversion.
 
 - [✨ Release Notes](./CHANGELOG.md)
 
 ## Features
 
-- Enhanced `toJSON` method with normalization functions:
-  - Auto-converts `_id` to `id`
-  - Removes `private` fields from the JSON output
-  - Converts `Decimal128` fields to strings
-  - Removes `__v` version key
-- Commonly used schema settings for fast schema creation with `createCommonMongooseSchemas`.
-- Automatic timestamp field settings based on configuration.
-- Pre-registered `mongoose-paginate-v2` and `mongoose-aggregate-paginate-v2` plugins for pagination support.
-- Automatic Decimal128 field conversion and rounding configuration.
-- TypeScript support for better type safety and IntelliSense.
-- Flexible model creation with `buildMongooseModel`, supporting custom connections and plugin configurations.
+- ✨ Flexible Connections: Choose to use a specific connection or fall back to a default connection, with an automatic creation of a connection if none is provided
+- ✨ Plugin Integration: Automatically integrates `mongoose-aggregate-paginate-v2`, `mongoose-paginate-v2`, and a custom normalization plugin for enhanced JSON output
+- 🛠 Predefined Schemas: Provides a set of commonly used schema definitions such as boolean, decimal128, number, objectId, and string
+- 🛠 Customizable: Allows for custom schemas and settings, including automatic rounding and fixed decimal places for `Decimal128` fields
+- 🔄 Enhanced JSON Output: Adds an `id` field, removes `_id` and `__v` fields, excludes private fields, and converts `Decimal128` fields to strings in JSON output
+- 🧩 Reference Schema Creation: Easily create schema definitions for ObjectId references with attributes like `private`, `required`, and `unique`
+- 🧩 String Schema Creation: Generate string schema definitions with attributes such as `private`, `required`, `short`, `trim`, and `unique`
+- 🧩 Decimal128 Field Conversion: Set up getters to convert `Decimal128` fields to strings for easier handling in documents
+- 🧩 Document Conversion: Convert documents or ObjectIds to documents using specified models, with optional field selection
+
+## Environment Requirements
+
+- Mongoose version 8.x
+- Node.js version 18 or higher
 
 ## Installation
 
+Add dependency (example using pnpm).
+
 ```bash
-# Using pnpm
 pnpm add @kikiutils/mongoose
-
-# Using yarn
-yarn add @kikiutils/mongoose
-
-# Using npm
-npm i @kikiutils/mongoose
-
-# Using bun
-bun add @kikiutils/mongoose
 ```
 
-## Environmental Requirements
+You can also use yarn, npm, or bun to add the dependency.
 
-- ESM only
-- Mongoose v8
-- NodeJS 18 or higher
+That's it! You're ready to use this package in your project. Check out the instructions for [usage](#usage) below ✨.
 
-## Usage
+# Usage
 
-Example code is provided in the examples folder. Follow the steps below to understand how to use the package:
-
-1. Navigate to the examples folder
-
-```bash
-cd examples
-```
-
-2. Install the dependencies
-
-```bash
-pnpm i
-```
-
-3. Copy the .env.example file to .env
-
-```bash
-cp .env.example .env
-```
-
-4. Set the MONGODB_URI in the .env file with your MongoDB connection string
-5. Run the example code
-
-- If you use bun, run this command directly
-  ```bash
-  bun --watch run ./src/index.ts
-  ```
-
-- Use node
-  ```bash
-  pnpm run build
-  MONGODB_URI="mongodb://127.0.0.1:27017/kikiutils-mongoose-test?directConnection=true" node ./dist/index.mjs
-  ```
-
-This will execute the example code and demonstrate how to use the @kikiutils/mongoose package with your MongoDB setup.
-
-You can modify the code in examples/src/index.ts and run it to test other functions.
+Please refer to the [examples](./examples/README.md) folder for usage instructions of this package.
 
 ## License
 
