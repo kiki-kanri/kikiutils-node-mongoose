@@ -1,5 +1,5 @@
 import Decimal from 'decimal.js';
-import { merge } from 'lodash';
+import lodash from 'lodash';
 import mongoose from 'mongoose';
 import { Types } from 'mongoose';
 import mongooseAggregatePaginate from 'mongoose-aggregate-paginate-v2';
@@ -9,6 +9,8 @@ import { mongooseConnections } from './constants';
 import mongooseNormalizePlugin from './plugins/normalize';
 import type { BuildMongooseModelOptions } from './types/options';
 import type { BaseSchemaAttribute, CreateCommonMongooseSchemasOptions, MongooseObjectIdRefSchema, MongooseStringSchema, MongooseStringSchemaAttribute } from './types/schema';
+
+const { merge } = lodash;
 
 /**
  * Builds and returns a Mongoose model with specified schema and options.

@@ -1,5 +1,7 @@
-import { get as lodashGet, set as lodashSet, unset as lodashUnset } from 'lodash';
+import lodash from 'lodash';
 import type { Schema, Types } from 'mongoose';
+
+const { get: lodashGet, set: lodashSet, unset: lodashUnset } = lodash;
 
 /**
  * Mongoose plugin to normalize the JSON output of documents.
