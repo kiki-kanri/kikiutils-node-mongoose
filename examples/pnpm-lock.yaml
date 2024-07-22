@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@kikiutils/mongoose':
-        specifier: ^1.1.0
-        version: 1.1.0
+        specifier: ^1.2.0
+        version: 1.2.0
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
@@ -180,8 +180,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@kikiutils/mongoose@1.1.0':
-    resolution: {integrity: sha512-opgpAmCZPcNNKBSTZJv4OodHu0o5uaLFQHThpXqOCeJ/6CkaT31Hm/jq17NQJCFwJcqMWfn//kUa6z5RQc+uSA==}
+  '@kikiutils/mongoose@1.2.0':
+    resolution: {integrity: sha512-OEF9cDMO14bvPVl+lk/NCOQ5qwbrqT+sgF4Br4Q9nCtwWSWeeODyQ/vR2RsoUjWmP3d3EN4WIT+lBQX/cUu2rA==}
     engines: {node: '>=18'}
 
   '@kikiutils/tsconfigs@3.0.1':
@@ -916,7 +916,7 @@ snapshots:
   '@esbuild/win32-x64@0.21.5':
     optional: true
 
-  '@kikiutils/mongoose@1.1.0':
+  '@kikiutils/mongoose@1.2.0':
     dependencies:
       decimal.js: 10.4.3
       lodash: 4.17.21

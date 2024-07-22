@@ -1,4 +1,3 @@
-
 # Examples
 
 This folder contains examples to demonstrate the usage of the `@kikiutils/mongoose` package.
