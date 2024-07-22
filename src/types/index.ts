@@ -1,10 +1,14 @@
-import type { AggregatePaginateModel, HydratedDocument, PaginateModel, QueryWithHelpers, Types } from 'mongoose';
+import type { AggregatePaginateModel, Connection, HydratedDocument, PaginateModel, QueryWithHelpers, Types } from 'mongoose';
 
 export type {} from './aggregate-paginate';
 export type {} from './paginate';
 
 // @ts-ignore
 export interface BaseModelStatics<RawDocType, InstanceMethodsAndOverrides = {}, QueryHelpers = {}> {}
+
+export interface MongooseConnections {
+	default?: Connection;
+}
 
 declare global {
 	/**

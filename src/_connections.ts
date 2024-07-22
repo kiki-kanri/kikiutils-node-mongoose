@@ -1,4 +1,4 @@
-import type { Connection } from 'mongoose';
+import type { MongooseConnections } from './types';
 
 /**
  * Mongoose connections.
@@ -7,4 +7,4 @@ import type { Connection } from 'mongoose';
  * database connections to be managed within the application. An optional `default`
  * connection can also be specified for use when a specific connection is not provided.
  */
-export const mongooseConnections: Record<string, Connection> & { default?: Connection } = {};
+export const mongooseConnections: MongooseConnections = {};
