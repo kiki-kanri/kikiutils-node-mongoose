@@ -1,5 +1,30 @@
 # Changelog
 
+## v1.2.0
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.1.0...v1.2.0)
+
+### 🚀 Enhancements
+
+- Add `MongooseConnections` interface ([44a8358](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/44a8358))
+
+### 🩹 Fixes
+
+- Correct lodash function import and usage ([3c8f9c3](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/3c8f9c3))
+- Resolve circular import issue ([a520920](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/a520920))
+
+### 📖 Documentation
+
+- Update CHANGELOG ([0faecd9](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/0faecd9))
+
+### 🏡 Chore
+
+- Add dev script, add README, and update comments in examples folder ([7743e30](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/7743e30))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v1.1.0
 
 > [!IMPORTANT]
