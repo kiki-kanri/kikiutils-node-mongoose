@@ -5,7 +5,7 @@ import { Types } from 'mongoose';
 import mongooseAggregatePaginate from 'mongoose-aggregate-paginate-v2';
 import mongoosePaginate from 'mongoose-paginate-v2';
 
-import { mongooseConnections } from './constants';
+import { mongooseConnections } from './_connections';
 import mongooseNormalizePlugin from './plugins/normalize';
 import type { BuildMongooseModelOptions } from './types/options';
 import type { BaseSchemaAttribute, CreateCommonMongooseSchemasOptions, MongooseObjectIdRefSchema, MongooseStringSchema, MongooseStringSchemaAttribute } from './types/schema';

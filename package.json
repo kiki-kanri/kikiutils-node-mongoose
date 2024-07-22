@@ -50,6 +50,11 @@
       "require": "./*.cjs",
       "types": "./*.d.ts"
     },
+    "./_connections": {
+      "import": null,
+      "require": null,
+      "types": null
+    },
     "./plugins/*": {
       "import": "./plugins/*.mjs",
       "require": "./plugins/*.cjs",
