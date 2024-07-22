@@ -8,9 +8,8 @@
     "type": "git",
     "url": "git+https://github.com/kiki-kanri/kikiutils-node-mongoose.git"
   },
-  "type": "module",
   "scripts": {
-    "build": "tsc-multi --clean && tsc-multi",
+    "build": "rollup -c --configPlugin typescript=\"{ tsconfig: './tsconfig.rollup.json' }\"",
     "bumplog": "changelogen --bump"
   },
   "dependencies": {
@@ -23,10 +22,14 @@
   "devDependencies": {
     "@kikiutils/prettierrc": "^1.3.2",
     "@kikiutils/tsconfigs": "^2.2.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
     "@types/lodash": "^4.17.7",
     "@types/node": "^20.14.10",
     "changelogen": "^0.5.5",
-    "tsc-multi": "^1.1.0"
+    "rollup": "^4.19.0",
+    "rollup-plugin-delete": "^2.0.0",
+    "rollup-plugin-node-externals": "^7.1.2"
   },
   "keywords": [
     "mongoose",
@@ -39,11 +42,13 @@
   },
   "exports": {
     "./*": {
-      "default": "./*.mjs",
+      "import": "./*.mjs",
+      "require": "./*.cjs",
       "types": "./*.d.ts"
     },
     "./plugins/*": {
-      "default": "./plugins/*.mjs",
+      "import": "./plugins/*.mjs",
+      "require": "./plugins/*.cjs",
       "types": "./plugins/*.d.ts"
     },
     "./types": {
