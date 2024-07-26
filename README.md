@@ -35,7 +35,7 @@ pnpm add @kikiutils/mongoose
 
 You can also use yarn, npm, or bun to add the dependency.
 
-That's it! You're ready to use this package in your project. Check out the instructions for [usage](#usage) below ✨.
+That's it! You're ready to use this package in your project. Check out the [usage instructions](#usage) below ✨.
 
 # Usage
 
