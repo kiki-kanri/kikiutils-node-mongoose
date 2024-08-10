@@ -1,5 +1,27 @@
 # Changelog
 
+## v1.2.1
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.2.0...v1.2.1)
+
+### 🩹 Fixes
+
+- Prevent `createCommonMongooseSchemas` from overwriting non-null/undefined falsy values in options defaults ([0624efb](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/0624efb))
+
+### 📖 Documentation
+
+- Update README ([a7aa6c7](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/a7aa6c7))
+
+### 🏡 Chore
+
+- Update examples related files ([b30d046](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/b30d046))
+- Remove rollup files and dependencies and switch to builder build ([363a76f](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/363a76f))
+- Upgrade dependencies ([03a7935](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/03a7935))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v1.2.0
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.1.0...v1.2.0)
