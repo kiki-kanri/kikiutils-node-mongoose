@@ -15,17 +15,17 @@
   "dependencies": {
     "decimal.js": "^10.4.3",
     "lodash": "^4.17.21",
-    "mongoose": "^8.5.1",
-    "mongoose-aggregate-paginate-v2": "^1.1.1",
-    "mongoose-paginate-v2": "^1.8.2"
+    "mongoose": "^8.5.2",
+    "mongoose-aggregate-paginate-v2": "^1.1.2",
+    "mongoose-paginate-v2": "^1.8.3"
   },
   "devDependencies": {
     "@kikiutils/prettierrc": "^1.3.2",
     "@kikiutils/tsconfigs": "^3.0.1",
     "@types/lodash": "^4.17.7",
-    "@types/node": "^20.14.12",
+    "@types/node": "^22.2.0",
     "changelogen": "^0.5.5",
-    "ts-project-builder": "^3.0.0"
+    "ts-project-builder": "^3.0.1"
   },
   "keywords": [
     "Decimal128",
