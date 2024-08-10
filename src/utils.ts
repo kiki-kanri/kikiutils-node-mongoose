@@ -46,7 +46,7 @@ export function buildMongooseModel<DocType, Model extends BaseMongoosePaginateMo
 	schema.plugin(mongooseAggregatePaginate);
 	schema.plugin(mongoosePaginate);
 	schema.set('timestamps', options?.timestamps === undefined ? true : options.timestamps);
-	return (options?.connection || mongooseConnections.default || (mongooseConnections.default = mongoose.createConnection(process.env.MONGODB_URI || 'mongodb://localhost:27017'))).model<DocType, Model, QueryHelpers>(name, schema, collection);
+	return (options?.connection || mongooseConnections.default || (mongooseConnections.default = mongoose.createConnection(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017'))).model<DocType, Model, QueryHelpers>(name, schema, collection);
 }
 
 /**
@@ -64,8 +64,8 @@ export function buildMongooseModel<DocType, Model extends BaseMongoosePaginateMo
  * @returns The merged common and custom schemas.
  */
 export function createCommonMongooseSchemas<T extends {}>(customSchemas?: T, options?: CreateCommonMongooseSchemasOptions) {
-	const autoRoundAndToFixedDecimal128Places = options?.autoRoundAndToFixedDecimal128?.places || 2;
-	const autoRoundAndToFixedDecimal128Rounding = options?.autoRoundAndToFixedDecimal128?.rounding || Decimal.ROUND_DOWN;
+	const autoRoundAndToFixedDecimal128Places = options?.autoRoundAndToFixedDecimal128?.places ?? 2;
+	const autoRoundAndToFixedDecimal128Rounding = options?.autoRoundAndToFixedDecimal128?.rounding ?? Decimal.ROUND_DOWN;
 	const baseAutoRoundAndToFixedDecimal128 = {
 		set: (value: number | string | { toString(): string }) => new Decimal(value.toString()).toFixed(autoRoundAndToFixedDecimal128Places, autoRoundAndToFixedDecimal128Rounding),
 		type: mongoose.Schema.Types.Decimal128
