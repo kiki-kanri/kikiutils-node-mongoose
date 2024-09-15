@@ -1,5 +1,21 @@
 # Changelog
 
+## v1.3.0
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.2.1...v1.3.0)
+
+### 🚀 Enhancements
+
+- Add ipv4 and ipv6 schemas to `createCommonMongooseSchemas` ([cda5483](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/cda5483))
+
+### 🏡 Chore
+
+- Upgrade dependencies ([8e7050c](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/8e7050c))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v1.2.1
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.2.0...v1.2.1)
