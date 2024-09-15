@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import { Types } from 'mongoose';
 import mongooseAggregatePaginate from 'mongoose-aggregate-paginate-v2';
 import mongoosePaginate from 'mongoose-paginate-v2';
+import net from 'net';
 
 import { mongooseConnections } from './_connections';
 import mongooseNormalizePlugin from './plugins/normalize';
@@ -71,6 +72,23 @@ export function createCommonMongooseSchemas<T extends {}>(customSchemas?: T, opt
 		type: mongoose.Schema.Types.Decimal128
 	} as const;
 
+	const baseIPv4 = {
+		trim: true,
+		type: String,
+		validate: {
+			message: '`{VALUE}` is not a valid IPv4 address for path `{PATH}`.',
+			validator: (value: string) => net.isIPv4(value)
+		}
+	} as const;
+
+	const baseIPv6 = {
+		...baseIPv4,
+		validate: {
+			message: '`{VALUE}` is not a valid IPv6 address for path `{PATH}`.',
+			validator: (value: string) => net.isIPv6(value)
+		}
+	} as const;
+
 	const baseRequiredBoolean = { required: true, type: Boolean } as const;
 	const baseRequiredNumber = { required: true, type: Number } as const;
 	const baseRequiredObjectId = { required: true, type: mongoose.Schema.Types.ObjectId } as const;
@@ -113,6 +131,72 @@ export function createCommonMongooseSchemas<T extends {}>(customSchemas?: T, opt
 				}
 			},
 			string: {
+				ipv4: {
+					nonRequired: baseIPv4,
+					private: {
+						nonRequired: { ...baseIPv4, private: true },
+						required: {
+							...baseIPv4,
+							private: true,
+							required: true
+						},
+						unique: {
+							nonRequired: {
+								...baseIPv4,
+								private: true,
+								unique: true
+							},
+							required: {
+								...baseIPv4,
+								private: true,
+								required: true,
+								unique: true
+							}
+						}
+					},
+					required: { ...baseIPv4, required: true },
+					unique: {
+						nonRequired: { ...baseIPv4, unique: true },
+						required: {
+							...baseIPv4,
+							required: true,
+							unique: true
+						}
+					}
+				},
+				ipv6: {
+					nonRequired: baseIPv6,
+					private: {
+						nonRequired: { ...baseIPv6, private: true },
+						required: {
+							...baseIPv6,
+							private: true,
+							required: true
+						},
+						unique: {
+							nonRequired: {
+								...baseIPv6,
+								private: true,
+								unique: true
+							},
+							required: {
+								...baseIPv6,
+								private: true,
+								required: true,
+								unique: true
+							}
+						}
+					},
+					required: { ...baseIPv6, required: true },
+					unique: {
+						nonRequired: { ...baseIPv6, unique: true },
+						required: {
+							...baseIPv6,
+							required: true,
+							unique: true
+						}
+					}
+				},
 				nonRequired: createMongooseStringSchema(),
 				private: {
 					nonRequired: createMongooseStringSchema('private'),
