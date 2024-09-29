@@ -72,26 +72,33 @@ declare module 'mongoose' {
 		[customLabel: string]: T[] | number | boolean | null | undefined;
 	}
 
-	type PaginateDocument<T, TMethods, TVirtuals, O extends PaginateOptions = {}> = O['lean'] extends true ? (O['leanWithId'] extends true ? T & { id: string } : T) : HydratedDocument<T, TMethods, TVirtuals>;
+	type PaginateDocument<T, TMethods, TQueryHelpers, O extends PaginateOptions = {}> = O['lean'] extends true ? (O['leanWithId'] extends true ? T & { id: string } : T) : HydratedDocument<T, TMethods, TQueryHelpers>;
 
 	interface PaginateModel<T, TQueryHelpers = {}, TMethods = {}> extends Model<T, TQueryHelpers, TMethods> {
-		paginate<O extends PaginateOptions>(query?: FilterQuery<T>, options?: O, callback?: (err: any, result: PaginateResult<PaginateDocument<T, TMethods, O>>) => void): Promise<PaginateResult<PaginateDocument<T, TMethods, O>>>;
-	}
+		paginate<O extends PaginateOptions>(
+			query?: FilterQuery<T>,
+			options?: O,
+			callback?: (err: any, result: PaginateResult<PaginateDocument<T, TMethods, TQueryHelpers, O>>) => void
+		): Promise<PaginateResult<PaginateDocument<T, TMethods, TQueryHelpers, O>>>;
 
-	interface PaginateModel<T, TQueryHelpers = {}, TMethods = {}> extends Model<T, TQueryHelpers, TMethods> {
 		paginate<UserType = T, O extends PaginateOptions = PaginateOptions>(
 			query?: FilterQuery<T>,
 			options?: O,
-			callback?: (err: any, result: PaginateResult<PaginateDocument<UserType, TMethods, O>>) => void
-		): Promise<PaginateResult<PaginateDocument<UserType, TMethods, O>>>;
-	}
+			callback?: (err: any, result: PaginateResult<PaginateDocument<UserType, TMethods, TQueryHelpers, O>>) => void
+		): Promise<PaginateResult<PaginateDocument<UserType, TMethods, TQueryHelpers, O>>>;
 
-	interface PaginateModel<T, TQueryHelpers = {}, TMethods = {}> extends Model<T, TQueryHelpers, TMethods> {
 		paginate<UserType = T>(
 			query?: FilterQuery<T>,
 			options?: PaginateOptions,
-			callback?: (err: any, result: PaginateResult<PaginateDocument<UserType, TMethods, PaginateOptions>>) => void
-		): Promise<PaginateResult<PaginateDocument<UserType, TMethods, PaginateOptions>>>;
+			callback?: (err: any, result: PaginateResult<PaginateDocument<UserType, TMethods, TQueryHelpers, PaginateOptions>>) => void
+		): Promise<PaginateResult<PaginateDocument<UserType, TMethods, TQueryHelpers, PaginateOptions>>>;
+	}
+
+	// @ts-expect-error
+	interface Query<ResultType, DocType, THelpers = NonNullable<unknown>, RawDocType = DocType, QueryOp = 'find', TInstanceMethods = Record<string, never>> {
+		paginate<O extends PaginateOptions>(options?: O): Promise<PaginateResult<PaginateDocument<RawDocType, TInstanceMethods, THelpers, O>>>;
+		paginate<UserType = ResultType, O extends PaginateOptions = PaginateOptions>(options?: O): Promise<PaginateResult<PaginateDocument<UserType, TInstanceMethods, THelpers, O>>>;
+		paginate<UserType = ResultType>(options?: PaginateOptions): Promise<PaginateResult<PaginateDocument<UserType, TInstanceMethods, THelpers, PaginateOptions>>>;
 	}
 }
 
