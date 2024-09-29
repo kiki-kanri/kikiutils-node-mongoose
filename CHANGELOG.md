@@ -1,5 +1,28 @@
 # Changelog
 
+## v1.3.1
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.3.0...v1.3.1)
+
+### 🩹 Fixes
+
+- Add missing `InstanceMethodsAndOverrides` parameter to `MongooseFindOneReturnType` ([f387156](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/f387156))
+
+### 💅 Refactors
+
+- Replace `@ts-ignore` comments with `@ts-expect-error` ([a37542b](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/a37542b))
+
+### 🏡 Chore
+
+- Update script ([e9146d9](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/e9146d9))
+- Add tslib dev dependency ([3f7f0bd](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/3f7f0bd))
+- Upgrade dependencies ([f135e7f](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/f135e7f))
+- Update paginate type definition file ([7316908](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/7316908))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v1.3.0
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.2.1...v1.3.0)
