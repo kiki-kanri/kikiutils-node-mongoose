@@ -25,7 +25,8 @@
     "@types/lodash": "^4.17.7",
     "@types/node": "^22.5.5",
     "changelogen": "^0.5.5",
-    "ts-project-builder": "^3.0.1"
+    "ts-project-builder": "^3.0.1",
+    "tslib": "^2.7.0"
   },
   "keywords": [
     "Decimal128",
