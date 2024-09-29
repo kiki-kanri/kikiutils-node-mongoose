@@ -2,7 +2,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "del-cli ./dist && tsc-multi",
+    "build": "ts-project-builder ./src/index.ts -f esm --clean --preserve-modules",
     "dev": "tsx watch ./src/index.ts"
   },
   "dependencies": {
@@ -11,8 +11,7 @@
   },
   "devDependencies": {
     "@kikiutils/tsconfigs": "^3.0.1",
-    "del-cli": "^5.1.0",
-    "tsc-multi": "^1.1.0",
+    "ts-project-builder": "^3.0.1",
     "tsx": "^4.19.1"
   }
 }
