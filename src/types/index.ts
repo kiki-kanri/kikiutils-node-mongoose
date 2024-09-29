@@ -3,7 +3,7 @@ import type { AggregatePaginateModel, Connection, HydratedDocument, PaginateMode
 export type {} from './aggregate-paginate';
 export type {} from './paginate';
 
-// @ts-ignore
+// @ts-expect-error
 export interface BaseModelStatics<RawDocType, InstanceMethodsAndOverrides = {}, QueryHelpers = {}> {}
 
 export interface MongooseConnections {

@@ -30,7 +30,7 @@ interface UserModel extends BaseMongoosePaginateModel<User, UserMethodsAndOverri
 const userSchema = new Schema<User, UserModel, UserMethodsAndOverrides>(
 	{
 		account: commonMongooseSchemas.string.short.trimmed.unique.required,
-		// @ts-ignore
+		// @ts-expect-error
 		balance: { ...commonMongooseSchemas.decimal128.autoRoundAndToFixed.required, default: '0' },
 		email: { ...commonMongooseSchemas.string.trimmed.nonRequired, lowercase: true },
 		enabled: commonMongooseSchemas.boolean.defaultTrue.required,
