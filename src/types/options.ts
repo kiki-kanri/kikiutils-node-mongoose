@@ -1,4 +1,10 @@
-import type { Connection, SchemaTimestampsConfig } from 'mongoose';
+import type { Connection, Schema, SchemaTimestampsConfig } from 'mongoose';
+
+export interface CustomMongooseOptions {
+	beforeModelBuild?: <DocType, Model extends BaseMongoosePaginateModel<DocType, InstanceMethodsAndOverrides, QueryHelpers>, InstanceMethodsAndOverrides = {}, QueryHelpers = {}>(
+		schema: Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>
+	) => void;
+}
 
 /**
  * Interface for options used when building a Mongoose model.
