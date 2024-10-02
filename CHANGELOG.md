@@ -1,5 +1,23 @@
 # Changelog
 
+## v1.4.0
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.3.1...v1.4.0)
+
+### 🚀 Enhancements
+
+- Add `customMongooseOptions` constant ([6e4dcb3](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/6e4dcb3))
+- Execute `customMongooseOptions.beforeModelBuild` during model build ([a6819ca](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/a6819ca))
+
+### 🏡 Chore
+
+- Upgrade examples dependencies ([1b03baa](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/1b03baa))
+- Update build process for examples ([b66f554](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/b66f554))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v1.3.1
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.3.0...v1.3.1)
