@@ -52,11 +52,6 @@
       "require": null,
       "types": null
     },
-    "./plugins/*": {
-      "import": "./plugins/*.mjs",
-      "require": "./plugins/*.cjs",
-      "types": "./plugins/*.d.ts"
-    },
     "./types": {
       "types": "./types/index.d.ts"
     },
