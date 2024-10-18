@@ -10,7 +10,8 @@
   },
   "scripts": {
     "build": "ts-project-builder ./src/constants.ts ./src/utils.ts --clean --preserve-modules",
-    "bumplog": "changelogen --bump"
+    "bumplog": "changelogen --bump",
+    "release": "pnpm run build && changelogen --release && sh ./build-and-publish.sh"
   },
   "dependencies": {
     "decimal.js": "^10.4.3",
