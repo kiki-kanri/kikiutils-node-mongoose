@@ -24,7 +24,7 @@ declare module 'mongoose' {
 		select?: object | string;
 		collation?: mongo.CollationOptions;
 		sort?: object | string;
-		populate?: PopulateOptions[] | string[] | PopulateOptions | string | PopulateOptions;
+		populate?: PopulateOptions[] | string[] | PopulateOptions | string;
 		projection?: any;
 		lean?: boolean;
 		leanWithId?: boolean;
