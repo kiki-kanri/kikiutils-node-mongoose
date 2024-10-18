@@ -1,14 +1,14 @@
 /**
  * Interface for the base data of a Mongoose model, optionally including timestamp fields.
  *
- * This interface extends `_WithTimestampFieldsData` to optionally include `createdAt`
+ * This interface extends `LocalWithTimestampFieldsData` to optionally include `createdAt`
  * and `updatedAt` fields based on the `CreatedAtField` and `UpdatedAtField` flags.
  * It also includes a mandatory `id` field.
  *
  * @template CreatedAtField - A boolean flag indicating whether the `createdAt` field should be included.
  * @template UpdatedAtField - A boolean flag indicating whether the `updatedAt` field should be included.
  */
-interface _BaseMongooseModelData<CreatedAtField extends boolean = true, UpdatedAtField extends boolean = true> extends _WithTimestampFieldsData<CreatedAtField, UpdatedAtField> {
+interface LocalBaseMongooseModelData<CreatedAtField extends boolean = true, UpdatedAtField extends boolean = true> extends LocalWithTimestampFieldsData<CreatedAtField, UpdatedAtField> {
 	id: string;
 }
 
@@ -22,7 +22,7 @@ interface _BaseMongooseModelData<CreatedAtField extends boolean = true, UpdatedA
  * @template CreatedAt - A boolean flag indicating whether the `createdAt` field should be included.
  * @template UpdatedAt - A boolean flag indicating whether the `updatedAt` field should be included.
  */
-interface _WithTimestampFieldsData<CreatedAt extends boolean = true, UpdatedAt extends boolean = true> {
+interface LocalWithTimestampFieldsData<CreatedAt extends boolean = true, UpdatedAt extends boolean = true> {
 	createdAt: CreatedAt extends true ? string : never;
 	updatedAt: UpdatedAt extends true ? string : never;
 }
@@ -41,13 +41,13 @@ declare global {
 	/**
 	 * Type definition for the base data of a Mongoose model, optionally including timestamp fields.
 	 *
-	 * This type alias uses `OmitNever` to remove any `never` properties from `_BaseMongooseModelData`
+	 * This type alias uses `OmitNever` to remove any `never` properties from `LocalBaseMongooseModelData`
 	 * based on the presence of the `CreatedAtField` and `UpdatedAtField` flags.
 	 *
 	 * @template CreatedAtField - A boolean flag indicating whether the `createdAt` field should be included.
 	 * @template UpdatedAtField - A boolean flag indicating whether the `updatedAt` field should be included.
 	 */
-	type BaseMongooseModelData<CreatedAtField extends boolean = true, UpdatedAtField extends boolean = true> = OmitNever<_BaseMongooseModelData<CreatedAtField, UpdatedAtField>>;
+	type BaseMongooseModelData<CreatedAtField extends boolean = true, UpdatedAtField extends boolean = true> = OmitNever<LocalBaseMongooseModelData<CreatedAtField, UpdatedAtField>>;
 
 	/**
 	 * Type definition to omit timestamp fields and other specified fields from a given type.
@@ -63,13 +63,13 @@ declare global {
 	/**
 	 * Type definition for including timestamp fields conditionally based on the provided flags.
 	 *
-	 * This type alias uses `OmitNever` to remove any `never` properties from `_WithTimestampFieldsData`
+	 * This type alias uses `OmitNever` to remove any `never` properties from `LocalWithTimestampFieldsData`
 	 * based on the presence of the `CreatedAt` and `UpdatedAt` flags.
 	 *
 	 * @template CreatedAt - A boolean flag indicating whether the `createdAt` field should be included.
 	 * @template UpdatedAt - A boolean flag indicating whether the `updatedAt` field should be included.
 	 */
-	type WithMongooseTimestampFieldsData<CreatedAt extends boolean = true, UpdatedAt extends boolean = true> = OmitNever<_WithTimestampFieldsData<CreatedAt, UpdatedAt>>;
+	type WithMongooseTimestampFieldsData<CreatedAt extends boolean = true, UpdatedAt extends boolean = true> = OmitNever<LocalWithTimestampFieldsData<CreatedAt, UpdatedAt>>;
 }
 
 export {};

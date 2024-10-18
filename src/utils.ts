@@ -1,7 +1,6 @@
 import Decimal from 'decimal.js';
 import lodash from 'lodash';
-import mongoose from 'mongoose';
-import { Types } from 'mongoose';
+import mongoose, { Types } from 'mongoose';
 import mongooseAggregatePaginate from 'mongoose-aggregate-paginate-v2';
 import mongoosePaginate from 'mongoose-paginate-v2';
 import net from 'net';
@@ -303,8 +302,8 @@ export function createMongooseObjectIdRefSchema<R extends string, T extends Base
 export function createMongooseStringSchema<T extends MongooseStringSchemaAttribute[]>(...attributes: T) {
 	const schema: Partial<MongooseStringSchema<T>> = { type: String };
 	new Set(attributes).forEach((attribute) => {
-		if (attribute === 'short') return (schema.maxlength = 16);
-		schema[attribute] = true;
+		if (attribute === 'short') schema.maxlength = 16;
+		else schema[attribute] = true;
 	});
 
 	return schema as MongooseStringSchema<T>;

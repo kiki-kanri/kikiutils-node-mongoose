@@ -44,14 +44,14 @@ declare module 'mongoose' {
 
 	interface SubPaginateOptions {
 		select?: object | string;
-		populate?: PopulateOptions[] | string[] | PopulateOptions | string | PopulateOptions;
+		populate?: PopulateOptions[] | string[] | PopulateOptions | string;
 		pagination?: boolean;
 		read?: PaginateReadOptions;
 		pagingOptions: SubDocumentPagingOptions | undefined;
 	}
 
 	interface SubDocumentPagingOptions {
-		populate?: PopulateOptions[] | string[] | PopulateOptions | string | PopulateOptions;
+		populate?: PopulateOptions[] | string[] | PopulateOptions | string;
 		page?: number;
 		limit?: number;
 	}
