@@ -1,5 +1,25 @@
 # Changelog
 
+## v1.4.1
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.4.0...v1.4.1)
+
+### 🩹 Fixes
+
+- Resolve issues in code reported by gitroll ([e7103c6](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/e7103c6))
+
+### 🏡 Chore
+
+- Modify tsconfig.json ([7d2c147](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/7d2c147))
+- Upgrade dependencies ([242b61e](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/242b61e))
+- Switch changelog generation package and remove tslib ([ef4e4d0](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/ef4e4d0))
+- Remove tslib ([6e35e19](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/6e35e19))
+- Add release script to package.json ([0fea0dc](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/0fea0dc))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v1.4.0
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.3.1...v1.4.0)
