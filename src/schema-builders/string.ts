@@ -4,10 +4,10 @@ import net from 'net';
 import { createBaseSchemaBuilderFactory } from './base';
 import type { MaybeReadonly } from '../types/utils';
 
-type ExtendStringSchemaBuilder<Props, ExtraOmitFields extends string> = Omit<StringSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
+type ExtendStringSchemaBuilder<Props extends { type: StringSchemaDefinition }, ExtraOmitFields extends string> = Omit<StringSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
 type IPSchema<T extends string> = { trim: true; validate: { message: T; validator: (value: string) => boolean } };
 
-export interface StringSchemaBuilder<Props = { type: StringSchemaDefinition }, ExtraOmitFields extends string = never, PropsWithRequired = Props & { required: true }> {
+export interface StringSchemaBuilder<Props extends { type: StringSchemaDefinition } = { type: StringSchemaDefinition }, ExtraOmitFields extends string = never, PropsWithRequired = Props & { required: true }> {
 	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends string>(value: T) => ExtendStringSchemaBuilder<{ [key in keyof (Props & { default: T })]: (Props & { default: T })[key] }, ExtraOmitFields>;
 	enum: <
 		T extends

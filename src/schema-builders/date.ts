@@ -3,9 +3,9 @@ import type { DefaultType, DateSchemaDefinition } from 'mongoose';
 import { createBaseSchemaBuilderFactory } from './base';
 import type { MaybeReadonly } from '../types/utils';
 
-type ExtendDateSchemaBuilder<Props, ExtraOmitFields extends string> = Omit<DateSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
+type ExtendDateSchemaBuilder<Props extends { type: DateSchemaDefinition }, ExtraOmitFields extends string> = Omit<DateSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
 
-export interface DateSchemaBuilder<Props = { type: DateSchemaDefinition }, ExtraOmitFields extends string = never, PropsWithRequired = Props & { required: true }> {
+export interface DateSchemaBuilder<Props extends { type: DateSchemaDefinition } = { type: DateSchemaDefinition }, ExtraOmitFields extends string = never, PropsWithRequired = Props & { required: true }> {
 	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends NativeDate>(value: T) => ExtendDateSchemaBuilder<{ [key in keyof (Props & { default: T })]: (Props & { default: T })[key] }, ExtraOmitFields>;
 	enum: <
 		T extends
