@@ -8,8 +8,11 @@ import net from 'net';
 import { mongooseConnections } from './_connections';
 import { customMongooseOptions } from './options';
 import mongooseNormalizePlugin from './plugins/normalize';
+import type { schemaBuilders } from './schema-builders';
 import type { BuildMongooseModelOptions } from './types/options';
 import type { BaseSchemaAttribute, CreateCommonMongooseSchemasOptions, MongooseObjectIdRefSchema, MongooseStringSchema, MongooseStringSchemaAttribute } from './types/schema';
+
+export type DoNotUseOrRemoveThisType = typeof schemaBuilders;
 
 const { merge } = lodash;
 
@@ -95,6 +98,9 @@ export function createCommonMongooseSchemas<T extends {}>(customSchemas?: T, opt
 	const baseRequiredObjectId = { required: true, type: mongoose.Schema.Types.ObjectId } as const;
 	return merge(
 		{
+			/**
+			 * @deprecated - Will be removed in the next major version. Use {@link schemaBuilders.boolean} instead.
+			 */
 			boolean: {
 				defaultFalse: {
 					nonRequired: { default: false, type: Boolean },
@@ -115,6 +121,9 @@ export function createCommonMongooseSchemas<T extends {}>(customSchemas?: T, opt
 				nonRequired: { type: mongoose.Schema.Types.Decimal128 },
 				required: { required: true, type: mongoose.Schema.Types.Decimal128 }
 			},
+			/**
+			 * @deprecated - Will be removed in the next major version. Use {@link schemaBuilders.number} instead.
+			 */
 			number: {
 				nonRequired: { type: Number },
 				required: baseRequiredNumber,
@@ -131,6 +140,9 @@ export function createCommonMongooseSchemas<T extends {}>(customSchemas?: T, opt
 					required: { ...baseRequiredObjectId, unique: true }
 				}
 			},
+			/**
+			 * @deprecated - Will be removed in the next major version. Use {@link schemaBuilders.string} instead.
+			 */
 			string: {
 				ipv4: {
 					nonRequired: baseIPv4,
@@ -292,6 +304,8 @@ export function createMongooseObjectIdRefSchema<R extends string, T extends Base
  * This function generates a schema definition for a string field, including attributes
  * such as 'private', 'required', 'short', 'trim', and 'unique'. If the 'short' attribute
  * is included, the `maxlength` is set to 16.
+ *
+ * @deprecated - Will be removed in the next major version. Use {@link schemaBuilders.string} instead.
  *
  * @template T - An array of attributes to apply to the schema field.
  *
