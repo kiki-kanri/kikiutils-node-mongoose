@@ -61,6 +61,8 @@ export function buildMongooseModel<DocType, Model extends BaseMongoosePaginateMo
  * number, objectId, and string schemas, with optional custom configurations and rounding
  * options for Decimal128 fields.
  *
+ * @deprecated - Will be removed in the next major version. Use {@link schemaBuilders} instead.
+ *
  * @template T - The type for custom schemas.
  *
  * @param customSchemas - Optional custom schemas to merge with the common schemas.
@@ -113,6 +115,9 @@ export function createCommonMongooseSchemas<T extends {}>(customSchemas?: T, opt
 				nonRequired: { type: Boolean },
 				required: baseRequiredBoolean
 			},
+			/**
+			 * @deprecated - Will be removed in the next major version. Use {@link schemaBuilders.decimal128} instead.
+			 */
 			decimal128: {
 				autoRoundAndToFixed: {
 					nonRequired: baseAutoRoundAndToFixedDecimal128,
@@ -359,6 +364,8 @@ export async function mongooseDocumentOrObjectIdToDocument<D extends MongooseHyd
  *
  * This function adds a getter to the specified Decimal128 fields in the schema,
  * converting the values to strings for easier use.
+ *
+ * @deprecated - Will be removed in the next major version. Use {@link schemaBuilders.decimal128} instead.
  *
  * @template DocType - The type of the document.
  * @template Model - The type of the model, which extends `BaseMongoosePaginateModel`.

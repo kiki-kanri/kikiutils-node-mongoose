@@ -1,6 +1,10 @@
 import type Decimal from 'decimal.js';
 import type { ObjectIdSchemaDefinition, SchemaTypeOptions, StringSchemaDefinition, Types } from 'mongoose';
 
+import type { schemaBuilders } from '../schema-builders';
+
+export type DoNotUseOrRemoveThisType = typeof schemaBuilders;
+
 /**
  * Base attributes for Mongoose schemas.
  *
@@ -21,6 +25,8 @@ export type MongooseStringSchemaAttribute = BaseSchemaAttribute | 'lowercase' | 
  *
  * This interface defines options for creating common Mongoose schemas, including
  * settings for automatic rounding and fixed decimal places for Decimal128 fields.
+ *
+ * @deprecated - Will be removed in the next major version. Use {@link schemaBuilders} instead.
  */
 export interface CreateCommonMongooseSchemasOptions {
 	/**
