@@ -11,7 +11,7 @@
   "scripts": {
     "build": "ts-project-builder ./src/constants.ts ./src/schema-builders/index.ts ./src/utils.ts --clean --preserve-modules",
     "bumplog": "changelogen --bump",
-    "release": "pnpm run build && changelogen --push --release && sh ./build-and-publish.sh",
+    "release": "pnpm run build && pnpm run test && changelogen --push --release && sh ./build-and-publish.sh",
     "test": "jest --coverage"
   },
   "dependencies": {
