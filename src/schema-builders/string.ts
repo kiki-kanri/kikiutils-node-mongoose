@@ -1,6 +1,7 @@
 import type { DefaultType, StringSchemaDefinition } from 'mongoose';
+import net from 'net';
 
-import { createSchemaBuilder } from './base';
+import { createBaseSchemaBuilderFactory } from './base';
 import type { MaybeReadonly } from '../types/utils';
 
 type ExtendStringSchemaBuilder<Props, ExtraOmitFields extends string> = Omit<StringSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
@@ -38,4 +39,31 @@ export interface StringSchemaBuilder<Props = { type: StringSchemaDefinition }, E
 	uppercase: ExtendStringSchemaBuilder<{ [key in keyof (Props & { uppercase: true })]: (Props & { uppercase: true })[key] }, ExtraOmitFields>;
 }
 
-export const stringSchemaBuilder = createSchemaBuilder<StringSchemaBuilder>(String);
+const baseBuilderFactory = createBaseSchemaBuilderFactory(String);
+export const stringSchemaBuilder = () => {
+	const baseBuilder = baseBuilderFactory();
+	return new Proxy(baseBuilder, {
+		get(target, key, receiver) {
+			// @ts-expect-error
+			const schema = target._schema;
+			if (key === 'ipv4') {
+				return (message: string = '`{VALUE}` is not a valid IPv4 address for path `{PATH}`.') => {
+					schema.trim = true;
+					schema.validate = { message, validator: (value: string) => net.isIPv4(value) };
+					return receiver;
+				};
+			}
+
+			if (key === 'ipv6') {
+				return (message: string = '`{VALUE}` is not a valid IPv6 address for path `{PATH}`.') => {
+					schema.trim = true;
+					schema.validate = { message, validator: (value: string) => net.isIPv6(value) };
+					return receiver;
+				};
+			}
+
+			if (key === 'length') return (value: any) => ((schema['maxlength'] = schema['minlength'] = value), receiver);
+			return Reflect.get(target, key, receiver);
+		}
+	}) as StringSchemaBuilder;
+};
