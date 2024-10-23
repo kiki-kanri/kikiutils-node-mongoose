@@ -1,6 +1,6 @@
 {
   "name": "@kikiutils/mongoose",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "A Mongoose plugin for enhanced JSON normalization and common schema creation, with built-in support for pagination and automatic Decimal128 conversion.",
   "license": "MIT",
   "author": "kiki-kanri",
@@ -9,7 +9,7 @@
     "url": "git+https://github.com/kiki-kanri/kikiutils-node-mongoose.git"
   },
   "scripts": {
-    "build": "ts-project-builder ./src/constants.ts ./src/utils.ts --clean --preserve-modules",
+    "build": "ts-project-builder ./src/constants.ts ./src/schema-builders/index.ts ./src/utils.ts --clean --preserve-modules",
     "bumplog": "changelogen --bump",
     "release": "pnpm run build && changelogen --push --release && sh ./build-and-publish.sh"
   },
@@ -26,7 +26,8 @@
     "@kikiutils/tsconfigs": "^3.0.1",
     "@types/lodash": "^4.17.12",
     "@types/node": "^22.7.8",
-    "ts-project-builder": "^3.3.0"
+    "ts-project-builder": "^3.3.0",
+    "tslib": "^2.8.0"
   },
   "keywords": [
     "Decimal128",
@@ -51,6 +52,11 @@
       "import": null,
       "require": null,
       "types": null
+    },
+    "./schema-builders": {
+      "import": "./schema-builders/index.mjs",
+      "require": "./schema-builders/index.cjs",
+      "types": "./schema-builders/index.d.ts"
     },
     "./types": {
       "types": "./types/index.d.ts"

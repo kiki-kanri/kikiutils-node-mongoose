@@ -1,5 +1,34 @@
 # Changelog
 
+## v1.5.0
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.4.1...v1.5.0)
+
+### 🚀 Enhancements
+
+- Add createSchemaBuilder function ([6a90caa](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/6a90caa))
+- Add `stringSchemaBuilder` ([86f223c](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/86f223c))
+- Add `MaybeReadonly` type and update `StringSchemaBuilder` ([46c7350](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/46c7350))
+- Add `numberSchemaBuilder` ([8a314e3](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/8a314e3))
+- Add `booleanSchemaBuilder` ([cd56098](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/cd56098))
+- Add `dateSchemaBuilder` ([cff37b1](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/cff37b1))
+
+### 💅 Refactors
+
+- Remove duplicate type definitions ([d77b31f](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/d77b31f))
+- Add deprecation tags to certain properties and functions ([b327aff](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/b327aff))
+
+### 🏡 Chore
+
+- Update exports field in package.json ([0b2f242](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/0b2f242))
+- Upgrade dependencies and modify release script ([06e1c86](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/06e1c86))
+- Update minimum Node.js version ([217920d](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/217920d))
+- Upgrade dependencies ([c727924](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/c727924))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v1.4.1
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.4.0...v1.4.1)
