@@ -25,8 +25,19 @@ export interface Decimal128SchemaBuilder<Props extends { type: Schema.Types.Deci
 	nonRequired: { [key in keyof Props]: Props[key] };
 	private: ExtendDecimal128SchemaBuilder<{ [key in keyof (Props & { private: true })]: (Props & { private: true })[key] }, ExtraOmitFields>;
 	required: { [key in keyof (Props & { required: true })]: (Props & { required: true })[key] };
+	setToStringGetter: ExtendDecimal128SchemaBuilder<{ [key in keyof (Props & { get: (value: Types.Decimal128) => string })]: (Props & { get: (value: Types.Decimal128) => string })[key] }, ExtraOmitFields | 'setToStringGetter '>;
 	sparse: ExtendDecimal128SchemaBuilder<{ [key in keyof (Props & { sparse: true })]: (Props & { sparse: true })[key] }, ExtraOmitFields>;
 	unique: ExtendDecimal128SchemaBuilder<{ [key in keyof (Props & { unique: true })]: (Props & { unique: true })[key] }, ExtraOmitFields>;
 }
 
-export const decimal128SchemaBuilder = createBaseSchemaBuilderFactory(Schema.Types.Decimal128);
+const baseBuilderFactory = createBaseSchemaBuilderFactory(Schema.Types.Decimal128);
+export const decimal128SchemaBuilder = () => {
+	const schema: Record<string, any> = {};
+	const baseBuilder = baseBuilderFactory(schema);
+	return new Proxy(baseBuilder, {
+		get(target, key, receiver) {
+			if (key === 'setToStringGetter') return (schema['get'] = (value: Types.Decimal128) => value.toString()), receiver;
+			return Reflect.get(target, key, receiver);
+		}
+	}) as Decimal128SchemaBuilder;
+};
