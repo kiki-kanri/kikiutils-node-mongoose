@@ -132,6 +132,9 @@ export function createCommonMongooseSchemas<T extends {}>(customSchemas?: T, opt
 					required: { ...baseRequiredNumber, unique: true }
 				}
 			},
+			/**
+			 * @deprecated - Will be removed in the next major version. Use {@link schemaBuilders.objectId} instead.
+			 */
 			objectId: {
 				nonRequired: { type: mongoose.Schema.Types.ObjectId },
 				required: baseRequiredObjectId,
