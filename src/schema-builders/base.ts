@@ -1,4 +1,6 @@
-export const createBaseSchemaBuilderFactory = <Builder = Readonly<{}>>(type: BooleanConstructor | DateConstructor | NumberConstructor | StringConstructor) => {
+import type { Schema } from 'mongoose';
+
+export const createBaseSchemaBuilderFactory = <Builder = Readonly<{}>>(type: BooleanConstructor | DateConstructor | NumberConstructor | Schema.Types.ObjectId['constructor'] | StringConstructor) => {
 	return (schema: Record<string, any> = {}) => {
 		schema.type = type;
 		return new Proxy(Object.freeze({}), {
