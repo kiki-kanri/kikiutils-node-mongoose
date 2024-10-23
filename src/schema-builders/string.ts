@@ -41,11 +41,10 @@ export interface StringSchemaBuilder<Props = { type: StringSchemaDefinition }, E
 
 const baseBuilderFactory = createBaseSchemaBuilderFactory(String);
 export const stringSchemaBuilder = () => {
-	const baseBuilder = baseBuilderFactory();
+	const schema: Record<string, any> = {};
+	const baseBuilder = baseBuilderFactory(schema);
 	return new Proxy(baseBuilder, {
 		get(target, key, receiver) {
-			// @ts-expect-error
-			const schema = target._schema;
 			if (key === 'ipv4') {
 				return (message: string = '`{VALUE}` is not a valid IPv4 address for path `{PATH}`.') => {
 					schema.trim = true;
