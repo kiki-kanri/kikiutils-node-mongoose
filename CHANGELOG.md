@@ -1,5 +1,37 @@
 # Changelog
 
+## v1.7.0
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.6.0...v1.7.0)
+
+### 🚀 Enhancements
+
+- Add `objectIdSchemaBuilder` ([ecf4117](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/ecf4117))
+- Add `decimal128SchemaBuilder` ([0cccf0a](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/0cccf0a))
+- Add `setToStringGetter` property to `decimal128SchemaBuilder` ([7ea08e1](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/7ea08e1))
+- Add `setRoundAndToFixedSetter` property to `decimal128SchemaBuilder` ([fd813a7](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/fd813a7))
+
+### 🩹 Fixes
+
+- Resolve missing type field issue in RefSchemaBuilder ([dc68335](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/dc68335))
+
+### 💅 Refactors
+
+- Use constants to define default validation messages for stringSchemaBuilder's ipv4 and ipv6 methods ([2c822ba](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/2c822ba))
+
+### 📖 Documentation
+
+- Add deprecation tag to `createMongooseObjectIdRefSchema` ([eb3b3d5](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/eb3b3d5))
+- Add deprecation tag to certain constants, functions and properties ([c00a4f6](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/c00a4f6))
+
+### 🏡 Chore
+
+- Add testing dependencies and configuration files ([f327c27](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/f327c27))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v1.6.0
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.5.0...v1.6.0)
