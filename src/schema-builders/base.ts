@@ -1,4 +1,4 @@
-export const createSchemaBuilder = <Builder>(type: NumberConstructor | StringConstructor) => {
+export const createSchemaBuilder = <Builder>(type: BooleanConstructor | NumberConstructor | StringConstructor) => {
 	return () => {
 		const schema: Record<string, any> = { type };
 		return new Proxy(Object.freeze({}), {
