@@ -1,5 +1,25 @@
 # Changelog
 
+## v1.6.0
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.5.0...v1.6.0)
+
+### 🚀 Enhancements
+
+- Add ipv4 and ipv6 methods to StringSchemaBuilder ([234756d](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/234756d))
+- Allow passing schema to builder returned by createBaseSchemaBuilderFactory ([589c59b](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/589c59b))
+- Add `refSchemaBuilder` ([44c1702](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/44c1702))
+
+### 💅 Refactors
+
+- Rename `createSchemaBuilder` to `createBaseSchemaBuilderFactory` and remove string-specific operations ([7f3ce35](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/7f3ce35))
+- Modify stringSchemaBuilder to extend createBaseSchemaBuilderFactory ([85fc4ac](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/85fc4ac))
+- Update other schema builders ([4d85342](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/4d85342))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v1.5.0
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.4.1...v1.5.0)
