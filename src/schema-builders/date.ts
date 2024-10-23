@@ -5,7 +5,7 @@ import type { MaybeReadonly } from '../types/utils';
 
 type ExtendDateSchemaBuilder<Props extends { type: DateSchemaDefinition }, ExtraOmitFields extends string> = Omit<DateSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
 
-export interface DateSchemaBuilder<Props extends { type: DateSchemaDefinition } = { type: DateSchemaDefinition }, ExtraOmitFields extends string = never, PropsWithRequired = Props & { required: true }> {
+export interface DateSchemaBuilder<Props extends { type: DateSchemaDefinition } = { type: DateSchemaDefinition }, ExtraOmitFields extends string = never> {
 	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends NativeDate>(value: T) => ExtendDateSchemaBuilder<{ [key in keyof (Props & { default: T })]: (Props & { default: T })[key] }, ExtraOmitFields>;
 	enum: <
 		T extends
@@ -25,7 +25,7 @@ export interface DateSchemaBuilder<Props extends { type: DateSchemaDefinition } 
 	min: <T extends D | MaybeReadonly<[D, S]>, D extends NativeDate, S extends string>(value: T) => ExtendDateSchemaBuilder<{ [key in keyof (Props & { min: T })]: (Props & { min: T })[key] }, ExtraOmitFields>;
 	nonRequired: { [key in keyof Props]: Props[key] };
 	private: ExtendDateSchemaBuilder<{ [key in keyof (Props & { private: true })]: (Props & { private: true })[key] }, ExtraOmitFields>;
-	required: { [key in keyof PropsWithRequired]: PropsWithRequired[key] };
+	required: { [key in keyof (Props & { required: true })]: (Props & { required: true })[key] };
 	sparse: ExtendDateSchemaBuilder<{ [key in keyof (Props & { sparse: true })]: (Props & { sparse: true })[key] }, ExtraOmitFields>;
 	unique: ExtendDateSchemaBuilder<{ [key in keyof (Props & { unique: true })]: (Props & { unique: true })[key] }, ExtraOmitFields>;
 }

@@ -7,7 +7,7 @@ import type { MaybeReadonly } from '../types/utils';
 type ExtendStringSchemaBuilder<Props extends { type: StringSchemaDefinition }, ExtraOmitFields extends string> = Omit<StringSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
 type IPSchema<T extends string> = { trim: true; validate: { message: T; validator: (value: string) => boolean } };
 
-export interface StringSchemaBuilder<Props extends { type: StringSchemaDefinition } = { type: StringSchemaDefinition }, ExtraOmitFields extends string = never, PropsWithRequired = Props & { required: true }> {
+export interface StringSchemaBuilder<Props extends { type: StringSchemaDefinition } = { type: StringSchemaDefinition }, ExtraOmitFields extends string = never> {
 	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends string>(value: T) => ExtendStringSchemaBuilder<{ [key in keyof (Props & { default: T })]: (Props & { default: T })[key] }, ExtraOmitFields>;
 	enum: <
 		T extends
@@ -31,7 +31,7 @@ export interface StringSchemaBuilder<Props extends { type: StringSchemaDefinitio
 	minlength: <T extends L | MaybeReadonly<[L, S]>, L extends number, S extends string>(value: T) => ExtendStringSchemaBuilder<{ [key in keyof (Props & { minlength: T })]: (Props & { minlength: T })[key] }, ExtraOmitFields>;
 	nonRequired: { [key in keyof Props]: Props[key] };
 	private: ExtendStringSchemaBuilder<{ [key in keyof (Props & { private: true })]: (Props & { private: true })[key] }, ExtraOmitFields>;
-	required: { [key in keyof PropsWithRequired]: PropsWithRequired[key] };
+	required: { [key in keyof (Props & { required: true })]: (Props & { required: true })[key] };
 	sparse: ExtendStringSchemaBuilder<{ [key in keyof (Props & { sparse: true })]: (Props & { sparse: true })[key] }, ExtraOmitFields>;
 	text: ExtendStringSchemaBuilder<{ [key in keyof (Props & { text: true })]: (Props & { text: true })[key] }, ExtraOmitFields>;
 	trim: ExtendStringSchemaBuilder<{ [key in keyof (Props & { trim: true })]: (Props & { trim: true })[key] }, ExtraOmitFields>;

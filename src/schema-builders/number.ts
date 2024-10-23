@@ -5,7 +5,7 @@ import type { MaybeReadonly } from '../types/utils';
 
 type ExtendNumberSchemaBuilder<Props extends { type: NumberSchemaDefinition }, ExtraOmitFields extends string> = Omit<NumberSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
 
-export interface NumberSchemaBuilder<Props extends { type: NumberSchemaDefinition } = { type: NumberSchemaDefinition }, ExtraOmitFields extends string = never, PropsWithRequired = Props & { required: true }> {
+export interface NumberSchemaBuilder<Props extends { type: NumberSchemaDefinition } = { type: NumberSchemaDefinition }, ExtraOmitFields extends string = never> {
 	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends number>(value: T) => ExtendNumberSchemaBuilder<{ [key in keyof (Props & { default: T })]: (Props & { default: T })[key] }, ExtraOmitFields>;
 	enum: <
 		T extends
@@ -25,7 +25,7 @@ export interface NumberSchemaBuilder<Props extends { type: NumberSchemaDefinitio
 	min: <T extends N | MaybeReadonly<[N, S]>, N extends number, S extends string>(value: T) => ExtendNumberSchemaBuilder<{ [key in keyof (Props & { min: T })]: (Props & { min: T })[key] }, ExtraOmitFields>;
 	nonRequired: { [key in keyof Props]: Props[key] };
 	private: ExtendNumberSchemaBuilder<{ [key in keyof (Props & { private: true })]: (Props & { private: true })[key] }, ExtraOmitFields>;
-	required: { [key in keyof PropsWithRequired]: PropsWithRequired[key] };
+	required: { [key in keyof (Props & { required: true })]: (Props & { required: true })[key] };
 	sparse: ExtendNumberSchemaBuilder<{ [key in keyof (Props & { sparse: true })]: (Props & { sparse: true })[key] }, ExtraOmitFields>;
 	unique: ExtendNumberSchemaBuilder<{ [key in keyof (Props & { unique: true })]: (Props & { unique: true })[key] }, ExtraOmitFields>;
 }
