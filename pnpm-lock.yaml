@@ -34,11 +34,11 @@ importers:
         specifier: ^3.0.1
         version: 3.0.1
       '@types/lodash':
-        specifier: ^4.17.11
-        version: 4.17.11
+        specifier: ^4.17.12
+        version: 4.17.12
       '@types/node':
-        specifier: ^22.7.6
-        version: 22.7.6
+        specifier: ^22.7.8
+        version: 22.7.8
       ts-project-builder:
         specifier: ^3.3.0
         version: 3.3.0(esbuild@0.24.0)(tslib@2.8.0)(typescript@5.6.3)
@@ -350,11 +350,11 @@ packages:
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
 
-  '@types/lodash@4.17.11':
-    resolution: {integrity: sha512-jzqWo/uQP/iqeGGTjhgFp2yaCrCYTauASQcpdzESNCkHjSprBJVcZP9KG9aQ0q+xcsXiKd/iuw/4dLjS3Odc7Q==}
+  '@types/lodash@4.17.12':
+    resolution: {integrity: sha512-sviUmCE8AYdaF/KIHLDJBQgeYzPBI0vf/17NaYehBJfYD1j6/L95Slh07NlyK2iNyBNaEkb3En2jRt+a8y3xZQ==}
 
-  '@types/node@22.7.6':
-    resolution: {integrity: sha512-/d7Rnj0/ExXDMcioS78/kf1lMzYk4BZV8MZGTBKzTGZ6/406ukkbYlIsZmMPhcR5KlkunDHQLrtAVmSq7r+mSw==}
+  '@types/node@22.7.8':
+    resolution: {integrity: sha512-a922jJy31vqR5sk+kAdIENJjHblqcZ4RmERviFsER4WJcEONqxKcjNOlk0q7OUfrF5sddT+vng070cdfMlrPLg==}
 
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
@@ -398,8 +398,8 @@ packages:
   browser-or-node@3.0.0:
     resolution: {integrity: sha512-iczIdVJzGEYhP5DqQxYM9Hh7Ztpqqi+CXZpSmX8ALFs9ecXkQIeqRyM6TfxEfMVpwhl3dSuDvxdzzo9sUOIVBQ==}
 
-  bson@6.8.0:
-    resolution: {integrity: sha512-iOJg8pr7wq2tg/zSlCCHMi3hMm5JTOxLTagf3zxhcenHsFp+c6uOs6K7W5UE7A4QIJGtqh/ZovFNMP4mOPJynQ==}
+  bson@6.9.0:
+    resolution: {integrity: sha512-X9hJeyeM0//Fus+0pc5dSUMhhrrmWwQUtdavaQeF3Ta6m69matZkGWV/MrBcnwUeLC8W9kwwc2hfkZgUuCX3Ig==}
     engines: {node: '>=16.20.1'}
 
   bundle-name@4.1.0:
@@ -1196,9 +1196,9 @@ snapshots:
 
   '@types/estree@1.0.6': {}
 
-  '@types/lodash@4.17.11': {}
+  '@types/lodash@4.17.12': {}
 
-  '@types/node@22.7.6':
+  '@types/node@22.7.8':
     dependencies:
       undici-types: 6.19.8
 
@@ -1232,7 +1232,7 @@ snapshots:
 
   browser-or-node@3.0.0: {}
 
-  bson@6.8.0: {}
+  bson@6.9.0: {}
 
   bundle-name@4.1.0:
     dependencies:
@@ -1498,7 +1498,7 @@ snapshots:
   mongodb@6.9.0:
     dependencies:
       '@mongodb-js/saslprep': 1.1.9
-      bson: 6.8.0
+      bson: 6.9.0
       mongodb-connection-string-url: 3.0.1
 
   mongoose-aggregate-paginate-v2@1.1.2: {}
@@ -1507,7 +1507,7 @@ snapshots:
 
   mongoose@8.7.2:
     dependencies:
-      bson: 6.8.0
+      bson: 6.9.0
       kareem: 2.6.3
       mongodb: 6.9.0
       mpath: 0.9.0
