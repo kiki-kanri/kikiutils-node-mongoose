@@ -284,6 +284,8 @@ export function createCommonMongooseSchemas<T extends {}>(customSchemas?: T, opt
  * This function generates a schema definition for an ObjectId reference field, including
  * attributes such as 'private', 'required', and 'unique'.
  *
+ * @deprecated - Will be removed in the next major version. Use {@link schemaBuilders.ref} instead.
+ *
  * @template R - The type of the reference model name.
  * @template T - An array of attributes to apply to the schema field.
  *
