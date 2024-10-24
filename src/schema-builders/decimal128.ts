@@ -36,6 +36,7 @@ export interface Decimal128SchemaBuilder<Props extends { type: Schema.Types.Deci
 	 *
 	 * @param places - The number of decimal places to round to (default is 2).
 	 * @param rounding - The rounding strategy from the Decimal.js library (default is Decimal.ROUND_DOWN).
+	 *
 	 * @returns A schema builder with the rounding and toFixed behavior applied to the `set` option in Mongoose.
 	 */
 	setRoundAndToFixedSetter: (places?: number, rounding?: Decimal.Rounding) => ExtendDecimal128SchemaBuilder<{ [key in keyof (Props & ToStringSetterSchema)]: (Props & ToStringSetterSchema)[key] }, ExtraOmitFields | 'setRoundAndToFixedSetter'>;
