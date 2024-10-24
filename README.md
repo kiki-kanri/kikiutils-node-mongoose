@@ -2,6 +2,7 @@
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
+[![codecov][codecov-src]][codecov-href]
 [![License][license-src]][license-href]
 
 A Mongoose plugin for enhanced JSON normalization and common schema creation, with built-in support for pagination and automatic Decimal128 conversion.
@@ -46,11 +47,14 @@ Please refer to the [examples](./examples/README.md) folder for usage instructio
 [MIT License](./LICENSE)
 
 <!-- Badges -->
-[npm-version-src]: https://img.shields.io/npm/v/@kikiutils/mongoose/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
 [npm-version-href]: https://npmjs.com/package/@kikiutils/mongoose
+[npm-version-src]: https://img.shields.io/npm/v/@kikiutils/mongoose/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
 
-[npm-downloads-src]: https://img.shields.io/npm/dm/@kikiutils/mongoose.svg?style=flat&colorA=18181B&colorB=28CF8D
 [npm-downloads-href]: https://npmjs.com/package/@kikiutils/mongoose
+[npm-downloads-src]: https://img.shields.io/npm/dm/@kikiutils/mongoose.svg?style=flat&colorA=18181B&colorB=28CF8D
 
-[license-src]: https://img.shields.io/npm/l/@kikiutils/mongoose.svg?style=flat&colorA=18181B&colorB=28CF8D
+[codecov-href]: https://codecov.io/github/kiki-kanri/kikiutils-node-mongoose
+[codecov-src]: https://codecov.io/github/kiki-kanri/kikiutils-node-mongoose/graph/badge.svg?token=GRSQ7JO39E
+
 [license-href]: https://github.com/kiki-kanri/kikiutils-node-mongoose/blob/main/LICENSE
+[license-src]: https://img.shields.io/npm/l/@kikiutils/mongoose.svg?style=flat&colorA=18181B&colorB=28CF8D
