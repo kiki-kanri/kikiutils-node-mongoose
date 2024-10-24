@@ -1,4 +1,4 @@
-import { customMongooseOptions as localCustomMongooseOptions } from './_options';
+import { customMongooseOptions as internalCustomMongooseOptions } from './_internals';
 import type { CustomMongooseOptions } from './types/options';
 import type { buildMongooseModel } from './utils';
 
@@ -16,4 +16,4 @@ export const customMongooseOptions: CustomMongooseOptions = {};
  * every time {@link buildMongooseModel} is used. Inside this function, you can modify
  * the schema, allowing you to apply common settings to all global schemas.
  */
-export const setCustomMongooseOptions = <K extends keyof CustomMongooseOptions>(key: K, value: CustomMongooseOptions[K]) => (localCustomMongooseOptions[key] = value);
+export const setCustomMongooseOptions = <K extends keyof CustomMongooseOptions>(key: K, value: CustomMongooseOptions[K]) => (internalCustomMongooseOptions[key] = value);

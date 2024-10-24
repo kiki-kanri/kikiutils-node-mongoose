@@ -1,7 +1,7 @@
+import type { schemaBuilders } from './schema-builders';
 import { createCommonMongooseSchemas } from './utils';
 
-export { mongooseConnections } from './_connections';
-import type { schemaBuilders } from './schema-builders';
+export { mongooseConnections } from './_internals';
 
 export type DoNotUseOrRemoveThisType = typeof schemaBuilders;
 

@@ -1,4 +1,7 @@
 import type { MongooseConnections } from './types';
+import type { CustomMongooseOptions } from './types/options';
+
+export const customMongooseOptions: CustomMongooseOptions = {};
 
 /**
  * Mongoose connections.
