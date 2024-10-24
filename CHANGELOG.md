@@ -1,5 +1,27 @@
 # Changelog
 
+## v2.0.0-rc.0
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.7.1...v2.0.0-rc.0)
+
+### 🚀 Enhancements
+
+- Mark `customMongooseOptions` as deprecated and add new corresponding functionality ([97eecae](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/97eecae))
+
+### 📖 Documentation
+
+- Add codecov badge to README ([4e84017](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/4e84017))
+- Add deprecation tag to certain types ([292de7b](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/292de7b))
+
+### ✅ Tests
+
+- Add unit tests for objectId and number schema builders ([7c83695](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/7c83695))
+- Add unit tests for decimal128 schema builder ([d6927bf](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/d6927bf))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v1.7.1
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.7.0...v1.7.1)
