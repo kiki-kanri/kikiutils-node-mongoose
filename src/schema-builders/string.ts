@@ -23,8 +23,31 @@ export interface StringSchemaBuilder<Props extends { type: StringSchemaDefinitio
 		value: T
 	) => ExtendStringSchemaBuilder<{ [key in keyof (Props & { enum: T })]: (Props & { enum: T })[key] }, ExtraOmitFields>;
 
+	/**
+	 * Adds IPv4 validation to the string schema.
+	 * Ensures the string is a valid IPv4 address and trims the input. The validation message can be customized.
+	 *
+	 * @param message - The custom error message to return if validation fails. Defaults to a standard IPv4 validation message.
+	 * @returns A schema builder with IPv4 validation and the `trim` option enabled.
+	 */
 	ipv4: <T extends string = typeof defaultIPv4ValidateMessage>(message?: T) => ExtendStringSchemaBuilder<{ [key in keyof (Props & IPSchema<T>)]: (Props & IPSchema<T>)[key] }, ExtraOmitFields | 'ipv4' | 'ipv6'>;
+
+	/**
+	 * Adds IPv6 validation to the string schema.
+	 * Ensures the string is a valid IPv6 address and trims the input. The validation message can be customized.
+	 *
+	 * @param message - The custom error message to return if validation fails. Defaults to a standard IPv6 validation message.
+	 * @returns A schema builder with IPv6 validation and the `trim` option enabled.
+	 */
 	ipv6: <T extends string = typeof defaultIPv6ValidateMessage>(message?: T) => ExtendStringSchemaBuilder<{ [key in keyof (Props & IPSchema<T>)]: (Props & IPSchema<T>)[key] }, ExtraOmitFields | 'ipv4' | 'ipv6'>;
+
+	/**
+	 * Sets both the maximum and minimum length of the string.
+	 * This method ensures the string length is exactly or within a specified range.
+	 *
+	 * @param value - A number representing the exact length or an array specifying [minimum, maximum] length.
+	 * @returns A schema builder with both `maxlength` and `minlength` options applied.
+	 */
 	length: <T extends L | MaybeReadonly<[L, S]>, L extends number, S extends string>(value: T) => ExtendStringSchemaBuilder<{ [key in keyof (Props & { maxlength: T; minlength: T })]: (Props & { maxlength: T; minlength: T })[key] }, ExtraOmitFields>;
 	lowercase: ExtendStringSchemaBuilder<{ [key in keyof (Props & { lowercase: true })]: (Props & { lowercase: true })[key] }, ExtraOmitFields>;
 	maxlength: <T extends L | MaybeReadonly<[L, S]>, L extends number, S extends string>(value: T) => ExtendStringSchemaBuilder<{ [key in keyof (Props & { maxlength: T })]: (Props & { maxlength: T })[key] }, ExtraOmitFields>;
