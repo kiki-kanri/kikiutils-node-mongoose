@@ -1,10 +1,8 @@
 import type { Connection, Schema, SchemaTimestampsConfig } from 'mongoose';
 
-export interface CustomMongooseOptions {
-	beforeModelBuild?: <DocType, Model extends BaseMongoosePaginateModel<DocType, InstanceMethodsAndOverrides, QueryHelpers>, InstanceMethodsAndOverrides = {}, QueryHelpers = {}>(
-		schema: Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>
-	) => void;
-}
+import type { buildMongooseModel } from '../utils';
+
+export type DoNotUseOrRemoveThisType = typeof buildMongooseModel;
 
 /**
  * Interface for options used when building a Mongoose model.
@@ -42,4 +40,13 @@ export interface BuildMongooseModelOptions {
 	 * @default true
 	 */
 	timestamps?: boolean | SchemaTimestampsConfig;
+}
+
+export interface CustomMongooseOptions {
+	/**
+	 * A function that will be executed before the final build when using {@link buildMongooseModel}.
+	 */
+	beforeModelBuild?: <DocType, Model extends BaseMongoosePaginateModel<DocType, InstanceMethodsAndOverrides, QueryHelpers>, InstanceMethodsAndOverrides = {}, QueryHelpers = {}>(
+		schema: Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>
+	) => void;
 }

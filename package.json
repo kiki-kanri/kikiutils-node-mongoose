@@ -57,6 +57,11 @@
       "require": null,
       "types": null
     },
+    "./_options": {
+      "import": null,
+      "require": null,
+      "types": null
+    },
     "./schema-builders": {
       "import": "./schema-builders/index.mjs",
       "require": "./schema-builders/index.cjs",

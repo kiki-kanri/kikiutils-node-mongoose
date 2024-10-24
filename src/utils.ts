@@ -6,13 +6,14 @@ import mongoosePaginate from 'mongoose-paginate-v2';
 import net from 'net';
 
 import { mongooseConnections } from './_connections';
-import { customMongooseOptions } from './options';
+import { customMongooseOptions as localCustomMongooseOptions } from './_options';
+import { customMongooseOptions, setCustomMongooseOptions } from './options';
 import mongooseNormalizePlugin from './plugins/normalize';
 import type { schemaBuilders } from './schema-builders';
 import type { BuildMongooseModelOptions } from './types/options';
 import type { BaseSchemaAttribute, CreateCommonMongooseSchemasOptions, MongooseObjectIdRefSchema, MongooseStringSchema, MongooseStringSchemaAttribute } from './types/schema';
 
-export type DoNotUseOrRemoveThisType = typeof schemaBuilders;
+export type DoNotUseOrRemoveThisType = typeof schemaBuilders | typeof setCustomMongooseOptions;
 
 const { merge } = lodash;
 
@@ -27,6 +28,9 @@ const { merge } = lodash;
  * 2. Otherwise, use the default connection stored in `mongooseConnections`.
  * 3. If there's no default connection, create one using the MongoDB URI from the environment variables,
  *    or fallback to a local MongoDB instance.
+ *
+ * You can set a function to be executed before the final build by using {@link setCustomMongooseOptions}.
+ * However, ensure that this option is configured before calling {@link buildMongooseModel}.
  *
  * @template DocType - The type of the document.
  * @template Model - The type of the model, which extends `BaseMongoosePaginateModel`.
@@ -50,7 +54,7 @@ export function buildMongooseModel<DocType, Model extends BaseMongoosePaginateMo
 	schema.plugin(mongooseAggregatePaginate);
 	schema.plugin(mongoosePaginate);
 	schema.set('timestamps', options?.timestamps === undefined ? true : options.timestamps);
-	customMongooseOptions.beforeModelBuild?.(schema);
+	(localCustomMongooseOptions.beforeModelBuild || customMongooseOptions.beforeModelBuild)?.(schema);
 	return (options?.connection || mongooseConnections.default || (mongooseConnections.default = mongoose.createConnection(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017'))).model<DocType, Model, QueryHelpers>(name, schema, collection);
 }
 
