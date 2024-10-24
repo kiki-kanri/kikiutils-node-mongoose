@@ -12,10 +12,10 @@ describe('createBaseSchemaBuilderFactory', () => {
 	});
 
 	it('should set any additional key in the schema to true', () => {
-		expect(createBaseSchemaBuilderFactory(String)().anOtherKey.anyOtherKey.nonRequired).toEqual({
-			anOtherKey: true,
-			anyOtherKey: true,
-			type: String
+		expect(createBaseSchemaBuilderFactory(String)().private.unique.nonRequired).toEqual({
+			private: true,
+			type: String,
+			unique: true
 		});
 	});
 
