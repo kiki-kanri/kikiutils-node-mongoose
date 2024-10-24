@@ -1,5 +1,34 @@
 # Changelog
 
+## v1.7.1
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.7.0...v1.7.1)
+
+### 💅 Refactors
+
+- **schema-builder:** Remove `PropsWithRequired` type parameter ([110e875](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/110e875))
+- Modify Builder type in `createBaseSchemaBuilderFactory` ([ac9ef1f](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/ac9ef1f))
+
+### 📖 Documentation
+
+- Add comments to several schema builders ([6f074af](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/6f074af))
+
+### 🏡 Chore
+
+- Update release script and add test CI configuration file ([0f4e599](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/0f4e599))
+- Add tsconfig.jest.json ([5d6b28c](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/5d6b28c))
+
+### ✅ Tests
+
+- Add unit tests for base schema-builder ([d2c455d](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/d2c455d))
+- Modify base schema-builder test unit ([25b3d86](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/25b3d86))
+- Add unit tests for boolean, date and number schema-builders ([96bc550](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/96bc550))
+- Add unit tests for string schema-builder ([2fa5832](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/2fa5832))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v1.7.0
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.6.0...v1.7.0)
