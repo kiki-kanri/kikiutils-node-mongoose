@@ -9,6 +9,8 @@ export type DoNotUseOrRemoveThisType = typeof schemaBuilders;
  * Base attributes for Mongoose schemas.
  *
  * This type defines common attributes that can be applied to any schema field.
+ *
+ * @deprecated - Will be removed in the next major version.
  */
 export type BaseSchemaAttribute = 'private' | 'required' | 'unique';
 
@@ -17,6 +19,8 @@ export type BaseSchemaAttribute = 'private' | 'required' | 'unique';
  *
  * This type extends the base schema attributes with string-specific attributes
  * like `lowercase`, `short`, `trim`, and `uppercase`.
+ *
+ * @deprecated - Will be removed in the next major version.
  */
 export type MongooseStringSchemaAttribute = BaseSchemaAttribute | 'lowercase' | 'short' | 'trim' | 'uppercase';
 
@@ -55,6 +59,8 @@ export interface CreateCommonMongooseSchemasOptions {
  * This interface allows specifying attributes for an ObjectId reference field,
  * including whether the field is private, the reference model name, and standard
  * schema options like `required` and `unique`.
+ *
+ * @deprecated - Will be removed in the next major version.
  *
  * @template R - The type of the reference model name.
  * @template T - An array of attributes to apply to the schema field.
@@ -100,6 +106,8 @@ export interface MongooseObjectIdRefSchema<R extends string, T extends BaseSchem
  * This interface allows specifying attributes for a string schema field, including
  * whether the field should be lowercased, trimmed, or uppercased, as well as standard
  * schema options like `required` and `unique`.
+ *
+ * @deprecated - Will be removed in the next major version.
  *
  * @template T - An array of attributes to apply to the schema field.
  */
