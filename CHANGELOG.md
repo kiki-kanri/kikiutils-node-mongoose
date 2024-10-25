@@ -18,7 +18,7 @@
 
 ### 🎨 Styles
 
-- Adjust line spacing for @param tags in some JSDoc comments ([0153ba4](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/0153ba4))
+- Adjust line spacing for `@param` tags in some JSDoc comments ([0153ba4](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/0153ba4))
 
 ### ❤️ Contributors
 
