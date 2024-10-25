@@ -1,5 +1,29 @@
 # Changelog
 
+## v2.0.0-rc.1
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v2.0.0-rc.0...v2.0.0-rc.1)
+
+### 🩹 Fixes
+
+- Resolve issue with missing options.ts export in build files ([91374cb](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/91374cb))
+
+### 💅 Refactors
+
+- Merge `_connections.ts` and `_options.ts` to `_internals.ts` ([3a22c73](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/3a22c73))
+
+### 🏡 Chore
+
+- Upgrade examples dependencies ([7a097fe](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/7a097fe))
+
+### 🎨 Styles
+
+- Adjust line spacing for @param tags in some JSDoc comments ([0153ba4](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/0153ba4))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v2.0.0-rc.0
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v1.7.1...v2.0.0-rc.0)
