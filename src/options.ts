@@ -5,11 +5,6 @@ import type { buildMongooseModel } from './utils';
 export type DoNotUseOrRemoveThisType = typeof buildMongooseModel;
 
 /**
- * @deprecated - Will be removed in the next major version. Use {@link setCustomMongooseOptions} instead.
- */
-export const customMongooseOptions: CustomMongooseOptions = {};
-
-/**
  * Sets custom options.
  *
  * For example, you can set {@link CustomMongooseOptions.beforeModelBuild} to define a function that will be called
