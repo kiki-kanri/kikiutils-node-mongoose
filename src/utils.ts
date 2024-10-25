@@ -2,7 +2,8 @@ import mongoose, { Types } from 'mongoose';
 import mongooseAggregatePaginate from 'mongoose-aggregate-paginate-v2';
 import mongoosePaginate from 'mongoose-paginate-v2';
 
-import { customMongooseOptions as internalCustomMongooseOptions, mongooseConnections } from './_internals';
+import { customMongooseOptions as internalCustomMongooseOptions } from './_internals';
+import { mongooseConnections } from './constants';
 import { setCustomMongooseOptions } from './options';
 import mongooseNormalizePlugin from './plugins/normalize';
 import type { BuildMongooseModelOptions } from './types/options';
