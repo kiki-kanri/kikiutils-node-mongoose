@@ -9,7 +9,7 @@
     "url": "git+https://github.com/kiki-kanri/kikiutils-node-mongoose.git"
   },
   "scripts": {
-    "build": "ts-project-builder ./src/constants.ts ./src/schema-builders/index.ts ./src/utils.ts --clean --preserve-modules",
+    "build": "ts-project-builder ./src/constants.ts ./src/options.ts ./src/schema-builders/index.ts ./src/utils.ts --clean --preserve-modules",
     "bumplog": "changelogen --bump",
     "release": "pnpm run build && pnpm run test && changelogen --push --release && sh ./build-and-publish.sh",
     "test": "jest --coverage"
