@@ -2,7 +2,7 @@ import mongoose, { Types } from 'mongoose';
 import mongooseAggregatePaginate from 'mongoose-aggregate-paginate-v2';
 import mongoosePaginate from 'mongoose-paginate-v2';
 
-import { customMongooseOptions as internalCustomMongooseOptions } from './_internals';
+import { customMongooseOptions } from './_internals';
 import { mongooseConnections } from './constants';
 import { setCustomMongooseOptions } from './options';
 import mongooseNormalizePlugin from './plugins/normalize';
@@ -46,8 +46,8 @@ export function buildMongooseModel<DocType, Model extends BaseMongoosePaginateMo
 	if (options?.enableNormalizePlugin !== false) schema.plugin(mongooseNormalizePlugin);
 	schema.plugin(mongooseAggregatePaginate);
 	schema.plugin(mongoosePaginate);
-	schema.set('timestamps', options?.timestamps === undefined ? true : options.timestamps);
-	internalCustomMongooseOptions.beforeModelBuild?.(schema);
+	schema.set('timestamps', options?.timestamps ?? true);
+	customMongooseOptions.beforeModelBuild?.(schema);
 	return (options?.connection || mongooseConnections.default || (mongooseConnections.default = mongoose.createConnection(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017'))).model<DocType, Model, QueryHelpers>(name, schema, collection);
 }
 
