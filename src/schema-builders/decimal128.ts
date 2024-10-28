@@ -5,7 +5,7 @@ import type { DefaultType, Types } from 'mongoose';
 import { createBaseSchemaBuilderFactory } from './base';
 import type { MaybeReadonly } from '../types/utils';
 
-type ExtendDecimal128SchemaBuilder<Props extends { type: Schema.Types.Decimal128 }, ExtraOmitFields extends string> = Omit<Decimal128SchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
+export type ExtendDecimal128SchemaBuilder<Props extends { type: Schema.Types.Decimal128 }, ExtraOmitFields extends string> = Omit<Decimal128SchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
 type ToStringGetterSchema = { get: (value: Types.Decimal128) => string };
 type ToStringSetterSchema = { set: (value: { toString(): string }) => string };
 

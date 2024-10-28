@@ -6,7 +6,9 @@ This folder contains examples to demonstrate the usage of the `@kikiutils/mongoo
 
 ### Environment Requirements
 
-- Node.js version 18 or higher
+- MongoDB server 6.x or higher
+- Mongoose version 8.x
+- Node.js version 18.12.1 or higher
 
 ### Install Dependencies
 
@@ -16,22 +18,21 @@ To install the necessary dependencies, run the following command:
 pnpm i
 ```
 
-You can also use yarn, npm, or bun to install the dependencies.
+Alternatively, you can use yarn, npm, or bun to install the dependencies.
 
-## Example Usage
+### Example Usage
 
-Refer to [`./src/index.ts`](./src/index.ts) and other files for example usage.
+Refer to [./src/index.ts](./src/index.ts) for example usage.
 
-To extend the model (instance methods, statics, or virtuals), refer to [`./src/models/user/index.ts`](./src/models/user/index.ts) and the [Mongoose documentation](https://mongoosejs.com/docs/guide.html).
+For extending the model with instance methods, statics, or virtuals, please refer to the [Mongoose documentation](https://mongoosejs.com/docs/guide.html).
 
 ### Running the Examples
 
-Copy `.env.example` file to `.env` and modify the `MONGODB_URI` value inside.
+1. Copy the `.env.example` file to `.env` and update the MONGODB_URI value.
 
-To run the project in development mode:
+2. To run the project in development mode:
+	```bash
+	pnpm run dev
+	```
 
-```bash
-pnpm run dev
-```
-
-You can freely modify [`./src/index.ts`](./src/index.ts) and other files to test.
+Feel free to modify [./src/index.ts](./src/index.ts) to test different functionalities.

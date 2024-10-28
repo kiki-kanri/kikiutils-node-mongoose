@@ -2,16 +2,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "ts-project-builder ./src/index.ts -f esm --clean --preserve-modules",
-    "dev": "tsx watch ./src/index.ts"
+    "dev": "tsx watch --env-file=./.env ./src/index.ts"
   },
   "dependencies": {
-    "@kikiutils/mongoose": "2.0.0-rc.0",
-    "dotenv": "^16.4.5"
+    "@kikiutils/mongoose": "2.0.0-rc.1",
+    "mongoose": "^8.7.3"
   },
   "devDependencies": {
     "@kikiutils/tsconfigs": "^3.0.1",
-    "ts-project-builder": "^3.3.0",
-    "tsx": "^4.19.1"
+    "tsx": "^4.19.2"
   }
 }

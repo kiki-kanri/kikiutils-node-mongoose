@@ -1,50 +1,165 @@
-import './configs';
-import { UserGroupModel, UserLogModel, UserModel } from './models';
-import type { UserGroupDocument } from './models';
+import { setCustomMongooseOptions } from '@kikiutils/mongoose/options';
+import s from '@kikiutils/mongoose/schema-builders';
+import { buildMongooseModel } from '@kikiutils/mongoose/utils';
+import { Schema } from 'mongoose';
+import type { ProjectionType, QueryOptions, Types } from 'mongoose';
 
-// Create user group
-const userGroup = await UserGroupModel.create({ name: 'test' });
+// Load global types
+import type {} from '@kikiutils/mongoose/types';
+import type {} from '@kikiutils/mongoose/types/data';
 
-// Create user
+/**
+ * Set mongodb uri env.
+ *
+ * This is just an automatic default if you don't copy .env.example into .env,
+ * the actual project shouldn't have this line
+ * (unless you want to handle it the same way as the default).
+ */
+process.env.MONGODB_URI ||= 'mongodb://127.0.0.1:27017/kikiutils-mongoose-example?directConnection=true';
+
+/**
+ * Set custom mongoose options.
+ *
+ * If you want to unify the processing of schema before model build,
+ * you can use this method to set it.
+ *
+ * Please make sure to set it before using buildMongooseModel,
+ * as it will not affect models that have already been built before setting it.
+ */
+setCustomMongooseOptions('beforeModelBuild', (schema) => {
+	// console.log('building model with schema: ', schema);
+});
+
+/*
+ * Define data interface.
+ *
+ * This is the type of data on the front-end or elsewhere,
+ * usually populated and after calling toJSON,
+ * so the date field type is a string and the password is optional.
+ *
+ * If you don't need to distinguish between the two interfaces,
+ * you can use BaseMongooseDocType<{}> like the User interface below.
+ *
+ * BaseMongooseModelData accepts two boolean type parameters,
+ * the first controls the existence of the createdAt field and
+ * the second controls the updatedAt field.
+ */
+interface UserData extends BaseMongooseModelData {
+	account: string;
+	// To avoid precision issues use strings (Decimal128)
+	balance: string;
+	email?: string;
+	enabled: boolean;
+	// Date Fields toJSON followed by String
+	loginAt?: string;
+	// Passwords will not be exported in toJSON (the schema uses the private setting)
+	password?: string;
+}
+
+/*
+ * Define document and model interfaces and types.
+ *
+ * The second type parameter of BaseMongooseDocType
+ * controls the existence of the createdAt field
+ * and the third controls the updatedAt field.
+ */
+interface User extends BaseMongooseDocType<Omit<UserData, 'loginAt'>> {
+	// Correctly set the type in the document state
+	loginAt?: Date;
+}
+
+interface UserMethodsAndOverrides {
+	// Correctly set the type in the document state
+	password: string;
+	// Document methods
+	verifyPassword: (password: string) => boolean;
+}
+
+interface UserModel extends BaseMongoosePaginateModel<User, UserMethodsAndOverrides> {
+	// Model static methods
+	findByAccount(account: string, projection?: ProjectionType<User> | null, options?: QueryOptions<User> | null): MongooseFindOneReturnType<User, UserDocument, {}, UserMethodsAndOverrides>;
+}
+
+type UserDocument = MongooseHydratedDocument<User, UserMethodsAndOverrides>;
+
+// Define schema
+const userSchema = new Schema<User, UserModel, UserMethodsAndOverrides>({
+	account: s.string().maxlength(16).trim.unique.required,
+	// @ts-expect-error
+	// Use setRoundAndToFixedSetter to round up on save and setToStringGetter to convert to string on get
+	balance: s.decimal128().setRoundAndToFixedSetter().setToStringGetter.required,
+	email: s.string().lowercase.trim.nonRequired,
+	enabled: s.boolean().default(false).required,
+	password: s.string().private.required
+});
+
+// Set methods
+userSchema.method<UserDocument>('verifyPassword', function (password: string) {
+	return password === this.password;
+});
+
+// Set static methods
+userSchema.static('findByAccount', function (account: string, projection?: ProjectionType<User> | null, options?: QueryOptions<User> | null) {
+	return this.findOne({ account }, projection, options);
+});
+
+// Build model
+const UserModel = buildMongooseModel<User, UserModel, UserMethodsAndOverrides>('user.users', 'User', userSchema);
+
+// Create document
+console.log('creating user');
 const user = await UserModel.create({
-	account: 'test',
-	email: 'test@test.com',
-	group: userGroup,
-	name: 'test',
-	password: 'testpassword'
+	account: Array.from({ length: 8 }, () => String.fromCharCode((Math.random() > 0.5 ? 97 : 65) + Math.floor(Math.random() * 26))).join(''),
+	balance: '1000.501',
+	email: 'example@example.com',
+	password: 'test-password'
 });
 
-// Create user log
-await UserLogModel.create({
-	ip: '127.0.0.1',
-	text: 'test',
-	type: 0,
-	user: user
+console.log('created user: ', user);
+console.log('created user (with toJSON): ', user.toJSON());
+
+// Modify balance
+console.log('increasing user balance');
+await user.updateOne({ $inc: { balance: '100.105416' } });
+console.log('increased user balance: ', (await UserModel.findById(user._id))?.balance);
+
+// Verify password
+console.log('verifying user password');
+console.log('verified user password: ', user.verifyPassword('test-password'));
+
+// Define user log data interface
+interface UserLogData extends BaseMongooseModelData<true, false> {
+	content: string;
+	type: number;
+	user: Partial<UserData>;
+}
+
+// Define document and model interfaces and types
+interface UserLog extends BaseMongooseDocType<Omit<UserLogData, 'user'>, true, false> {
+	user: Types.Decimal128;
+}
+
+type UserLogDocument = MongooseHydratedDocument<UserLog>;
+type UserLogModel = BaseMongoosePaginateModel<UserLog>;
+
+// Define schema
+const userLogSchema = new Schema<UserLog, UserLogModel>({
+	content: s.string().trim.required,
+	type: s.number().required,
+	user: s.ref('User').required
 });
 
-// Modify user balance
-console.log('modify user balance');
-console.log(await user.modifyBalance(900));
-console.log();
-console.log('modify user balance with filter');
-console.log(await UserModel.modifyBalance(user, '-900.25', null, { balance: { $gte: '900.25' } }));
-console.log();
+// Build model
+const UserLogModel = buildMongooseModel<UserLog, UserLogModel>('user.logs', 'UserLog', userLogSchema);
 
-// Find user
-console.log('find user');
-const foundUser = await UserModel.findById(user._id);
-console.log(foundUser);
-console.log(foundUser?.toJSON());
-console.log();
+// Create document
+console.log('creating user log');
+const userLog = await UserLogModel.create({
+	content: 'test content',
+	type: 1,
+	user: user._id
+});
 
-// Populate user
-console.log('populate user');
-const foundUserPopulated = await UserModel.findById(user._id).populate<{ group: UserGroupDocument }>('group');
-console.log(foundUserPopulated);
-console.log(foundUserPopulated?.toJSON());
-console.log();
-
-// Find user log
-console.log('find user log');
-const foundUserLog = await UserLogModel.findOne({ user: foundUser });
-console.log(foundUserLog);
+console.log('created user log: ', userLog);
+console.log('created user log (with toJSON): ', userLog.toJSON());
+console.log('user log with populated user', await userLog.populate('user'));

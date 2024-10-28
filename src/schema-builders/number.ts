@@ -3,7 +3,7 @@ import type { DefaultType, NumberSchemaDefinition } from 'mongoose';
 import { createBaseSchemaBuilderFactory } from './base';
 import type { MaybeReadonly } from '../types/utils';
 
-type ExtendNumberSchemaBuilder<Props extends { type: NumberSchemaDefinition }, ExtraOmitFields extends string> = Omit<NumberSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
+export type ExtendNumberSchemaBuilder<Props extends { type: NumberSchemaDefinition }, ExtraOmitFields extends string> = Omit<NumberSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
 
 export interface NumberSchemaBuilder<Props extends { type: NumberSchemaDefinition } = { type: NumberSchemaDefinition }, ExtraOmitFields extends string = never> {
 	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends number>(value: T) => ExtendNumberSchemaBuilder<{ [key in keyof (Props & { default: T })]: (Props & { default: T })[key] }, ExtraOmitFields>;

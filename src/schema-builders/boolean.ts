@@ -2,7 +2,7 @@ import type { BooleanSchemaDefinition, DefaultType } from 'mongoose';
 
 import { createBaseSchemaBuilderFactory } from './base';
 
-type ExtendBooleanSchemaBuilder<Props extends { type: BooleanSchemaDefinition }, ExtraOmitFields extends string> = Omit<BooleanSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
+export type ExtendBooleanSchemaBuilder<Props extends { type: BooleanSchemaDefinition }, ExtraOmitFields extends string> = Omit<BooleanSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
 
 export interface BooleanSchemaBuilder<Props extends { type: BooleanSchemaDefinition } = { type: BooleanSchemaDefinition }, ExtraOmitFields extends string = never> {
 	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends boolean>(value: T) => ExtendBooleanSchemaBuilder<{ [key in keyof (Props & { default: T })]: (Props & { default: T })[key] }, ExtraOmitFields>;

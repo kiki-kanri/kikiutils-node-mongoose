@@ -1,17 +1,10 @@
-import type { schemaBuilders } from './schema-builders';
-import { createCommonMongooseSchemas } from './utils';
-
-export { mongooseConnections } from './_internals';
-
-export type DoNotUseOrRemoveThisType = typeof schemaBuilders;
+import type { MongooseConnections } from './types';
 
 /**
- * Common Mongoose schemas.
+ * Mongoose connections.
  *
- * This constant holds a set of commonly used Mongoose schema definitions, generated
- * by the `createCommonMongooseSchemas` utility function. These schemas include common
- * field types and configurations used across multiple models.
- *
- * @deprecated - Will be removed in the next major version. Use {@link schemaBuilders} instead.
+ * This constant is a record of named Mongoose connections, allowing multiple
+ * database connections to be managed within the application. An optional `default`
+ * connection can also be specified for use when a specific connection is not provided.
  */
-export const commonMongooseSchemas = createCommonMongooseSchemas();
+export const mongooseConnections: MongooseConnections = {};
