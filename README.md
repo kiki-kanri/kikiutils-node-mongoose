@@ -11,34 +11,32 @@ A Mongoose plugin for enhanced JSON normalization and common schema creation, wi
 
 ## Features
 
-- ✨ Flexible Connections: Choose to use a specific connection or fall back to a default connection, with an automatic creation of a connection if none is provided
-- ✨ Plugin Integration: Automatically integrates `mongoose-aggregate-paginate-v2`, `mongoose-paginate-v2`, and a custom normalization plugin for enhanced JSON output
-- 🛠 Predefined Schemas: Provides a set of commonly used schema definitions such as boolean, decimal128, number, objectId, and string
-- 🛠 Customizable: Allows for custom schemas and settings, including automatic rounding and fixed decimal places for `Decimal128` fields
-- 🔄 Enhanced JSON Output: Adds an `id` field, removes `_id` and `__v` fields, excludes private fields, and converts `Decimal128` fields to strings in JSON output
-- 🧩 Reference Schema Creation: Easily create schema definitions for ObjectId references with attributes like `private`, `required`, and `unique`
-- 🧩 String Schema Creation: Generate string schema definitions with attributes such as `private`, `required`, `short`, `trim`, and `unique`
-- 🧩 Decimal128 Field Conversion: Set up getters to convert `Decimal128` fields to strings for easier handling in documents
-- 🧩 Document Conversion: Convert documents or ObjectIds to documents using specified models, with optional field selection
+- ✨ Flexible Connections: Supports both default and custom connections, automatically creating connections when none are provided
+- 🔌 Plugin Integration: Automatically integrates `mongoose-aggregate-paginate-v2`, `mongoose-paginate-v2`, and custom normalization for cleaner JSON outputs
+- 🛠 Predefined & Customizable Schemas: Provides common schemas (boolean, date, decimal128, number, objectId, string) with the flexibility to customize attributes such as `private`, `required`, `unique`, `default`, and more
+- 🧮 Decimal Precision: Supports `Decimal128` fields with options for automatic rounding and fixed decimal precision
+- 🔄 Optimized JSON Output: Adds an `id` field, removes `_id` and `__v`, hides private fields, and converts `Decimal128` fields to strings in JSON responses
+- 🔄 Reference Management: Enables easy conversion of ObjectId references to fully populated documents with field selection and population options
+- 🔧 Utility Functions: Includes helper functions for converting and normalizing documents, handling ObjectId transformations, and processing schema fields
 
 ## Environment Requirements
 
 - Mongoose version 8.x
-- Node.js version 18 or higher
+- Node.js version 18.12.1 or higher
 
 ## Installation
 
 Add dependency (example using pnpm).
 
 ```bash
-pnpm add @kikiutils/mongoose
+pnpm add @kikiutils/mongoose mongoose
 ```
 
 You can also use yarn, npm, or bun to add the dependency.
 
 That's it! You're ready to use this package in your project. Check out the [usage instructions](#usage) below ✨.
 
-# Usage
+## Usage
 
 Please refer to the [examples](./examples/README.md) folder for usage instructions of this package.
 
