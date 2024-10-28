@@ -1,5 +1,35 @@
 # Changelog
 
+## v2.0.0
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v2.0.0-rc.1...v2.0.0)
+
+### 🚀 Enhancements
+
+- Export all schema builder's Extend helper types ([3d048a4](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/3d048a4))
+
+### 💅 Refactors
+
+- Move `mongooseConnections` to `constants.ts` ([b6d51d1](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/b6d51d1))
+- Tidy up and simplify code ([2851299](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/2851299))
+
+### 📖 Documentation
+
+- Update CHANGELOG ([b72d87e](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/b72d87e))
+- Update README and add README for examples ([da691bb](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/da691bb))
+
+### 🏡 Chore
+
+- Remove all deprecated code ([bce1c4f](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/bce1c4f))
+- Remove all files in examples folder ([3744a68](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/3744a68))
+- Add basic files to examples folder ([af25bbe](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/af25bbe))
+- Add mongoose dependency to examples ([5e8a26f](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/5e8a26f))
+- Add example files ([faf0b53](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/faf0b53))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v2.0.0-rc.1
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v2.0.0-rc.0...v2.0.0-rc.1)
