@@ -1,5 +1,18 @@
 # Changelog
 
+## v2.0.1
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v2.0.0...v2.0.1)
+
+### 🏡 Chore
+
+- Update exports field in package.json ([805d620](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/805d620))
+- Upgrade dependencies ([547dba3](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/547dba3))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v2.0.0
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v2.0.0-rc.1...v2.0.0)
