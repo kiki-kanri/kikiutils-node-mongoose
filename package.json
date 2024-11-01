@@ -52,12 +52,7 @@
       "require": "./*.cjs",
       "types": "./*.d.ts"
     },
-    "./_connections": {
-      "import": null,
-      "require": null,
-      "types": null
-    },
-    "./_options": {
+    "./_internals": {
       "import": null,
       "require": null,
       "types": null
