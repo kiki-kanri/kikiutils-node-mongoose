@@ -1,4 +1,4 @@
-import type { DefaultType, StringSchemaDefinition } from 'mongoose';
+import type { DefaultType, IndexDirection, IndexOptions, StringSchemaDefinition } from 'mongoose';
 import net from 'net';
 import type { Merge } from 'type-fest';
 
@@ -24,6 +24,8 @@ export interface StringSchemaBuilder<Props extends { type: StringSchemaDefinitio
 	>(
 		value: T
 	) => ExtendStringSchemaBuilder<Merge<Props, { enum: T }>, ExtraOmitFields>;
+
+	index: <T extends boolean | IndexDirection | IndexOptions>(value: T) => ExtendStringSchemaBuilder<Merge<Props, { index: T }>, ExtraOmitFields>;
 
 	/**
 	 * Adds IPv4 validation to the string schema.

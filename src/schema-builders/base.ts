@@ -20,6 +20,7 @@ export const createBaseSchemaBuilderFactory = <Builder = Readonly<Record<string,
 const isFunctionKeys = new Set([
 	'default',
 	'enum',
+	'index',
 	'max',
 	'maxlength',
 	'min',

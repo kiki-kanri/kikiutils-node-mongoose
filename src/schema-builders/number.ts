@@ -1,4 +1,4 @@
-import type { DefaultType, NumberSchemaDefinition } from 'mongoose';
+import type { DefaultType, IndexDirection, IndexOptions, NumberSchemaDefinition } from 'mongoose';
 import type { Merge } from 'type-fest';
 
 import { createBaseSchemaBuilderFactory } from './base';
@@ -23,6 +23,7 @@ export interface NumberSchemaBuilder<Props extends { type: NumberSchemaDefinitio
 		value: T
 	) => ExtendNumberSchemaBuilder<Merge<Props, { enum: T }>, ExtraOmitFields>;
 
+	index: <T extends boolean | IndexDirection | IndexOptions>(value: T) => ExtendNumberSchemaBuilder<Merge<Props, { index: T }>, ExtraOmitFields>;
 	max: <T extends N | Readonlyable<[N, S]>, N extends number, S extends string>(value: T) => ExtendNumberSchemaBuilder<Merge<Props, { max: T }>, ExtraOmitFields>;
 	min: <T extends N | Readonlyable<[N, S]>, N extends number, S extends string>(value: T) => ExtendNumberSchemaBuilder<Merge<Props, { min: T }>, ExtraOmitFields>;
 	nonRequired: Props;

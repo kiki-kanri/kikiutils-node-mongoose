@@ -1,6 +1,6 @@
 import Decimal from 'decimal.js';
 import { Schema } from 'mongoose';
-import type { DefaultType, Types } from 'mongoose';
+import type { DefaultType, IndexDirection, IndexOptions, Types } from 'mongoose';
 import type { Merge } from 'type-fest';
 
 import { createBaseSchemaBuilderFactory } from './base';
@@ -27,6 +27,7 @@ export interface Decimal128SchemaBuilder<Props extends { type: Schema.Types.Deci
 		value: T
 	) => ExtendDecimal128SchemaBuilder<Merge<Props, { enum: T }>, ExtraOmitFields>;
 
+	index: <T extends boolean | IndexDirection | IndexOptions>(value: T) => ExtendDecimal128SchemaBuilder<Merge<Props, { index: T }>, ExtraOmitFields>;
 	nonRequired: Props;
 	private: ExtendDecimal128SchemaBuilder<Merge<Props, { private: true }>, ExtraOmitFields>;
 	required: Merge<Props, { required: true }>;

@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import type { DefaultType, ObjectIdSchemaDefinition, Types } from 'mongoose';
+import type { DefaultType, IndexDirection, IndexOptions, ObjectIdSchemaDefinition, Types } from 'mongoose';
 import type { Merge } from 'type-fest';
 
 import { createBaseSchemaBuilderFactory } from './base';
@@ -24,6 +24,7 @@ export interface ObjectIdSchemaBuilder<Props extends { type: ObjectIdSchemaDefin
 		value: T
 	) => ExtendObjectIdSchemaBuilder<Merge<Props, { enum: T }>, ExtraOmitFields>;
 
+	index: <T extends boolean | IndexDirection | IndexOptions>(value: T) => ExtendObjectIdSchemaBuilder<Merge<Props, { index: T }>, ExtraOmitFields>;
 	nonRequired: Props;
 	private: ExtendObjectIdSchemaBuilder<Merge<Props, { private: true }>, ExtraOmitFields>;
 	required: Merge<Props, { required: true }>;

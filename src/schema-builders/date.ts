@@ -1,4 +1,4 @@
-import type { DefaultType, DateSchemaDefinition } from 'mongoose';
+import type { DefaultType, DateSchemaDefinition, IndexDirection, IndexOptions } from 'mongoose';
 import type { Merge } from 'type-fest';
 
 import { createBaseSchemaBuilderFactory } from './base';
@@ -23,6 +23,7 @@ export interface DateSchemaBuilder<Props extends { type: DateSchemaDefinition } 
 		value: T
 	) => ExtendDateSchemaBuilder<Merge<Props, { enum: T }>, ExtraOmitFields>;
 
+	index: <T extends boolean | IndexDirection | IndexOptions>(value: T) => ExtendDateSchemaBuilder<Merge<Props, { index: T }>, ExtraOmitFields>;
 	max: <T extends D | Readonlyable<[D, S]>, D extends NativeDate, S extends string>(value: T) => ExtendDateSchemaBuilder<Merge<Props, { max: T }>, ExtraOmitFields>;
 	min: <T extends D | Readonlyable<[D, S]>, D extends NativeDate, S extends string>(value: T) => ExtendDateSchemaBuilder<Merge<Props, { min: T }>, ExtraOmitFields>;
 	nonRequired: Props;
