@@ -50,15 +50,22 @@ declare global {
 	type BaseMongooseModelData<CreatedAtField extends boolean = true, UpdatedAtField extends boolean = true> = OmitNever<LocalBaseMongooseModelData<CreatedAtField, UpdatedAtField>>;
 
 	/**
-	 * Type definition to omit timestamp fields and other specified fields from a given type.
-	 *
-	 * This type alias uses `Omit` to remove `createdAt`, `updatedAt`, and any other specified fields (`OT`)
-	 * from the type `T`.
+	 * Type definition to omit timestamp fields (`createdAt`, `updatedAt`)
+	 * and other specified fields (`OT`) from a given type `T`.
 	 *
 	 * @template T - The type from which to omit fields.
-	 * @template OT - Additional fields to omit, specified as a union of string, number, or symbol.
+	 * @template OT - Additional fields to omit, specified as a union of keys in `T`.
 	 */
-	type OmitMongooseTimestampAndOtherFields<T, OT extends number | symbol | string = ''> = Omit<T, 'createdAt' | 'updatedAt' | OT>;
+	type ExceptMongooseTimestampAndOtherFields<T, OT extends keyof T> = Omit<T, 'createdAt' | 'updatedAt' | OT>;
+
+	/**
+	 * Type definition to omit timestamp fields (`createdAt`, `updatedAt`)
+	 * and other specified fields (`OT`) from a given type `T`.
+	 *
+	 * @template T - The type from which to omit fields.
+	 * @template OT - Additional fields to omit, specified as a union of string, number, or symbol keys.
+	 */
+	type OmitMongooseTimestampAndOtherFields<T, OT extends number | symbol | string = never> = Omit<T, 'createdAt' | 'updatedAt' | OT>;
 
 	/**
 	 * Type definition for including timestamp fields conditionally based on the provided flags.
