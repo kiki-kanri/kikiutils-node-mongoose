@@ -1,16 +1,18 @@
 import Decimal from 'decimal.js';
 import { Schema } from 'mongoose';
 import type { DefaultType, Types } from 'mongoose';
+import type { Merge } from 'type-fest';
 
 import { createBaseSchemaBuilderFactory } from './base';
 import type { Readonlyable } from '../types/utils';
 
-export type ExtendDecimal128SchemaBuilder<Props extends { type: Schema.Types.Decimal128 }, ExtraOmitFields extends string> = Omit<Decimal128SchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
+type BaseProps = { type: Schema.Types.Decimal128 };
+export type ExtendDecimal128SchemaBuilder<Props extends BaseProps, ExtraOmitFields extends string> = Omit<Decimal128SchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
 type ToStringGetterSchema = { get: (value: Types.Decimal128) => string };
 type ToStringSetterSchema = { set: (value: { toString(): string }) => string };
 
 export interface Decimal128SchemaBuilder<Props extends { type: Schema.Types.Decimal128 } = { type: Schema.Types.Decimal128 }, ExtraOmitFields extends string = never> {
-	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends Types.Decimal128>(value: T) => ExtendDecimal128SchemaBuilder<{ [key in keyof (Props & { default: T })]: (Props & { default: T })[key] }, ExtraOmitFields>;
+	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends Types.Decimal128>(value: T) => ExtendDecimal128SchemaBuilder<Merge<Props, { default: T }>, ExtraOmitFields>;
 	enum: <
 		T extends
 			| Readonlyable<Array<D | null>>
@@ -23,11 +25,11 @@ export interface Decimal128SchemaBuilder<Props extends { type: Schema.Types.Deci
 		M extends string
 	>(
 		value: T
-	) => ExtendDecimal128SchemaBuilder<{ [key in keyof (Props & { enum: T })]: (Props & { enum: T })[key] }, ExtraOmitFields>;
+	) => ExtendDecimal128SchemaBuilder<Merge<Props, { enum: T }>, ExtraOmitFields>;
 
-	nonRequired: { [key in keyof Props]: Props[key] };
-	private: ExtendDecimal128SchemaBuilder<{ [key in keyof (Props & { private: true })]: (Props & { private: true })[key] }, ExtraOmitFields>;
-	required: { [key in keyof (Props & { required: true })]: (Props & { required: true })[key] };
+	nonRequired: Props;
+	private: ExtendDecimal128SchemaBuilder<Merge<Props, { private: true }>, ExtraOmitFields>;
+	required: Merge<Props, { required: true }>;
 
 	/**
 	 * Sets the rounding and toFixed behavior for Decimal128 fields.
@@ -39,7 +41,7 @@ export interface Decimal128SchemaBuilder<Props extends { type: Schema.Types.Deci
 	 *
 	 * @returns A schema builder with the rounding and toFixed behavior applied to the `set` option in Mongoose.
 	 */
-	setRoundAndToFixedSetter: (places?: number, rounding?: Decimal.Rounding) => ExtendDecimal128SchemaBuilder<{ [key in keyof (Props & ToStringSetterSchema)]: (Props & ToStringSetterSchema)[key] }, ExtraOmitFields | 'setRoundAndToFixedSetter'>;
+	setRoundAndToFixedSetter: (places?: number, rounding?: Decimal.Rounding) => ExtendDecimal128SchemaBuilder<Merge<Props, ToStringSetterSchema>, ExtraOmitFields | 'setRoundAndToFixedSetter'>;
 
 	/**
 	 * Sets the toString behavior for Decimal128 fields.
@@ -50,9 +52,9 @@ export interface Decimal128SchemaBuilder<Props extends { type: Schema.Types.Deci
 	 * @returns A schema builder with the custom `get` behavior applied to convert the Decimal128 field to a string
 	 * when accessed in the application.
 	 */
-	setToStringGetter: ExtendDecimal128SchemaBuilder<{ [key in keyof (Props & ToStringGetterSchema)]: (Props & ToStringGetterSchema)[key] }, ExtraOmitFields | 'setToStringGetter'>;
-	sparse: ExtendDecimal128SchemaBuilder<{ [key in keyof (Props & { sparse: true })]: (Props & { sparse: true })[key] }, ExtraOmitFields>;
-	unique: ExtendDecimal128SchemaBuilder<{ [key in keyof (Props & { unique: true })]: (Props & { unique: true })[key] }, ExtraOmitFields>;
+	setToStringGetter: ExtendDecimal128SchemaBuilder<Merge<Props, ToStringGetterSchema>, ExtraOmitFields | 'setToStringGetter'>;
+	sparse: ExtendDecimal128SchemaBuilder<Merge<Props, { sparse: true }>, ExtraOmitFields>;
+	unique: ExtendDecimal128SchemaBuilder<Merge<Props, { unique: true }>, ExtraOmitFields>;
 }
 
 const baseBuilderFactory = createBaseSchemaBuilderFactory(Schema.Types.Decimal128);

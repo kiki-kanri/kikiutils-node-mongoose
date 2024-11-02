@@ -1,14 +1,16 @@
 import type { DefaultType, StringSchemaDefinition } from 'mongoose';
 import net from 'net';
+import type { Merge } from 'type-fest';
 
 import { createBaseSchemaBuilderFactory } from './base';
 import type { Readonlyable } from '../types/utils';
 
-export type ExtendStringSchemaBuilder<Props extends { type: StringSchemaDefinition }, ExtraOmitFields extends string> = Omit<StringSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
+type BaseProps = { type: StringSchemaDefinition };
+export type ExtendStringSchemaBuilder<Props extends BaseProps, ExtraOmitFields extends string> = Omit<StringSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
 type IPSchema<T extends string> = { trim: true; validate: { message: T; validator: (value: string) => boolean } };
 
 export interface StringSchemaBuilder<Props extends { type: StringSchemaDefinition } = { type: StringSchemaDefinition }, ExtraOmitFields extends string = never> {
-	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends string>(value: T) => ExtendStringSchemaBuilder<{ [key in keyof (Props & { default: T })]: (Props & { default: T })[key] }, ExtraOmitFields>;
+	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends string>(value: T) => ExtendStringSchemaBuilder<Merge<Props, { default: T }>, ExtraOmitFields>;
 	enum: <
 		T extends
 			| Readonlyable<Array<S | null>>
@@ -21,7 +23,7 @@ export interface StringSchemaBuilder<Props extends { type: StringSchemaDefinitio
 		S extends string
 	>(
 		value: T
-	) => ExtendStringSchemaBuilder<{ [key in keyof (Props & { enum: T })]: (Props & { enum: T })[key] }, ExtraOmitFields>;
+	) => ExtendStringSchemaBuilder<Merge<Props, { enum: T }>, ExtraOmitFields>;
 
 	/**
 	 * Adds IPv4 validation to the string schema.
@@ -31,7 +33,7 @@ export interface StringSchemaBuilder<Props extends { type: StringSchemaDefinitio
 	 *
 	 * @returns A schema builder with IPv4 validation and the `trim` option enabled.
 	 */
-	ipv4: <T extends string = typeof defaultIPv4ValidateMessage>(message?: T) => ExtendStringSchemaBuilder<{ [key in keyof (Props & IPSchema<T>)]: (Props & IPSchema<T>)[key] }, ExtraOmitFields | 'ipv4' | 'ipv6'>;
+	ipv4: <T extends string = typeof defaultIPv4ValidateMessage>(message?: T) => ExtendStringSchemaBuilder<Merge<Props, IPSchema<T>>, ExtraOmitFields | 'ipv4' | 'ipv6'>;
 
 	/**
 	 * Adds IPv6 validation to the string schema.
@@ -41,7 +43,7 @@ export interface StringSchemaBuilder<Props extends { type: StringSchemaDefinitio
 	 *
 	 * @returns A schema builder with IPv6 validation and the `trim` option enabled.
 	 */
-	ipv6: <T extends string = typeof defaultIPv6ValidateMessage>(message?: T) => ExtendStringSchemaBuilder<{ [key in keyof (Props & IPSchema<T>)]: (Props & IPSchema<T>)[key] }, ExtraOmitFields | 'ipv4' | 'ipv6'>;
+	ipv6: <T extends string = typeof defaultIPv6ValidateMessage>(message?: T) => ExtendStringSchemaBuilder<Merge<Props, IPSchema<T>>, ExtraOmitFields | 'ipv4' | 'ipv6'>;
 
 	/**
 	 * Sets both the maximum and minimum length of the string.
@@ -51,18 +53,18 @@ export interface StringSchemaBuilder<Props extends { type: StringSchemaDefinitio
 	 *
 	 * @returns A schema builder with both `maxlength` and `minlength` options applied.
 	 */
-	length: <T extends L | Readonlyable<[L, S]>, L extends number, S extends string>(value: T) => ExtendStringSchemaBuilder<{ [key in keyof (Props & { maxlength: T; minlength: T })]: (Props & { maxlength: T; minlength: T })[key] }, ExtraOmitFields>;
-	lowercase: ExtendStringSchemaBuilder<{ [key in keyof (Props & { lowercase: true })]: (Props & { lowercase: true })[key] }, ExtraOmitFields>;
-	maxlength: <T extends L | Readonlyable<[L, S]>, L extends number, S extends string>(value: T) => ExtendStringSchemaBuilder<{ [key in keyof (Props & { maxlength: T })]: (Props & { maxlength: T })[key] }, ExtraOmitFields>;
-	minlength: <T extends L | Readonlyable<[L, S]>, L extends number, S extends string>(value: T) => ExtendStringSchemaBuilder<{ [key in keyof (Props & { minlength: T })]: (Props & { minlength: T })[key] }, ExtraOmitFields>;
-	nonRequired: { [key in keyof Props]: Props[key] };
-	private: ExtendStringSchemaBuilder<{ [key in keyof (Props & { private: true })]: (Props & { private: true })[key] }, ExtraOmitFields>;
-	required: { [key in keyof (Props & { required: true })]: (Props & { required: true })[key] };
-	sparse: ExtendStringSchemaBuilder<{ [key in keyof (Props & { sparse: true })]: (Props & { sparse: true })[key] }, ExtraOmitFields>;
-	text: ExtendStringSchemaBuilder<{ [key in keyof (Props & { text: true })]: (Props & { text: true })[key] }, ExtraOmitFields>;
-	trim: ExtendStringSchemaBuilder<{ [key in keyof (Props & { trim: true })]: (Props & { trim: true })[key] }, ExtraOmitFields>;
-	unique: ExtendStringSchemaBuilder<{ [key in keyof (Props & { unique: true })]: (Props & { unique: true })[key] }, ExtraOmitFields>;
-	uppercase: ExtendStringSchemaBuilder<{ [key in keyof (Props & { uppercase: true })]: (Props & { uppercase: true })[key] }, ExtraOmitFields>;
+	length: <T extends L | Readonlyable<[L, S]>, L extends number, S extends string>(value: T) => ExtendStringSchemaBuilder<Merge<Props, { maxlength: T; minlength: T }>, ExtraOmitFields>;
+	lowercase: ExtendStringSchemaBuilder<Merge<Props, { lowercase: true }>, ExtraOmitFields>;
+	maxlength: <T extends L | Readonlyable<[L, S]>, L extends number, S extends string>(value: T) => ExtendStringSchemaBuilder<Merge<Props, { maxlength: T }>, ExtraOmitFields>;
+	minlength: <T extends L | Readonlyable<[L, S]>, L extends number, S extends string>(value: T) => ExtendStringSchemaBuilder<Merge<Props, { minlength: T }>, ExtraOmitFields>;
+	nonRequired: Props;
+	private: ExtendStringSchemaBuilder<Merge<Props, { private: true }>, ExtraOmitFields>;
+	required: Merge<Props, { required: true }>;
+	sparse: ExtendStringSchemaBuilder<Merge<Props, { sparse: true }>, ExtraOmitFields>;
+	text: ExtendStringSchemaBuilder<Merge<Props, { text: true }>, ExtraOmitFields>;
+	trim: ExtendStringSchemaBuilder<Merge<Props, { trim: true }>, ExtraOmitFields>;
+	unique: ExtendStringSchemaBuilder<Merge<Props, { unique: true }>, ExtraOmitFields>;
+	uppercase: ExtendStringSchemaBuilder<Merge<Props, { uppercase: true }>, ExtraOmitFields>;
 }
 
 const baseBuilderFactory = createBaseSchemaBuilderFactory(String);

@@ -1,13 +1,15 @@
 import { Schema } from 'mongoose';
 import type { DefaultType, Model, ObjectIdSchemaDefinition, Types } from 'mongoose';
+import type { Merge } from 'type-fest';
 
 import { createBaseSchemaBuilderFactory } from './base';
 import type { Readonlyable } from '../types/utils';
 
-export type ExtendRefSchemaBuilder<Props extends { type: ObjectIdSchemaDefinition }, ExtraOmitFields extends string> = Omit<RefSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
+type BaseProps = { type: ObjectIdSchemaDefinition };
+export type ExtendRefSchemaBuilder<Props extends BaseProps, ExtraOmitFields extends string> = Omit<RefSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
 
 export interface RefSchemaBuilder<Props extends { type: ObjectIdSchemaDefinition } = { type: ObjectIdSchemaDefinition }, ExtraOmitFields extends string = never> {
-	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends Types.ObjectId>(value: T) => ExtendRefSchemaBuilder<{ [key in keyof (Props & { default: T })]: (Props & { default: T })[key] }, ExtraOmitFields>;
+	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends Types.ObjectId>(value: T) => ExtendRefSchemaBuilder<Merge<Props, { default: T }>, ExtraOmitFields>;
 	enum: <
 		T extends
 			| Readonlyable<Array<O | null>>
@@ -20,13 +22,13 @@ export interface RefSchemaBuilder<Props extends { type: ObjectIdSchemaDefinition
 		O extends Types.ObjectId
 	>(
 		value: T
-	) => ExtendRefSchemaBuilder<{ [key in keyof (Props & { enum: T })]: (Props & { enum: T })[key] }, ExtraOmitFields>;
+	) => ExtendRefSchemaBuilder<Merge<Props, { enum: T }>, ExtraOmitFields>;
 
-	nonRequired: { [key in keyof Props]: Props[key] };
-	private: ExtendRefSchemaBuilder<{ [key in keyof (Props & { private: true })]: (Props & { private: true })[key] }, ExtraOmitFields>;
-	required: { [key in keyof (Props & { required: true })]: (Props & { required: true })[key] };
-	sparse: ExtendRefSchemaBuilder<{ [key in keyof (Props & { sparse: true })]: (Props & { sparse: true })[key] }, ExtraOmitFields>;
-	unique: ExtendRefSchemaBuilder<{ [key in keyof (Props & { unique: true })]: (Props & { unique: true })[key] }, ExtraOmitFields>;
+	nonRequired: Props;
+	private: ExtendRefSchemaBuilder<Merge<Props, { private: true }>, ExtraOmitFields>;
+	required: Merge<Props, { required: true }>;
+	sparse: ExtendRefSchemaBuilder<Merge<Props, { sparse: true }>, ExtraOmitFields>;
+	unique: ExtendRefSchemaBuilder<Merge<Props, { unique: true }>, ExtraOmitFields>;
 }
 
 const baseBuilderFactory = createBaseSchemaBuilderFactory(Schema.Types.ObjectId);

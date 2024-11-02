@@ -1,12 +1,14 @@
 import type { DefaultType, NumberSchemaDefinition } from 'mongoose';
+import type { Merge } from 'type-fest';
 
 import { createBaseSchemaBuilderFactory } from './base';
 import type { Readonlyable } from '../types/utils';
 
-export type ExtendNumberSchemaBuilder<Props extends { type: NumberSchemaDefinition }, ExtraOmitFields extends string> = Omit<NumberSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
+type BaseProps = { type: NumberSchemaDefinition };
+export type ExtendNumberSchemaBuilder<Props extends BaseProps, ExtraOmitFields extends string> = Omit<NumberSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
 
 export interface NumberSchemaBuilder<Props extends { type: NumberSchemaDefinition } = { type: NumberSchemaDefinition }, ExtraOmitFields extends string = never> {
-	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends number>(value: T) => ExtendNumberSchemaBuilder<{ [key in keyof (Props & { default: T })]: (Props & { default: T })[key] }, ExtraOmitFields>;
+	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends number>(value: T) => ExtendNumberSchemaBuilder<Merge<Props, { default: T }>, ExtraOmitFields>;
 	enum: <
 		T extends
 			| Readonlyable<Array<N | null>>
@@ -19,15 +21,15 @@ export interface NumberSchemaBuilder<Props extends { type: NumberSchemaDefinitio
 		N extends number
 	>(
 		value: T
-	) => ExtendNumberSchemaBuilder<{ [key in keyof (Props & { enum: T })]: (Props & { enum: T })[key] }, ExtraOmitFields>;
+	) => ExtendNumberSchemaBuilder<Merge<Props, { enum: T }>, ExtraOmitFields>;
 
-	max: <T extends N | Readonlyable<[N, S]>, N extends number, S extends string>(value: T) => ExtendNumberSchemaBuilder<{ [key in keyof (Props & { max: T })]: (Props & { max: T })[key] }, ExtraOmitFields>;
-	min: <T extends N | Readonlyable<[N, S]>, N extends number, S extends string>(value: T) => ExtendNumberSchemaBuilder<{ [key in keyof (Props & { min: T })]: (Props & { min: T })[key] }, ExtraOmitFields>;
-	nonRequired: { [key in keyof Props]: Props[key] };
-	private: ExtendNumberSchemaBuilder<{ [key in keyof (Props & { private: true })]: (Props & { private: true })[key] }, ExtraOmitFields>;
-	required: { [key in keyof (Props & { required: true })]: (Props & { required: true })[key] };
-	sparse: ExtendNumberSchemaBuilder<{ [key in keyof (Props & { sparse: true })]: (Props & { sparse: true })[key] }, ExtraOmitFields>;
-	unique: ExtendNumberSchemaBuilder<{ [key in keyof (Props & { unique: true })]: (Props & { unique: true })[key] }, ExtraOmitFields>;
+	max: <T extends N | Readonlyable<[N, S]>, N extends number, S extends string>(value: T) => ExtendNumberSchemaBuilder<Merge<Props, { max: T }>, ExtraOmitFields>;
+	min: <T extends N | Readonlyable<[N, S]>, N extends number, S extends string>(value: T) => ExtendNumberSchemaBuilder<Merge<Props, { min: T }>, ExtraOmitFields>;
+	nonRequired: Props;
+	private: ExtendNumberSchemaBuilder<Merge<Props, { private: true }>, ExtraOmitFields>;
+	required: Merge<Props, { required: true }>;
+	sparse: ExtendNumberSchemaBuilder<Merge<Props, { sparse: true }>, ExtraOmitFields>;
+	unique: ExtendNumberSchemaBuilder<Merge<Props, { unique: true }>, ExtraOmitFields>;
 }
 
 export const numberSchemaBuilder = createBaseSchemaBuilderFactory<NumberSchemaBuilder>(Number);

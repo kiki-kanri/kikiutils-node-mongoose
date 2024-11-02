@@ -1,12 +1,14 @@
 import type { DefaultType, DateSchemaDefinition } from 'mongoose';
+import type { Merge } from 'type-fest';
 
 import { createBaseSchemaBuilderFactory } from './base';
 import type { Readonlyable } from '../types/utils';
 
-export type ExtendDateSchemaBuilder<Props extends { type: DateSchemaDefinition }, ExtraOmitFields extends string> = Omit<DateSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
+type BaseProps = { type: DateSchemaDefinition };
+export type ExtendDateSchemaBuilder<Props extends BaseProps, ExtraOmitFields extends string> = Omit<DateSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
 
 export interface DateSchemaBuilder<Props extends { type: DateSchemaDefinition } = { type: DateSchemaDefinition }, ExtraOmitFields extends string = never> {
-	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends NativeDate>(value: T) => ExtendDateSchemaBuilder<{ [key in keyof (Props & { default: T })]: (Props & { default: T })[key] }, ExtraOmitFields>;
+	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends NativeDate>(value: T) => ExtendDateSchemaBuilder<Merge<Props, { default: T }>, ExtraOmitFields>;
 	enum: <
 		T extends
 			| Readonlyable<Array<D | null>>
@@ -19,15 +21,15 @@ export interface DateSchemaBuilder<Props extends { type: DateSchemaDefinition } 
 		M extends string
 	>(
 		value: T
-	) => ExtendDateSchemaBuilder<{ [key in keyof (Props & { enum: T })]: (Props & { enum: T })[key] }, ExtraOmitFields>;
+	) => ExtendDateSchemaBuilder<Merge<Props, { enum: T }>, ExtraOmitFields>;
 
-	max: <T extends D | Readonlyable<[D, S]>, D extends NativeDate, S extends string>(value: T) => ExtendDateSchemaBuilder<{ [key in keyof (Props & { max: T })]: (Props & { max: T })[key] }, ExtraOmitFields>;
-	min: <T extends D | Readonlyable<[D, S]>, D extends NativeDate, S extends string>(value: T) => ExtendDateSchemaBuilder<{ [key in keyof (Props & { min: T })]: (Props & { min: T })[key] }, ExtraOmitFields>;
-	nonRequired: { [key in keyof Props]: Props[key] };
-	private: ExtendDateSchemaBuilder<{ [key in keyof (Props & { private: true })]: (Props & { private: true })[key] }, ExtraOmitFields>;
-	required: { [key in keyof (Props & { required: true })]: (Props & { required: true })[key] };
-	sparse: ExtendDateSchemaBuilder<{ [key in keyof (Props & { sparse: true })]: (Props & { sparse: true })[key] }, ExtraOmitFields>;
-	unique: ExtendDateSchemaBuilder<{ [key in keyof (Props & { unique: true })]: (Props & { unique: true })[key] }, ExtraOmitFields>;
+	max: <T extends D | Readonlyable<[D, S]>, D extends NativeDate, S extends string>(value: T) => ExtendDateSchemaBuilder<Merge<Props, { max: T }>, ExtraOmitFields>;
+	min: <T extends D | Readonlyable<[D, S]>, D extends NativeDate, S extends string>(value: T) => ExtendDateSchemaBuilder<Merge<Props, { min: T }>, ExtraOmitFields>;
+	nonRequired: Props;
+	private: ExtendDateSchemaBuilder<Merge<Props, { private: true }>, ExtraOmitFields>;
+	required: Merge<Props, { required: true }>;
+	sparse: ExtendDateSchemaBuilder<Merge<Props, { sparse: true }>, ExtraOmitFields>;
+	unique: ExtendDateSchemaBuilder<Merge<Props, { unique: true }>, ExtraOmitFields>;
 }
 
 export const dateSchemaBuilder = createBaseSchemaBuilderFactory<DateSchemaBuilder>(Date);
