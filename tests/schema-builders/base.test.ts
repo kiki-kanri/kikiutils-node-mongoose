@@ -35,6 +35,12 @@ describe('createBaseSchemaBuilderFactory', () => {
 		expect(createBaseSchemaBuilderFactory(Number)().enum([1, 2]).nonRequired).toEqual({ enum: [1, 2], type: Number });
 	});
 
+	it('should set index attribute in the schema', () => {
+		expect(createBaseSchemaBuilderFactory(Number)().index(1).nonRequired).toEqual({ index: 1, type: Number });
+		expect(createBaseSchemaBuilderFactory(Number)().index('asc').nonRequired).toEqual({ index: 'asc', type: Number });
+		expect(createBaseSchemaBuilderFactory(Number)().index({ sparse: true, unique: true }).nonRequired).toEqual({ index: { sparse: true, unique: true }, type: Number });
+	});
+
 	it('should set max attribute in the schema', () => {
 		expect(createBaseSchemaBuilderFactory(Number)().max(1024).nonRequired).toEqual({ max: 1024, type: Number });
 	});
