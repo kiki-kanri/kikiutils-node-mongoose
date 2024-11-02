@@ -1,5 +1,26 @@
 # Changelog
 
+## v2.1.0
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v2.0.2...v2.1.0)
+
+### 🚀 Enhancements
+
+- Add `ExceptMongooseTimestampAndOtherFields` type ([058fc3b](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/058fc3b))
+- Add index method to schema builders ([c4ec43e](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/c4ec43e))
+
+### 💅 Refactors
+
+- **examples:** Replace `Omit` type with type-fest's `Except` type ([b5a8de0](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/b5a8de0))
+
+### ✅ Tests
+
+- Update unit tests for base schema builder ([a887a5a](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/a887a5a))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v2.0.2
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v2.0.1...v2.0.2)
