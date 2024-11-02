@@ -1,5 +1,19 @@
 # Changelog
 
+## v2.0.2
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v2.0.1...v2.0.2)
+
+### 💅 Refactors
+
+- Rename `MaybeReadonly` to `Readonlyable` ([7c98bb7](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/7c98bb7))
+- Change schema builder interface type merging to use type-fest's Merge type ([e488ba4](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/e488ba4))
+- Rename `DoNotUseOrRemoveThisType` to `DoNotRemoveOrUseThisType` ([5d93b8c](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/5d93b8c))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v2.0.1
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v2.0.0...v2.0.1)
