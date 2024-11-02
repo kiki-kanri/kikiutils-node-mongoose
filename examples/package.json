@@ -5,11 +5,12 @@
     "dev": "tsx watch --env-file=./.env ./src/index.ts"
   },
   "dependencies": {
-    "@kikiutils/mongoose": "2.0.0-rc.1",
-    "mongoose": "^8.7.3"
+    "@kikiutils/mongoose": "2.0.2",
+    "mongoose": "^8.8.0"
   },
   "devDependencies": {
-    "@kikiutils/tsconfigs": "^3.0.1",
-    "tsx": "^4.19.2"
+    "@kikiutils/tsconfigs": "^3.0.2",
+    "tsx": "^4.19.2",
+    "type-fest": "^4.26.1"
   }
 }

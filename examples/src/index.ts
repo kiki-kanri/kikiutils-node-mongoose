@@ -3,6 +3,7 @@ import s from '@kikiutils/mongoose/schema-builders';
 import { buildMongooseModel } from '@kikiutils/mongoose/utils';
 import { Schema } from 'mongoose';
 import type { ProjectionType, QueryOptions, Types } from 'mongoose';
+import type { Except } from 'type-fest';
 
 // Load global types
 import type {} from '@kikiutils/mongoose/types';
@@ -63,7 +64,7 @@ interface UserData extends BaseMongooseModelData {
  * controls the existence of the createdAt field
  * and the third controls the updatedAt field.
  */
-interface User extends BaseMongooseDocType<Omit<UserData, 'loginAt'>> {
+interface User extends BaseMongooseDocType<Except<UserData, 'loginAt'>> {
 	// Correctly set the type in the document state
 	loginAt?: Date;
 }
@@ -135,7 +136,7 @@ interface UserLogData extends BaseMongooseModelData<true, false> {
 }
 
 // Define document and model interfaces and types
-interface UserLog extends BaseMongooseDocType<Omit<UserLogData, 'user'>, true, false> {
+interface UserLog extends BaseMongooseDocType<Except<UserLogData, 'user'>, true, false> {
 	user: Types.Decimal128;
 }
 
