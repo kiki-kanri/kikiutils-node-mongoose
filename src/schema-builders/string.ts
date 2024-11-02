@@ -2,7 +2,7 @@ import type { DefaultType, StringSchemaDefinition } from 'mongoose';
 import net from 'net';
 
 import { createBaseSchemaBuilderFactory } from './base';
-import type { MaybeReadonly } from '../types/utils';
+import type { Readonlyable } from '../types/utils';
 
 export type ExtendStringSchemaBuilder<Props extends { type: StringSchemaDefinition }, ExtraOmitFields extends string> = Omit<StringSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
 type IPSchema<T extends string> = { trim: true; validate: { message: T; validator: (value: string) => boolean } };
@@ -11,10 +11,10 @@ export interface StringSchemaBuilder<Props extends { type: StringSchemaDefinitio
 	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends string>(value: T) => ExtendStringSchemaBuilder<{ [key in keyof (Props & { default: T })]: (Props & { default: T })[key] }, ExtraOmitFields>;
 	enum: <
 		T extends
-			| MaybeReadonly<Array<S | null>>
+			| Readonlyable<Array<S | null>>
 			| {
 					message?: M;
-					values: MaybeReadonly<Array<S | null>>;
+					values: Readonlyable<Array<S | null>>;
 			  }
 			| { [path: string]: S | null },
 		M extends string,
@@ -51,10 +51,10 @@ export interface StringSchemaBuilder<Props extends { type: StringSchemaDefinitio
 	 *
 	 * @returns A schema builder with both `maxlength` and `minlength` options applied.
 	 */
-	length: <T extends L | MaybeReadonly<[L, S]>, L extends number, S extends string>(value: T) => ExtendStringSchemaBuilder<{ [key in keyof (Props & { maxlength: T; minlength: T })]: (Props & { maxlength: T; minlength: T })[key] }, ExtraOmitFields>;
+	length: <T extends L | Readonlyable<[L, S]>, L extends number, S extends string>(value: T) => ExtendStringSchemaBuilder<{ [key in keyof (Props & { maxlength: T; minlength: T })]: (Props & { maxlength: T; minlength: T })[key] }, ExtraOmitFields>;
 	lowercase: ExtendStringSchemaBuilder<{ [key in keyof (Props & { lowercase: true })]: (Props & { lowercase: true })[key] }, ExtraOmitFields>;
-	maxlength: <T extends L | MaybeReadonly<[L, S]>, L extends number, S extends string>(value: T) => ExtendStringSchemaBuilder<{ [key in keyof (Props & { maxlength: T })]: (Props & { maxlength: T })[key] }, ExtraOmitFields>;
-	minlength: <T extends L | MaybeReadonly<[L, S]>, L extends number, S extends string>(value: T) => ExtendStringSchemaBuilder<{ [key in keyof (Props & { minlength: T })]: (Props & { minlength: T })[key] }, ExtraOmitFields>;
+	maxlength: <T extends L | Readonlyable<[L, S]>, L extends number, S extends string>(value: T) => ExtendStringSchemaBuilder<{ [key in keyof (Props & { maxlength: T })]: (Props & { maxlength: T })[key] }, ExtraOmitFields>;
+	minlength: <T extends L | Readonlyable<[L, S]>, L extends number, S extends string>(value: T) => ExtendStringSchemaBuilder<{ [key in keyof (Props & { minlength: T })]: (Props & { minlength: T })[key] }, ExtraOmitFields>;
 	nonRequired: { [key in keyof Props]: Props[key] };
 	private: ExtendStringSchemaBuilder<{ [key in keyof (Props & { private: true })]: (Props & { private: true })[key] }, ExtraOmitFields>;
 	required: { [key in keyof (Props & { required: true })]: (Props & { required: true })[key] };

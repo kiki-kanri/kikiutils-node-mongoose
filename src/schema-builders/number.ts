@@ -1,7 +1,7 @@
 import type { DefaultType, NumberSchemaDefinition } from 'mongoose';
 
 import { createBaseSchemaBuilderFactory } from './base';
-import type { MaybeReadonly } from '../types/utils';
+import type { Readonlyable } from '../types/utils';
 
 export type ExtendNumberSchemaBuilder<Props extends { type: NumberSchemaDefinition }, ExtraOmitFields extends string> = Omit<NumberSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
 
@@ -9,10 +9,10 @@ export interface NumberSchemaBuilder<Props extends { type: NumberSchemaDefinitio
 	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends number>(value: T) => ExtendNumberSchemaBuilder<{ [key in keyof (Props & { default: T })]: (Props & { default: T })[key] }, ExtraOmitFields>;
 	enum: <
 		T extends
-			| MaybeReadonly<Array<N | null>>
+			| Readonlyable<Array<N | null>>
 			| {
 					message?: M;
-					values: MaybeReadonly<Array<N | null>>;
+					values: Readonlyable<Array<N | null>>;
 			  }
 			| { [path: string]: N | null },
 		M extends string,
@@ -21,8 +21,8 @@ export interface NumberSchemaBuilder<Props extends { type: NumberSchemaDefinitio
 		value: T
 	) => ExtendNumberSchemaBuilder<{ [key in keyof (Props & { enum: T })]: (Props & { enum: T })[key] }, ExtraOmitFields>;
 
-	max: <T extends N | MaybeReadonly<[N, S]>, N extends number, S extends string>(value: T) => ExtendNumberSchemaBuilder<{ [key in keyof (Props & { max: T })]: (Props & { max: T })[key] }, ExtraOmitFields>;
-	min: <T extends N | MaybeReadonly<[N, S]>, N extends number, S extends string>(value: T) => ExtendNumberSchemaBuilder<{ [key in keyof (Props & { min: T })]: (Props & { min: T })[key] }, ExtraOmitFields>;
+	max: <T extends N | Readonlyable<[N, S]>, N extends number, S extends string>(value: T) => ExtendNumberSchemaBuilder<{ [key in keyof (Props & { max: T })]: (Props & { max: T })[key] }, ExtraOmitFields>;
+	min: <T extends N | Readonlyable<[N, S]>, N extends number, S extends string>(value: T) => ExtendNumberSchemaBuilder<{ [key in keyof (Props & { min: T })]: (Props & { min: T })[key] }, ExtraOmitFields>;
 	nonRequired: { [key in keyof Props]: Props[key] };
 	private: ExtendNumberSchemaBuilder<{ [key in keyof (Props & { private: true })]: (Props & { private: true })[key] }, ExtraOmitFields>;
 	required: { [key in keyof (Props & { required: true })]: (Props & { required: true })[key] };

@@ -2,7 +2,7 @@ import { Schema } from 'mongoose';
 import type { DefaultType, ObjectIdSchemaDefinition, Types } from 'mongoose';
 
 import { createBaseSchemaBuilderFactory } from './base';
-import type { MaybeReadonly } from '../types/utils';
+import type { Readonlyable } from '../types/utils';
 
 export type ExtendObjectIdSchemaBuilder<Props extends { type: ObjectIdSchemaDefinition }, ExtraOmitFields extends string> = Omit<ObjectIdSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
 
@@ -10,10 +10,10 @@ export interface ObjectIdSchemaBuilder<Props extends { type: ObjectIdSchemaDefin
 	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends Types.ObjectId>(value: T) => ExtendObjectIdSchemaBuilder<{ [key in keyof (Props & { default: T })]: (Props & { default: T })[key] }, ExtraOmitFields>;
 	enum: <
 		T extends
-			| MaybeReadonly<Array<O | null>>
+			| Readonlyable<Array<O | null>>
 			| {
 					message?: M;
-					values: MaybeReadonly<Array<O | null>>;
+					values: Readonlyable<Array<O | null>>;
 			  }
 			| { [path: string]: O | null },
 		M extends string,

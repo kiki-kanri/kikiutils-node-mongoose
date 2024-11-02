@@ -1,7 +1,7 @@
 import type { DefaultType, DateSchemaDefinition } from 'mongoose';
 
 import { createBaseSchemaBuilderFactory } from './base';
-import type { MaybeReadonly } from '../types/utils';
+import type { Readonlyable } from '../types/utils';
 
 export type ExtendDateSchemaBuilder<Props extends { type: DateSchemaDefinition }, ExtraOmitFields extends string> = Omit<DateSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
 
@@ -9,10 +9,10 @@ export interface DateSchemaBuilder<Props extends { type: DateSchemaDefinition } 
 	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends NativeDate>(value: T) => ExtendDateSchemaBuilder<{ [key in keyof (Props & { default: T })]: (Props & { default: T })[key] }, ExtraOmitFields>;
 	enum: <
 		T extends
-			| MaybeReadonly<Array<D | null>>
+			| Readonlyable<Array<D | null>>
 			| {
 					message?: M;
-					values: MaybeReadonly<Array<D | null>>;
+					values: Readonlyable<Array<D | null>>;
 			  }
 			| { [path: string]: D | null },
 		D extends NativeDate,
@@ -21,8 +21,8 @@ export interface DateSchemaBuilder<Props extends { type: DateSchemaDefinition } 
 		value: T
 	) => ExtendDateSchemaBuilder<{ [key in keyof (Props & { enum: T })]: (Props & { enum: T })[key] }, ExtraOmitFields>;
 
-	max: <T extends D | MaybeReadonly<[D, S]>, D extends NativeDate, S extends string>(value: T) => ExtendDateSchemaBuilder<{ [key in keyof (Props & { max: T })]: (Props & { max: T })[key] }, ExtraOmitFields>;
-	min: <T extends D | MaybeReadonly<[D, S]>, D extends NativeDate, S extends string>(value: T) => ExtendDateSchemaBuilder<{ [key in keyof (Props & { min: T })]: (Props & { min: T })[key] }, ExtraOmitFields>;
+	max: <T extends D | Readonlyable<[D, S]>, D extends NativeDate, S extends string>(value: T) => ExtendDateSchemaBuilder<{ [key in keyof (Props & { max: T })]: (Props & { max: T })[key] }, ExtraOmitFields>;
+	min: <T extends D | Readonlyable<[D, S]>, D extends NativeDate, S extends string>(value: T) => ExtendDateSchemaBuilder<{ [key in keyof (Props & { min: T })]: (Props & { min: T })[key] }, ExtraOmitFields>;
 	nonRequired: { [key in keyof Props]: Props[key] };
 	private: ExtendDateSchemaBuilder<{ [key in keyof (Props & { private: true })]: (Props & { private: true })[key] }, ExtraOmitFields>;
 	required: { [key in keyof (Props & { required: true })]: (Props & { required: true })[key] };

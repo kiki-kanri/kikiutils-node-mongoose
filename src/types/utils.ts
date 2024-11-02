@@ -1,1 +1,1 @@
-export type MaybeReadonly<T> = T | Readonly<T>;
+export type Readonlyable<T> = T | Readonly<T>;

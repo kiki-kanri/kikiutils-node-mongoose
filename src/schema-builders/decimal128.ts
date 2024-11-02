@@ -3,7 +3,7 @@ import { Schema } from 'mongoose';
 import type { DefaultType, Types } from 'mongoose';
 
 import { createBaseSchemaBuilderFactory } from './base';
-import type { MaybeReadonly } from '../types/utils';
+import type { Readonlyable } from '../types/utils';
 
 export type ExtendDecimal128SchemaBuilder<Props extends { type: Schema.Types.Decimal128 }, ExtraOmitFields extends string> = Omit<Decimal128SchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
 type ToStringGetterSchema = { get: (value: Types.Decimal128) => string };
@@ -13,10 +13,10 @@ export interface Decimal128SchemaBuilder<Props extends { type: Schema.Types.Deci
 	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends Types.Decimal128>(value: T) => ExtendDecimal128SchemaBuilder<{ [key in keyof (Props & { default: T })]: (Props & { default: T })[key] }, ExtraOmitFields>;
 	enum: <
 		T extends
-			| MaybeReadonly<Array<D | null>>
+			| Readonlyable<Array<D | null>>
 			| {
 					message?: M;
-					values: MaybeReadonly<Array<D | null>>;
+					values: Readonlyable<Array<D | null>>;
 			  }
 			| { [path: string]: D | null },
 		D extends Types.Decimal128,
