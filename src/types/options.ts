@@ -2,7 +2,7 @@ import type { Connection, Schema, SchemaTimestampsConfig } from 'mongoose';
 
 import type { buildMongooseModel } from '../utils';
 
-export type DoNotUseOrRemoveThisType = typeof buildMongooseModel;
+export type DoNotRemoveOrUseThisType = typeof buildMongooseModel;
 
 /**
  * Interface for options used when building a Mongoose model.

@@ -8,7 +8,7 @@ import { setCustomMongooseOptions } from './options';
 import mongooseNormalizePlugin from './plugins/normalize';
 import type { BuildMongooseModelOptions } from './types/options';
 
-export type DoNotUseOrRemoveThisType = typeof setCustomMongooseOptions;
+export type DoNotRemoveOrUseThisType = typeof setCustomMongooseOptions;
 
 /**
  * Builds and returns a Mongoose model with specified schema and options.

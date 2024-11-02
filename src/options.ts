@@ -2,7 +2,7 @@ import { customMongooseOptions } from './_internals';
 import type { CustomMongooseOptions } from './types/options';
 import type { buildMongooseModel } from './utils';
 
-export type DoNotUseOrRemoveThisType = typeof buildMongooseModel;
+export type DoNotRemoveOrUseThisType = typeof buildMongooseModel;
 
 /**
  * Sets custom options.
