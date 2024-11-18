@@ -1,5 +1,23 @@
 # Changelog
 
+## v2.1.1
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v2.1.0...v2.1.1)
+
+### 🏡 Chore
+
+- Upgrade dependencies ([6d0af61](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/6d0af61))
+- Replace Prettier with ESLint, add related files, and update VSCode settings ([01dcce6](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/01dcce6))
+- Modify scripts in package.json ([79116cc](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/79116cc))
+
+### 🎨 Styles
+
+- Format and lint all files ([4db725a](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/4db725a))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v2.1.0
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v2.0.2...v2.1.0)
