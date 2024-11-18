@@ -1,18 +1,18 @@
 import type { FilterQuery, mongo, PaginateOptions, Schema } from 'mongoose';
 
 declare module 'mongoose' {
-	interface PaginateCustomLabels<T = string | undefined | boolean> {
-		totalDocs?: T;
+	interface PaginateCustomLabels<T = boolean | string | undefined> {
 		docs?: T;
-		limit?: T;
-		page?: T;
-		nextPage?: T;
-		prevPage?: T;
 		hasNextPage?: T;
 		hasPrevPage?: T;
-		totalPages?: T;
-		pagingCounter?: T;
+		limit?: T;
 		meta?: T;
+		nextPage?: T;
+		page?: T;
+		pagingCounter?: T;
+		prevPage?: T;
+		totalDocs?: T;
+		totalPages?: T;
 	}
 
 	interface PaginateReadOptions {
@@ -21,58 +21,63 @@ declare module 'mongoose' {
 	}
 
 	interface PaginateOptions {
-		select?: object | string;
+		allowDiskUse?: boolean;
 		collation?: mongo.CollationOptions;
-		sort?: object | string;
-		populate?: PopulateOptions[] | string[] | PopulateOptions | string;
-		projection?: any;
+		customLabels?: PaginateCustomLabels;
+		forceCountFn?: boolean;
 		lean?: boolean;
 		leanWithId?: boolean;
-		offset?: number;
-		page?: number;
 		limit?: number;
-		customLabels?: PaginateCustomLabels;
-		/* If pagination is set to `false`, it will return all docs without adding limit condition. (Default: `true`) */
-		pagination?: boolean;
-		useEstimatedCount?: boolean;
-		useCustomCountFn?: () => Promise<number>;
-		forceCountFn?: boolean;
-		allowDiskUse?: boolean;
-		read?: PaginateReadOptions;
+		offset?: number;
 		options?: QueryOptions;
+		page?: number;
+
+		/**
+		 *  If pagination is set to `false`, it will return all docs without adding limit condition.
+		 *
+		 * @default true
+		 */
+		pagination?: boolean;
+		populate?: PopulateOptions | PopulateOptions[] | string | string[];
+		projection?: any;
+		read?: PaginateReadOptions;
+		select?: object | string;
+		sort?: object | string;
+		useCustomCountFn?: () => Promise<number>;
+		useEstimatedCount?: boolean;
 	}
 
 	interface SubPaginateOptions {
-		select?: object | string;
-		populate?: PopulateOptions[] | string[] | PopulateOptions | string;
 		pagination?: boolean;
-		read?: PaginateReadOptions;
 		pagingOptions: SubDocumentPagingOptions | undefined;
+		populate?: PopulateOptions | PopulateOptions[] | string | string[];
+		read?: PaginateReadOptions;
+		select?: object | string;
 	}
 
 	interface SubDocumentPagingOptions {
-		populate?: PopulateOptions[] | string[] | PopulateOptions | string;
-		page?: number;
 		limit?: number;
+		page?: number;
+		populate?: PopulateOptions | PopulateOptions[] | string | string[];
 	}
 
 	interface PaginateResult<T> {
+		[customLabel: string]: T[] | boolean | null | number | undefined;
 		docs: T[];
-		totalDocs: number;
-		limit: number;
-		hasPrevPage: boolean;
 		hasNextPage: boolean;
-		page?: number;
-		totalPages: number;
-		offset: number;
-		prevPage?: number | null;
-		nextPage?: number | null;
-		pagingCounter: number;
+		hasPrevPage: boolean;
+		limit: number;
 		meta?: any;
-		[customLabel: string]: T[] | number | boolean | null | undefined;
+		nextPage?: null | number;
+		offset: number;
+		page?: number;
+		pagingCounter: number;
+		prevPage?: null | number;
+		totalDocs: number;
+		totalPages: number;
 	}
 
-	type PaginateDocument<T, TMethods, TQueryHelpers, O extends PaginateOptions = object> = O['lean'] extends true ? (O['leanWithId'] extends true ? T & { id: string } : T) : HydratedDocument<T, TMethods, TQueryHelpers>;
+	type PaginateDocument<T, TMethods, TQueryHelpers, O extends PaginateOptions = object> = O['lean'] extends true ? (O['leanWithId'] extends true ? { id: string } & T : T) : HydratedDocument<T, TMethods, TQueryHelpers>;
 
 	interface PaginateModel<T, TQueryHelpers = object, TMethods = object> extends Model<T, TQueryHelpers, TMethods> {
 		paginate: {

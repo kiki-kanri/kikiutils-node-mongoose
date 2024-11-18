@@ -23,7 +23,7 @@ declare global {
 	 * @template CreatedAtField - A boolean flag indicating whether the `createdAt` field should be included.
 	 * @template UpdatedAtField - A boolean flag indicating whether the `updatedAt` field should be included.
 	 */
-	type BaseMongooseDocType<T, CreatedAtField extends boolean = true, UpdatedAtField extends boolean = true> = Omit<T, 'createdAt' | 'id' | 'updatedAt'> & (CreatedAtField extends true ? { createdAt: Date } : object) & (UpdatedAtField extends true ? { updatedAt: Date } : object);
+	type BaseMongooseDocType<T, CreatedAtField extends boolean = true, UpdatedAtField extends boolean = true> = (CreatedAtField extends true ? { createdAt: Date } : object) & Omit<T, 'createdAt' | 'id' | 'updatedAt'> & (UpdatedAtField extends true ? { updatedAt: Date } : object);
 
 	/**
 	 * Type definition for a Mongoose model with pagination and aggregation capabilities.
@@ -35,7 +35,7 @@ declare global {
 	 * @template InstanceMethodsAndOverrides - Optional type parameter for instance methods and overrides.
 	 * @template QueryHelpers - Optional type parameter for additional query helper methods.
 	 */
-	type BaseMongoosePaginateModel<RawDocType, InstanceMethodsAndOverrides = object, QueryHelpers = object> = AggregatePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> & PaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> & BaseModelStatics<RawDocType, InstanceMethodsAndOverrides, QueryHelpers>;
+	type BaseMongoosePaginateModel<RawDocType, InstanceMethodsAndOverrides = object, QueryHelpers = object> = AggregatePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> & BaseModelStatics<RawDocType, InstanceMethodsAndOverrides, QueryHelpers> & PaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>;
 
 	/**
 	 * Type definition for a Mongoose document or ObjectId.
@@ -46,7 +46,7 @@ declare global {
 	 *
 	 * @template D - The Mongoose document type.
 	 */
-	type MongooseDocumentOrObjectId<D> = D | string | Types.ObjectId;
+	type MongooseDocumentOrObjectId<D> = D | Types.ObjectId | string;
 
 	/**
 	 * Type definition for the return type of a Mongoose `findOne` query.

@@ -1,1 +1,1 @@
-export type Readonlyable<T> = T | Readonly<T>;
+export type Readonlyable<T> = Readonly<T> | T;

@@ -65,7 +65,7 @@ declare global {
 	 * @template T - The type from which to omit fields.
 	 * @template OT - Additional fields to omit, specified as a union of string, number, or symbol keys.
 	 */
-	type OmitMongooseTimestampAndOtherFields<T, OT extends number | symbol | string = never> = Omit<T, 'createdAt' | 'updatedAt' | OT>;
+	type OmitMongooseTimestampAndOtherFields<T, OT extends number | string | symbol = never> = Omit<T, 'createdAt' | 'updatedAt' | OT>;
 
 	/**
 	 * Type definition for including timestamp fields conditionally based on the provided flags.

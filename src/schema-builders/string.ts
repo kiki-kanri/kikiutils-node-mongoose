@@ -11,25 +11,26 @@ export type ExtendStringSchemaBuilder<Props extends BaseProps, ExtraOmitFields e
 interface BaseProps {
 	type: StringSchemaDefinition;
 }
+
 interface IPSchema<T extends string> {
 	trim: true;
 	validate: { message: T; validator: (value: string) => boolean };
 }
 
 export interface StringSchemaBuilder<Props extends { type: StringSchemaDefinition } = { type: StringSchemaDefinition }, ExtraOmitFields extends string = never> {
-	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends string>(value: T) => ExtendStringSchemaBuilder<Merge<Props, { default: T }>, ExtraOmitFields>;
+	default: <T extends ((this: any, doc: any) => DefaultType<D>) | DefaultType<D> | null, D extends string>(value: T) => ExtendStringSchemaBuilder<Merge<Props, { default: T }>, ExtraOmitFields>;
 	enum: <
 		T extends
-		| Readonlyable<Array<S | null>>
+		| { [path: string]: S | null }
 		| { message?: M; values: Readonlyable<Array<S | null>> }
-		| { [path: string]: S | null },
+		| Readonlyable<Array<S | null>>,
 		M extends string,
 		S extends string,
 	>(
 		value: T
 	) => ExtendStringSchemaBuilder<Merge<Props, { enum: T }>, ExtraOmitFields>;
 
-	index: <T extends boolean | IndexDirection | IndexOptions>(value: T) => ExtendStringSchemaBuilder<Merge<Props, { index: T }>, ExtraOmitFields>;
+	index: <T extends IndexDirection | IndexOptions | boolean>(value: T) => ExtendStringSchemaBuilder<Merge<Props, { index: T }>, ExtraOmitFields>;
 
 	/**
 	 * Adds IPv4 validation to the string schema.
@@ -39,7 +40,7 @@ export interface StringSchemaBuilder<Props extends { type: StringSchemaDefinitio
 	 *
 	 * @returns A schema builder with IPv4 validation and the `trim` option enabled.
 	 */
-	ipv4: <T extends string = typeof defaultIPv4ValidateMessage>(message?: T) => ExtendStringSchemaBuilder<Merge<Props, IPSchema<T>>, ExtraOmitFields | 'ipv4' | 'ipv6'>;
+	ipv4: <T extends string = typeof defaultIPv4ValidateMessage>(message?: T) => ExtendStringSchemaBuilder<Merge<Props, IPSchema<T>>, 'ipv4' | 'ipv6' | ExtraOmitFields>;
 
 	/**
 	 * Adds IPv6 validation to the string schema.
@@ -49,7 +50,7 @@ export interface StringSchemaBuilder<Props extends { type: StringSchemaDefinitio
 	 *
 	 * @returns A schema builder with IPv6 validation and the `trim` option enabled.
 	 */
-	ipv6: <T extends string = typeof defaultIPv6ValidateMessage>(message?: T) => ExtendStringSchemaBuilder<Merge<Props, IPSchema<T>>, ExtraOmitFields | 'ipv4' | 'ipv6'>;
+	ipv6: <T extends string = typeof defaultIPv6ValidateMessage>(message?: T) => ExtendStringSchemaBuilder<Merge<Props, IPSchema<T>>, 'ipv4' | 'ipv6' | ExtraOmitFields>;
 
 	/**
 	 * Sets both the maximum and minimum length of the string.

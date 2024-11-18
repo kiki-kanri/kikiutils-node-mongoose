@@ -8,61 +8,66 @@
 import type { AggregatePaginateOptions, Schema } from 'mongoose';
 
 declare module 'mongoose' {
-	interface AggregateCustomLabels<T = string | undefined | boolean> {
-		totalDocs?: T;
+	interface AggregateCustomLabels<T = boolean | string | undefined> {
 		docs?: T;
-		limit?: T;
-		page?: T;
-		nextPage?: T;
-		prevPage?: T;
 		hasNextPage?: T;
 		hasPrevPage?: T;
-		totalPages?: T;
-		pagingCounter?: T;
+		limit?: T;
 		meta?: T;
+		nextPage?: T;
+		page?: T;
+		pagingCounter?: T;
+		prevPage?: T;
+		totalDocs?: T;
+		totalPages?: T;
 	}
 
 	interface AggregatePaginateOptions {
-		sort?: object | string;
-		offset?: number;
-		page?: number;
-		limit?: number;
-		customLabels?: AggregateCustomLabels;
-		/* If pagination is set to `false`, it will return all docs without adding limit condition. (Default: `true`) */
-		pagination?: boolean;
 		allowDiskUse?: boolean;
 		countQuery?: object;
+		customLabels?: AggregateCustomLabels;
+		limit?: number;
+		offset?: number;
+		page?: number;
+
+		/**
+		 *  If pagination is set to `false`, it will return all docs without adding limit condition.
+		 *
+		 * @default true
+		 */
+		pagination?: boolean;
+		sort?: object | string;
 		useFacet?: boolean;
 	}
 
 	interface AggregatePaginateQueryPopulateOptions {
-		/** space delimited path(s) to populate */
-		path: string;
-		/** optional fields to select */
-		select?: any;
 		/** optional query conditions to match */
 		match?: any;
 		/** optional model to use for population */
-		model?: string | Model<any>;
+		model?: Model<any> | string;
 		/** optional query options like sort, limit, etc */
 		options?: any;
+		/** space delimited path(s) to populate */
+		path: string;
 		/** deep populate */
 		populate?: AggregatePaginateQueryPopulateOptions | AggregatePaginateQueryPopulateOptions[];
+		/** optional fields to select */
+		select?: any;
 	}
 
 	interface AggregatePaginateResult<T> {
+		[customLabel: string]: T[] | boolean | null | number | undefined;
 		docs: T[];
-		totalDocs: number;
-		limit: number;
-		page?: number;
-		totalPages: number;
-		nextPage?: number | null;
-		prevPage?: number | null;
-		pagingCounter: number;
-		hasPrevPage: boolean;
 		hasNextPage: boolean;
+		hasPrevPage: boolean;
+		limit: number;
 		meta?: any;
-		[customLabel: string]: T[] | number | boolean | null | undefined;
+		nextPage?: null | number;
+		page?: number;
+		pagingCounter: number;
+		prevPage?: null | number;
+		totalDocs: number;
+		totalPages: number;
 	}
 
 	interface AggregatePaginateModel<RawDocType, QueryHelpers = object, InstanceMethodsAndOverrides = object> extends Model<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> {

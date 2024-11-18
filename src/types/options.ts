@@ -39,7 +39,7 @@ export interface BuildMongooseModelOptions {
 	 *
 	 * @default true
 	 */
-	timestamps?: boolean | SchemaTimestampsConfig;
+	timestamps?: SchemaTimestampsConfig | boolean;
 }
 
 export interface CustomMongooseOptions {

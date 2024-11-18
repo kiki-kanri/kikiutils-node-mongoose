@@ -13,19 +13,19 @@ interface BaseProps {
 }
 
 export interface RefSchemaBuilder<Props extends { type: ObjectIdSchemaDefinition } = { type: ObjectIdSchemaDefinition }, ExtraOmitFields extends string = never> {
-	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends Types.ObjectId>(value: T) => ExtendRefSchemaBuilder<Merge<Props, { default: T }>, ExtraOmitFields>;
+	default: <T extends ((this: any, doc: any) => DefaultType<D>) | DefaultType<D> | null, D extends Types.ObjectId>(value: T) => ExtendRefSchemaBuilder<Merge<Props, { default: T }>, ExtraOmitFields>;
 	enum: <
 		T extends
-		| Readonlyable<Array<O | null>>
+		| { [path: string]: O | null }
 		| { message?: M; values: Readonlyable<Array<O | null>> }
-		| { [path: string]: O | null },
+		| Readonlyable<Array<O | null>>,
 		M extends string,
 		O extends Types.ObjectId,
 	>(
 		value: T
 	) => ExtendRefSchemaBuilder<Merge<Props, { enum: T }>, ExtraOmitFields>;
 
-	index: <T extends boolean | IndexDirection | IndexOptions>(value: T) => ExtendRefSchemaBuilder<Merge<Props, { index: T }>, ExtraOmitFields>;
+	index: <T extends IndexDirection | IndexOptions | boolean>(value: T) => ExtendRefSchemaBuilder<Merge<Props, { index: T }>, ExtraOmitFields>;
 	nonRequired: Props;
 	private: ExtendRefSchemaBuilder<Merge<Props, { private: true }>, ExtraOmitFields>;
 	required: Merge<Props, { required: true }>;
@@ -34,4 +34,4 @@ export interface RefSchemaBuilder<Props extends { type: ObjectIdSchemaDefinition
 }
 
 const baseBuilderFactory = createBaseSchemaBuilderFactory(Schema.Types.ObjectId);
-export const refSchemaBuilder = <T extends string | Model<any> | ((this: any, doc: any) => string | Model<any>)>(ref: T) => baseBuilderFactory({ ref }) as RefSchemaBuilder<{ ref: T; type: ObjectIdSchemaDefinition }>;
+export const refSchemaBuilder = <T extends ((this: any, doc: any) => Model<any> | string) | Model<any> | string>(ref: T) => baseBuilderFactory({ ref }) as RefSchemaBuilder<{ ref: T; type: ObjectIdSchemaDefinition }>;

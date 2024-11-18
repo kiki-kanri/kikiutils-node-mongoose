@@ -31,8 +31,8 @@ importers:
         specifier: ^0.7.0
         version: 0.7.0
       '@kikiutils/eslint-config':
-        specifier: ^0.3.1
-        version: 0.3.1(@typescript-eslint/utils@8.14.0(eslint@9.15.0(jiti@2.4.0))(typescript@5.6.3))(@vue/compiler-sfc@3.5.13)(jiti@2.4.0)(typescript@5.6.3)
+        specifier: ^0.4.0
+        version: 0.4.0(@typescript-eslint/utils@8.14.0(eslint@9.15.0(jiti@2.4.0))(typescript@5.6.3))(@vue/compiler-sfc@3.5.13)(jiti@2.4.0)(typescript@5.6.3)
       '@kikiutils/tsconfigs':
         specifier: ^3.0.2
         version: 3.0.2
@@ -610,8 +610,8 @@ packages:
     resolution: {integrity: sha512-eGf5owO3OnT4GaR3/ydbPuPjA8TwKN1vE1G3ImveVzENLTZXnD7L3S20iZjsiQuKF68d2UwQ6ng3nefc+dYPMQ==}
     hasBin: true
 
-  '@kikiutils/eslint-config@0.3.1':
-    resolution: {integrity: sha512-tpB6AHuHFzKs3wc3juGWvcRCy9X19hFtKvwsZfsZjPBiv7MNDUAShXMW71iywC8tzAyZQYxztzl993zX3i6s7g==}
+  '@kikiutils/eslint-config@0.4.0':
+    resolution: {integrity: sha512-VVhsh6xRd7WevmJj2z4B9C2dgfbIx7AS44G9pRHTqRLYOFBa2iOg2x13OkP89skxTCAvVlY9CA6YMj41lY7P2g==}
     engines: {node: '>=18.12.1'}
 
   '@kikiutils/tsconfigs@3.0.2':
@@ -1187,8 +1187,8 @@ packages:
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     hasBin: true
 
-  cross-spawn@7.0.5:
-    resolution: {integrity: sha512-ZVJrKKYunU38/76t0RMOulHOnUcbU9GbpWKAOZ0mhjr7CX6FVrH+4FrAapSOekrgFQ3f/8gwMEuIft0aKq6Hug==}
+  cross-spawn@7.0.6:
+    resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
     engines: {node: '>= 8'}
 
   cssesc@3.0.0:
@@ -1443,10 +1443,6 @@ packages:
     peerDependencies:
       eslint: '>=8.44.0'
 
-  eslint-plugin-sort-keys-plus@1.4.0:
-    resolution: {integrity: sha512-4MsaETpu8+Atfhp3kyz+vu5ATHfst/vkAhVFUkzEDDgq39jpecGAbSVNGKd0OfDK7TDLGoeNzxnCLrMM06zvNg==}
-    engines: {node: '>=14'}
-
   eslint-plugin-toml@0.11.1:
     resolution: {integrity: sha512-Y1WuMSzfZpeMIrmlP1nUh3kT8p96mThIq4NnHrYUhg10IKQgGfBZjAWnrg9fBqguiX4iFps/x/3Hb5TxBisfdw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
@@ -1614,8 +1610,8 @@ packages:
     resolution: {integrity: sha512-f7ccFPK3SXFHpx15UIGyRJ/FJQctuKZ0zVuN3frBo4HnK3cay9VEW0R6yPYFHC0AgqhukPzKjq22t5DmAyqGyw==}
     engines: {node: '>=16'}
 
-  flatted@3.3.1:
-    resolution: {integrity: sha512-X8cqMLLie7KsNUDSdzeN8FYK9rEt4Dt67OsG/DNGnYTSDBG4uFAJFBnUeiV+zCVAvwFy56IjM9sH51jVaEhNxw==}
+  flatted@3.3.2:
+    resolution: {integrity: sha512-AiwGJM8YcNOaobumgtng+6NHuOqC3A7MixFeDafM3X9cIUM+xUXoS5Vfgf+OihAYe20fxqNM9yPBXJzRtZ/4eA==}
 
   foreground-child@3.3.0:
     resolution: {integrity: sha512-Ld2g8rrAyMYFXBhEqMz8ZAHBi4J4uS1i/CxGMDnjyFWddMXLVcDp051DZfu+t7+ab7Wv6SMqpWmyFIj5UbfFvg==}
@@ -3633,12 +3629,11 @@ snapshots:
     transitivePeerDependencies:
       - magicast
 
-  '@kikiutils/eslint-config@0.3.1(@typescript-eslint/utils@8.14.0(eslint@9.15.0(jiti@2.4.0))(typescript@5.6.3))(@vue/compiler-sfc@3.5.13)(jiti@2.4.0)(typescript@5.6.3)':
+  '@kikiutils/eslint-config@0.4.0(@typescript-eslint/utils@8.14.0(eslint@9.15.0(jiti@2.4.0))(typescript@5.6.3))(@vue/compiler-sfc@3.5.13)(jiti@2.4.0)(typescript@5.6.3)':
     dependencies:
       '@antfu/eslint-config': 3.9.1(@typescript-eslint/utils@8.14.0(eslint@9.15.0(jiti@2.4.0))(typescript@5.6.3))(@vue/compiler-sfc@3.5.13)(eslint@9.15.0(jiti@2.4.0))(typescript@5.6.3)
       eslint: 9.15.0(jiti@2.4.0)
       eslint-flat-config-utils: 0.4.0
-      eslint-plugin-sort-keys-plus: 1.4.0
     transitivePeerDependencies:
       - '@eslint-react/eslint-plugin'
       - '@eslint/json'
@@ -4254,7 +4249,7 @@ snapshots:
       - supports-color
       - ts-node
 
-  cross-spawn@7.0.5:
+  cross-spawn@7.0.6:
     dependencies:
       path-key: 3.1.1
       shebang-command: 2.0.0
@@ -4516,11 +4511,6 @@ snapshots:
       regexp-ast-analysis: 0.7.1
       scslre: 0.3.0
 
-  eslint-plugin-sort-keys-plus@1.4.0:
-    dependencies:
-      escape-string-regexp: 4.0.0
-      natural-compare: 1.4.0
-
   eslint-plugin-toml@0.11.1(eslint@9.15.0(jiti@2.4.0)):
     dependencies:
       debug: 4.3.7
@@ -4617,7 +4607,7 @@ snapshots:
       '@types/json-schema': 7.0.15
       ajv: 6.12.6
       chalk: 4.1.2
-      cross-spawn: 7.0.5
+      cross-spawn: 7.0.6
       debug: 4.3.7
       escape-string-regexp: 4.0.0
       eslint-scope: 8.2.0
@@ -4672,7 +4662,7 @@ snapshots:
 
   execa@5.1.1:
     dependencies:
-      cross-spawn: 7.0.5
+      cross-spawn: 7.0.6
       get-stream: 6.0.1
       human-signals: 2.1.0
       is-stream: 2.0.1
@@ -4684,7 +4674,7 @@ snapshots:
 
   execa@8.0.1:
     dependencies:
-      cross-spawn: 7.0.5
+      cross-spawn: 7.0.6
       get-stream: 8.0.1
       human-signals: 5.0.0
       is-stream: 3.0.0
@@ -4756,14 +4746,14 @@ snapshots:
 
   flat-cache@4.0.1:
     dependencies:
-      flatted: 3.3.1
+      flatted: 3.3.2
       keyv: 4.5.4
 
-  flatted@3.3.1: {}
+  flatted@3.3.2: {}
 
   foreground-child@3.3.0:
     dependencies:
-      cross-spawn: 7.0.5
+      cross-spawn: 7.0.6
       signal-exit: 4.1.0
 
   fs-minipass@2.1.0:
