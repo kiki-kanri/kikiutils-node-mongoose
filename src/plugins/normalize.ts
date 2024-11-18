@@ -17,7 +17,7 @@ const { get: lodashGet, set: lodashSet, unset: lodashUnset } = lodash;
  *
  * @param schema - The Mongoose schema to apply the plugin to.
  */
-export const mongooseNormalizePlugin = <S extends Schema>(schema: S) => {
+export function mongooseNormalizePlugin<S extends Schema>(schema: S) {
 	const toJSON = schema.get('toJSON');
 	const toJSONTransform = toJSON?.transform;
 	schema.set('toJSON', {
@@ -37,8 +37,8 @@ export const mongooseNormalizePlugin = <S extends Schema>(schema: S) => {
 			delete copiedRet.__v;
 			if (toJSONTransform && typeof toJSONTransform !== 'boolean') return toJSONTransform(doc, copiedRet, options);
 			return copiedRet;
-		}
+		},
 	});
-};
+}
 
 export default mongooseNormalizePlugin;

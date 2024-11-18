@@ -31,8 +31,8 @@ For extending the model with instance methods, statics, or virtuals, please refe
 1. Copy the `.env.example` file to `.env` and update the MONGODB_URI value.
 
 2. To run the project in development mode:
-	```bash
-	pnpm run dev
-	```
+  ```bash
+  pnpm run dev
+  ```
 
 Feel free to modify [./src/index.ts](./src/index.ts) to test different functionalities.

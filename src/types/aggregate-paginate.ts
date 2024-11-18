@@ -65,12 +65,14 @@ declare module 'mongoose' {
 		[customLabel: string]: T[] | number | boolean | null | undefined;
 	}
 
-	interface AggregatePaginateModel<RawDocType, QueryHelpers = {}, InstanceMethodsAndOverrides = {}> extends Model<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> {
-		aggregatePaginate<T>(query?: Aggregate<T[]>, options?: AggregatePaginateOptions, callback?: (err: any, result: AggregatePaginateResult<T>) => void): Promise<AggregatePaginateResult<T>>;
+	interface AggregatePaginateModel<RawDocType, QueryHelpers = object, InstanceMethodsAndOverrides = object> extends Model<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> {
+		aggregatePaginate: <T>(query?: Aggregate<T[]>, options?: AggregatePaginateOptions, callback?: (err: any, result: AggregatePaginateResult<T>) => void) => Promise<AggregatePaginateResult<T>>;
 	}
 }
 
 declare function mongooseAggregatePaginate(schema: Schema): void;
+
+/* eslint-disable-next-line ts/no-namespace */
 declare namespace mongooseAggregatePaginate {
 	const PREPAGINATION_PLACEHOLDER: string;
 	const aggregatePaginate: { options: AggregatePaginateOptions };

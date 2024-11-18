@@ -3,26 +3,33 @@ import { Schema } from 'mongoose';
 import type { DefaultType, IndexDirection, IndexOptions, Types } from 'mongoose';
 import type { Merge } from 'type-fest';
 
-import { createBaseSchemaBuilderFactory } from './base';
 import type { Readonlyable } from '../types/utils';
 
-type BaseProps = { type: Schema.Types.Decimal128 };
+import { createBaseSchemaBuilderFactory } from './base';
+
 export type ExtendDecimal128SchemaBuilder<Props extends BaseProps, ExtraOmitFields extends string> = Omit<Decimal128SchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
-type ToStringGetterSchema = { get: (value: Types.Decimal128) => string };
-type ToStringSetterSchema = { set: (value: { toString(): string }) => string };
+
+interface BaseProps {
+	type: Schema.Types.Decimal128;
+}
+
+interface ToStringGetterSchema {
+	get: (value: Types.Decimal128) => string;
+}
+
+interface ToStringSetterSchema {
+	set: (value: { toString: () => string }) => string;
+}
 
 export interface Decimal128SchemaBuilder<Props extends { type: Schema.Types.Decimal128 } = { type: Schema.Types.Decimal128 }, ExtraOmitFields extends string = never> {
 	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends Types.Decimal128>(value: T) => ExtendDecimal128SchemaBuilder<Merge<Props, { default: T }>, ExtraOmitFields>;
 	enum: <
 		T extends
-			| Readonlyable<Array<D | null>>
-			| {
-					message?: M;
-					values: Readonlyable<Array<D | null>>;
-			  }
-			| { [path: string]: D | null },
+		| Readonlyable<Array<D | null>>
+		| { message?: M; values: Readonlyable<Array<D | null>> }
+		| { [path: string]: D | null },
 		D extends Types.Decimal128,
-		M extends string
+		M extends string,
 	>(
 		value: T
 	) => ExtendDecimal128SchemaBuilder<Merge<Props, { enum: T }>, ExtraOmitFields>;
@@ -59,20 +66,25 @@ export interface Decimal128SchemaBuilder<Props extends { type: Schema.Types.Deci
 }
 
 const baseBuilderFactory = createBaseSchemaBuilderFactory(Schema.Types.Decimal128);
-export const decimal128SchemaBuilder = () => {
+
+export function decimal128SchemaBuilder() {
 	const schema: Record<string, any> = {};
 	const baseBuilder = baseBuilderFactory(schema);
 	return new Proxy(baseBuilder, {
 		get(target, key, receiver) {
 			if (key === 'setRoundAndToFixedSetter') {
 				return (places: number = 2, rounding: Decimal.Rounding = Decimal.ROUND_DOWN) => {
-					schema['set'] = (value: { toString(): string }) => new Decimal(value.toString()).toFixed(places, rounding);
+					schema.set = (value: { toString: () => string }) => new Decimal(value.toString()).toFixed(places, rounding);
 					return receiver;
 				};
 			}
 
-			if (key === 'setToStringGetter') return (schema['get'] = (value: Types.Decimal128) => value.toString()), receiver;
+			if (key === 'setToStringGetter') {
+				(schema.get = (value: Types.Decimal128) => value.toString());
+				return receiver;
+			}
+
 			return Reflect.get(target, key, receiver);
-		}
+		},
 	}) as Decimal128SchemaBuilder;
-};
+}

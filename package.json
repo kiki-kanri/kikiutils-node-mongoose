@@ -2,11 +2,47 @@
   "name": "@kikiutils/mongoose",
   "version": "2.1.0",
   "description": "A Mongoose plugin for enhanced JSON normalization and common schema creation, with built-in support for pagination and automatic Decimal128 conversion.",
-  "license": "MIT",
   "author": "kiki-kanri",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kiki-kanri/kikiutils-node-mongoose.git"
+  },
+  "keywords": [
+    "Decimal128",
+    "json",
+    "mongo",
+    "mongoose",
+    "normalization",
+    "pagination",
+    "plugin",
+    "schema"
+  ],
+  "exports": {
+    "./*": {
+      "types": "./*.d.ts",
+      "import": "./*.mjs",
+      "require": "./*.cjs"
+    },
+    "./_internals": {
+      "types": null,
+      "import": null,
+      "require": null
+    },
+    "./schema-builders": {
+      "types": "./schema-builders/index.d.ts",
+      "import": "./schema-builders/index.mjs",
+      "require": "./schema-builders/index.cjs"
+    },
+    "./types": {
+      "types": "./types/index.d.ts"
+    },
+    "./types/*": {
+      "types": "./types/*.d.ts"
+    }
+  },
+  "engines": {
+    "node": ">=18.12.1"
   },
   "scripts": {
     "build": "ts-project-builder ./src/constants.ts ./src/options.ts ./src/schema-builders/index.ts ./src/utils.ts --clean --preserve-modules",
@@ -24,7 +60,7 @@
   },
   "devDependencies": {
     "@kikiutils/changelogen": "^0.7.0",
-    "@kikiutils/eslint-config": "^0.3.0",
+    "@kikiutils/eslint-config": "^0.3.1",
     "@kikiutils/tsconfigs": "^3.0.2",
     "@types/jest": "^29.5.14",
     "@types/lodash": "^4.17.13",
@@ -33,41 +69,5 @@
     "ts-jest": "^29.2.5",
     "ts-project-builder": "^3.3.2",
     "tslib": "^2.8.1"
-  },
-  "keywords": [
-    "Decimal128",
-    "json",
-    "mongo",
-    "mongoose",
-    "normalization",
-    "pagination",
-    "plugin",
-    "schema"
-  ],
-  "engines": {
-    "node": ">=18.12.1"
-  },
-  "exports": {
-    "./*": {
-      "import": "./*.mjs",
-      "require": "./*.cjs",
-      "types": "./*.d.ts"
-    },
-    "./_internals": {
-      "import": null,
-      "require": null,
-      "types": null
-    },
-    "./schema-builders": {
-      "import": "./schema-builders/index.mjs",
-      "require": "./schema-builders/index.cjs",
-      "types": "./schema-builders/index.d.ts"
-    },
-    "./types": {
-      "types": "./types/index.d.ts"
-    },
-    "./types/*": {
-      "types": "./types/*.d.ts"
-    }
   }
 }

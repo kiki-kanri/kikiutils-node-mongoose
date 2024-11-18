@@ -15,7 +15,7 @@ describe('createBaseSchemaBuilderFactory', () => {
 		expect(createBaseSchemaBuilderFactory(String)().private.unique.nonRequired).toEqual({
 			private: true,
 			type: String,
-			unique: true
+			unique: true,
 		});
 	});
 
@@ -68,7 +68,7 @@ describe('createBaseSchemaBuilderFactory', () => {
 
 	it('should throw an error when using a symbol as a schema attribute', () => {
 		const schemaBuilder = createBaseSchemaBuilderFactory(Boolean)();
-		// @ts-expect-error
-		expect(() => schemaBuilder[Symbol()]).toThrow('Cannot use symbol as a schema attribute');
+		// @ts-expect-error Ignore this error.
+		expect(() => schemaBuilder[Symbol('test')]).toThrow('Cannot use symbol as a schema attribute');
 	});
 });

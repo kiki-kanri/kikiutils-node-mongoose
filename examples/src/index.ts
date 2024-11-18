@@ -1,8 +1,11 @@
+/* eslint-disable no-console */
+
 import { setCustomMongooseOptions } from '@kikiutils/mongoose/options';
 import s from '@kikiutils/mongoose/schema-builders';
 import { buildMongooseModel } from '@kikiutils/mongoose/utils';
 import { Schema } from 'mongoose';
 import type { ProjectionType, QueryOptions, Types } from 'mongoose';
+import { env } from 'node:process';
 import type { Except } from 'type-fest';
 
 // Load global types
@@ -16,7 +19,7 @@ import type {} from '@kikiutils/mongoose/types/data';
  * the actual project shouldn't have this line
  * (unless you want to handle it the same way as the default).
  */
-process.env.MONGODB_URI ||= 'mongodb://127.0.0.1:27017/kikiutils-mongoose-example?directConnection=true';
+env.MONGODB_URI ||= 'mongodb://127.0.0.1:27017/kikiutils-mongoose-example?directConnection=true';
 
 /**
  * Set custom mongoose options.
@@ -27,7 +30,7 @@ process.env.MONGODB_URI ||= 'mongodb://127.0.0.1:27017/kikiutils-mongoose-exampl
  * Please make sure to set it before using buildMongooseModel,
  * as it will not affect models that have already been built before setting it.
  */
-setCustomMongooseOptions('beforeModelBuild', (schema) => {
+setCustomMongooseOptions('beforeModelBuild', (_schema) => {
 	// console.log('building model with schema: ', schema);
 });
 
@@ -78,20 +81,20 @@ interface UserMethodsAndOverrides {
 
 interface UserModel extends BaseMongoosePaginateModel<User, UserMethodsAndOverrides> {
 	// Model static methods
-	findByAccount(account: string, projection?: ProjectionType<User> | null, options?: QueryOptions<User> | null): MongooseFindOneReturnType<User, UserDocument, {}, UserMethodsAndOverrides>;
+	findByAccount: (account: string, projection?: ProjectionType<User> | null, options?: QueryOptions<User> | null) => MongooseFindOneReturnType<User, UserDocument, object, UserMethodsAndOverrides>;
 }
 
-type UserDocument = MongooseHydratedDocument<User, UserMethodsAndOverrides>;
+export type UserDocument = MongooseHydratedDocument<User, UserMethodsAndOverrides>;
 
 // Define schema
 const userSchema = new Schema<User, UserModel, UserMethodsAndOverrides>({
 	account: s.string().maxlength(16).trim.unique.required,
-	// @ts-expect-error
+	// @ts-expect-error Ignore this error.
 	// Use setRoundAndToFixedSetter to round up on save and setToStringGetter to convert to string on get
 	balance: s.decimal128().setRoundAndToFixedSetter().setToStringGetter.required,
 	email: s.string().lowercase.trim.nonRequired,
 	enabled: s.boolean().default(false).required,
-	password: s.string().private.required
+	password: s.string().private.required,
 });
 
 // Set methods
@@ -113,7 +116,7 @@ const user = await UserModel.create({
 	account: Array.from({ length: 8 }, () => String.fromCharCode((Math.random() > 0.5 ? 97 : 65) + Math.floor(Math.random() * 26))).join(''),
 	balance: '1000.501',
 	email: 'example@example.com',
-	password: 'test-password'
+	password: 'test-password',
 });
 
 console.log('created user: ', user);
@@ -129,7 +132,7 @@ console.log('verifying user password');
 console.log('verified user password: ', user.verifyPassword('test-password'));
 
 // Define user log data interface
-interface UserLogData extends BaseMongooseModelData<true, false> {
+export interface UserLogData extends BaseMongooseModelData<true, false> {
 	content: string;
 	type: number;
 	user: Partial<UserData>;
@@ -140,14 +143,14 @@ interface UserLog extends BaseMongooseDocType<Except<UserLogData, 'user'>, true,
 	user: Types.Decimal128;
 }
 
-type UserLogDocument = MongooseHydratedDocument<UserLog>;
-type UserLogModel = BaseMongoosePaginateModel<UserLog>;
+export type UserLogDocument = MongooseHydratedDocument<UserLog>;
+export type UserLogModel = BaseMongoosePaginateModel<UserLog>;
 
 // Define schema
 const userLogSchema = new Schema<UserLog, UserLogModel>({
 	content: s.string().trim.required,
 	type: s.number().required,
-	user: s.ref('User').required
+	user: s.ref('User').required,
 });
 
 // Build model
@@ -158,7 +161,7 @@ console.log('creating user log');
 const userLog = await UserLogModel.create({
 	content: 'test content',
 	type: 1,
-	user: user._id
+	user: user._id,
 });
 
 console.log('created user log: ', userLog);

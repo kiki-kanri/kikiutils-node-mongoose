@@ -1,24 +1,25 @@
 import type { DefaultType, IndexDirection, IndexOptions, NumberSchemaDefinition } from 'mongoose';
 import type { Merge } from 'type-fest';
 
-import { createBaseSchemaBuilderFactory } from './base';
 import type { Readonlyable } from '../types/utils';
 
-type BaseProps = { type: NumberSchemaDefinition };
+import { createBaseSchemaBuilderFactory } from './base';
+
 export type ExtendNumberSchemaBuilder<Props extends BaseProps, ExtraOmitFields extends string> = Omit<NumberSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
+
+interface BaseProps {
+	type: NumberSchemaDefinition;
+}
 
 export interface NumberSchemaBuilder<Props extends { type: NumberSchemaDefinition } = { type: NumberSchemaDefinition }, ExtraOmitFields extends string = never> {
 	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends number>(value: T) => ExtendNumberSchemaBuilder<Merge<Props, { default: T }>, ExtraOmitFields>;
 	enum: <
 		T extends
-			| Readonlyable<Array<N | null>>
-			| {
-					message?: M;
-					values: Readonlyable<Array<N | null>>;
-			  }
-			| { [path: string]: N | null },
+		| Readonlyable<Array<N | null>>
+		| { message?: M; values: Readonlyable<Array<N | null>> }
+		| { [path: string]: N | null },
 		M extends string,
-		N extends number
+		N extends number,
 	>(
 		value: T
 	) => ExtendNumberSchemaBuilder<Merge<Props, { enum: T }>, ExtraOmitFields>;

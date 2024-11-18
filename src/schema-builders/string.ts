@@ -1,26 +1,30 @@
 import type { DefaultType, IndexDirection, IndexOptions, StringSchemaDefinition } from 'mongoose';
-import net from 'net';
+import net from 'node:net';
 import type { Merge } from 'type-fest';
 
-import { createBaseSchemaBuilderFactory } from './base';
 import type { Readonlyable } from '../types/utils';
 
-type BaseProps = { type: StringSchemaDefinition };
+import { createBaseSchemaBuilderFactory } from './base';
+
 export type ExtendStringSchemaBuilder<Props extends BaseProps, ExtraOmitFields extends string> = Omit<StringSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
-type IPSchema<T extends string> = { trim: true; validate: { message: T; validator: (value: string) => boolean } };
+
+interface BaseProps {
+	type: StringSchemaDefinition;
+}
+interface IPSchema<T extends string> {
+	trim: true;
+	validate: { message: T; validator: (value: string) => boolean };
+}
 
 export interface StringSchemaBuilder<Props extends { type: StringSchemaDefinition } = { type: StringSchemaDefinition }, ExtraOmitFields extends string = never> {
 	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends string>(value: T) => ExtendStringSchemaBuilder<Merge<Props, { default: T }>, ExtraOmitFields>;
 	enum: <
 		T extends
-			| Readonlyable<Array<S | null>>
-			| {
-					message?: M;
-					values: Readonlyable<Array<S | null>>;
-			  }
-			| { [path: string]: S | null },
+		| Readonlyable<Array<S | null>>
+		| { message?: M; values: Readonlyable<Array<S | null>> }
+		| { [path: string]: S | null },
 		M extends string,
-		S extends string
+		S extends string,
 	>(
 		value: T
 	) => ExtendStringSchemaBuilder<Merge<Props, { enum: T }>, ExtraOmitFields>;
@@ -72,7 +76,8 @@ export interface StringSchemaBuilder<Props extends { type: StringSchemaDefinitio
 const baseBuilderFactory = createBaseSchemaBuilderFactory(String);
 const defaultIPv4ValidateMessage = '`{VALUE}` is not a valid IPv4 address for path `{PATH}`.';
 const defaultIPv6ValidateMessage = '`{VALUE}` is not a valid IPv6 address for path `{PATH}`.';
-export const stringSchemaBuilder = () => {
+
+export function stringSchemaBuilder() {
 	const schema: Record<string, any> = {};
 	const baseBuilder = baseBuilderFactory(schema);
 	return new Proxy(baseBuilder, {
@@ -93,8 +98,14 @@ export const stringSchemaBuilder = () => {
 				};
 			}
 
-			if (key === 'length') return (value: any) => ((schema['maxlength'] = schema['minlength'] = value), receiver);
+			if (key === 'length') {
+				return (value: any) => {
+					(schema.maxlength = schema.minlength = value);
+					return receiver;
+				};
+			}
+
 			return Reflect.get(target, key, receiver);
-		}
+		},
 	}) as StringSchemaBuilder;
-};
+}

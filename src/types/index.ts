@@ -3,8 +3,9 @@ import type { AggregatePaginateModel, Connection, HydratedDocument, PaginateMode
 export type {} from './aggregate-paginate';
 export type {} from './paginate';
 
-// @ts-expect-error
-export interface BaseModelStatics<RawDocType, InstanceMethodsAndOverrides = {}, QueryHelpers = {}> {}
+// @ts-expect-error Ignore this error.
+// eslint-disable-next-line unused-imports/no-unused-vars
+export interface BaseModelStatics<RawDocType, InstanceMethodsAndOverrides = object, QueryHelpers = object> {}
 
 export interface MongooseConnections {
 	default?: Connection;
@@ -22,9 +23,7 @@ declare global {
 	 * @template CreatedAtField - A boolean flag indicating whether the `createdAt` field should be included.
 	 * @template UpdatedAtField - A boolean flag indicating whether the `updatedAt` field should be included.
 	 */
-	type BaseMongooseDocType<T, CreatedAtField extends boolean = true, UpdatedAtField extends boolean = true> = Omit<T, 'createdAt' | 'id' | 'updatedAt'> &
-		(CreatedAtField extends true ? { createdAt: Date } : {}) &
-		(UpdatedAtField extends true ? { updatedAt: Date } : {});
+	type BaseMongooseDocType<T, CreatedAtField extends boolean = true, UpdatedAtField extends boolean = true> = Omit<T, 'createdAt' | 'id' | 'updatedAt'> & (CreatedAtField extends true ? { createdAt: Date } : object) & (UpdatedAtField extends true ? { updatedAt: Date } : object);
 
 	/**
 	 * Type definition for a Mongoose model with pagination and aggregation capabilities.
@@ -36,9 +35,7 @@ declare global {
 	 * @template InstanceMethodsAndOverrides - Optional type parameter for instance methods and overrides.
 	 * @template QueryHelpers - Optional type parameter for additional query helper methods.
 	 */
-	type BaseMongoosePaginateModel<RawDocType, InstanceMethodsAndOverrides = {}, QueryHelpers = {}> = AggregatePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> &
-		PaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> &
-		BaseModelStatics<RawDocType, InstanceMethodsAndOverrides, QueryHelpers>;
+	type BaseMongoosePaginateModel<RawDocType, InstanceMethodsAndOverrides = object, QueryHelpers = object> = AggregatePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> & PaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> & BaseModelStatics<RawDocType, InstanceMethodsAndOverrides, QueryHelpers>;
 
 	/**
 	 * Type definition for a Mongoose document or ObjectId.
@@ -65,7 +62,7 @@ declare global {
 	 * @template QueryHelpers - Optional type parameter for additional query helper methods.
 	 * @template InstanceMethodsAndOverrides - Optional type parameter for specifying custom instance methods and overrides on the document.
 	 */
-	type MongooseFindOneReturnType<RawDocType, DocType, QueryHelpers = {}, InstanceMethodsAndOverrides = {}> = QueryWithHelpers<DocType | null, DocType, QueryHelpers, RawDocType, 'findOne', InstanceMethodsAndOverrides>;
+	type MongooseFindOneReturnType<RawDocType, DocType, QueryHelpers = object, InstanceMethodsAndOverrides = object> = QueryWithHelpers<DocType | null, DocType, QueryHelpers, RawDocType, 'findOne', InstanceMethodsAndOverrides>;
 
 	/**
 	 * Type definition for a hydrated Mongoose document.
@@ -79,5 +76,5 @@ declare global {
 	 * @template InstanceMethodsAndOverrides - Optional type parameter for instance methods and overrides.
 	 * @template QueryHelpers - Optional type parameter for additional query helper methods.
 	 */
-	type MongooseHydratedDocument<DocType, InstanceMethodsAndOverrides = {}, QueryHelpers = {}> = HydratedDocument<DocType, InstanceMethodsAndOverrides, QueryHelpers>;
+	type MongooseHydratedDocument<DocType, InstanceMethodsAndOverrides = object, QueryHelpers = object> = HydratedDocument<DocType, InstanceMethodsAndOverrides, QueryHelpers>;
 }

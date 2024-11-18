@@ -1,13 +1,13 @@
 {
   "extends": "@kikiutils/tsconfigs/esnext/es2022.json",
   "compilerOptions": {
-    "declaration": true,
-    "declarationDir": "./dist",
-    "emitDeclarationOnly": true,
     "paths": {
       "mongoose-aggregate-paginate-v2": ["./src/types/aggregate-paginate"],
       "mongoose-paginate-v2": ["./src/types/paginate"]
-    }
+    },
+    "declaration": true,
+    "declarationDir": "./dist",
+    "emitDeclarationOnly": true
   },
   "include": ["./src"]
 }

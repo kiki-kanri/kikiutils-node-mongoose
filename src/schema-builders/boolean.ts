@@ -3,10 +3,13 @@ import type { Merge } from 'type-fest';
 
 import { createBaseSchemaBuilderFactory } from './base';
 
-type BaseProps = { type: BooleanSchemaDefinition };
-export type ExtendBooleanSchemaBuilder<Props extends BaseProps, ExtraOmitFields extends string> = Omit<BooleanSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
+export type ExtendBooleanSchemaBuilder<Props extends BaseBooleanSchemaProps, ExtraOmitFields extends string> = Omit<BooleanSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
 
-export interface BooleanSchemaBuilder<Props extends BaseProps = BaseProps, ExtraOmitFields extends string = never> {
+export interface BaseBooleanSchemaProps {
+	type: BooleanSchemaDefinition;
+}
+
+export interface BooleanSchemaBuilder<Props extends BaseBooleanSchemaProps = BaseBooleanSchemaProps, ExtraOmitFields extends string = never> {
 	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends boolean>(value: T) => ExtendBooleanSchemaBuilder<Merge<Props, { default: T }>, ExtraOmitFields>;
 	index: <T extends boolean | IndexDirection | IndexOptions>(value: T) => ExtendBooleanSchemaBuilder<Merge<Props, { index: T }>, ExtraOmitFields>;
 	nonRequired: Props;

@@ -12,8 +12,8 @@ describe('stringSchemaBuilder', () => {
 			type: String,
 			validate: {
 				message: '`{VALUE}` is not a valid IPv4 address for path `{PATH}`.',
-				validator: expect.any(Function)
-			}
+				validator: expect.any(Function),
+			},
 		});
 
 		expect(schema.validate.validator('192.168.1.1')).toBe(true);
@@ -30,8 +30,8 @@ describe('stringSchemaBuilder', () => {
 			type: String,
 			validate: {
 				message: '`{VALUE}` is not a valid IPv6 address for path `{PATH}`.',
-				validator: expect.any(Function)
-			}
+				validator: expect.any(Function),
+			},
 		});
 
 		expect(schema.validate.validator('2001:0db8:85a3:0000:0000:8a2e:0370:7334')).toBe(true);
@@ -45,7 +45,7 @@ describe('stringSchemaBuilder', () => {
 		expect(stringSchemaBuilder().length(10).nonRequired).toEqual({
 			maxlength: 10,
 			minlength: 10,
-			type: String
+			type: String,
 		});
 	});
 });

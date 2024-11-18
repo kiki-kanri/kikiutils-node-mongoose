@@ -1,6 +1,6 @@
 {
-  "private": true,
   "type": "module",
+  "private": true,
   "scripts": {
     "dev": "tsx watch --env-file=./.env ./src/index.ts"
   },

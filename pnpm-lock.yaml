@@ -31,8 +31,8 @@ importers:
         specifier: ^0.7.0
         version: 0.7.0
       '@kikiutils/eslint-config':
-        specifier: ^0.3.0
-        version: 0.3.0(@typescript-eslint/utils@8.14.0(eslint@9.15.0(jiti@2.4.0))(typescript@5.6.3))(@vue/compiler-sfc@3.5.13)(jiti@2.4.0)(typescript@5.6.3)
+        specifier: ^0.3.1
+        version: 0.3.1(@typescript-eslint/utils@8.14.0(eslint@9.15.0(jiti@2.4.0))(typescript@5.6.3))(@vue/compiler-sfc@3.5.13)(jiti@2.4.0)(typescript@5.6.3)
       '@kikiutils/tsconfigs':
         specifier: ^3.0.2
         version: 3.0.2
@@ -610,8 +610,8 @@ packages:
     resolution: {integrity: sha512-eGf5owO3OnT4GaR3/ydbPuPjA8TwKN1vE1G3ImveVzENLTZXnD7L3S20iZjsiQuKF68d2UwQ6ng3nefc+dYPMQ==}
     hasBin: true
 
-  '@kikiutils/eslint-config@0.3.0':
-    resolution: {integrity: sha512-ZG96RsUhKYjiNnPJzKAR3soyZn/C44E+glvsm324RLpP7jgYSaG4s+63p94i5TNAYUiucOKXA1Y75zsFavU2aA==}
+  '@kikiutils/eslint-config@0.3.1':
+    resolution: {integrity: sha512-tpB6AHuHFzKs3wc3juGWvcRCy9X19hFtKvwsZfsZjPBiv7MNDUAShXMW71iywC8tzAyZQYxztzl993zX3i6s7g==}
     engines: {node: '>=18.12.1'}
 
   '@kikiutils/tsconfigs@3.0.2':
@@ -3633,7 +3633,7 @@ snapshots:
     transitivePeerDependencies:
       - magicast
 
-  '@kikiutils/eslint-config@0.3.0(@typescript-eslint/utils@8.14.0(eslint@9.15.0(jiti@2.4.0))(typescript@5.6.3))(@vue/compiler-sfc@3.5.13)(jiti@2.4.0)(typescript@5.6.3)':
+  '@kikiutils/eslint-config@0.3.1(@typescript-eslint/utils@8.14.0(eslint@9.15.0(jiti@2.4.0))(typescript@5.6.3))(@vue/compiler-sfc@3.5.13)(jiti@2.4.0)(typescript@5.6.3)':
     dependencies:
       '@antfu/eslint-config': 3.9.1(@typescript-eslint/utils@8.14.0(eslint@9.15.0(jiti@2.4.0))(typescript@5.6.3))(@vue/compiler-sfc@3.5.13)(eslint@9.15.0(jiti@2.4.0))(typescript@5.6.3)
       eslint: 9.15.0(jiti@2.4.0)

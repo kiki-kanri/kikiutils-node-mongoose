@@ -1,10 +1,11 @@
 import mongoose, { Types } from 'mongoose';
 import mongooseAggregatePaginate from 'mongoose-aggregate-paginate-v2';
 import mongoosePaginate from 'mongoose-paginate-v2';
+import { env } from 'node:process';
 
 import { customMongooseOptions } from './_internals';
 import { mongooseConnections } from './constants';
-import { setCustomMongooseOptions } from './options';
+import type { setCustomMongooseOptions } from './options';
 import mongooseNormalizePlugin from './plugins/normalize';
 import type { BuildMongooseModelOptions } from './types/options';
 
@@ -37,18 +38,18 @@ export type DoNotRemoveOrUseThisType = typeof setCustomMongooseOptions;
  *
  * @returns The created Mongoose model.
  */
-export function buildMongooseModel<DocType, Model extends BaseMongoosePaginateModel<DocType, InstanceMethodsAndOverrides, QueryHelpers>, InstanceMethodsAndOverrides = {}, QueryHelpers = {}>(
+export function buildMongooseModel<DocType, Model extends BaseMongoosePaginateModel<DocType, InstanceMethodsAndOverrides, QueryHelpers>, InstanceMethodsAndOverrides = object, QueryHelpers = object>(
 	collection: string,
 	name: string,
 	schema: mongoose.Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>,
-	options?: BuildMongooseModelOptions
+	options?: BuildMongooseModelOptions,
 ) {
 	if (options?.enableNormalizePlugin !== false) schema.plugin(mongooseNormalizePlugin);
 	schema.plugin(mongooseAggregatePaginate);
 	schema.plugin(mongoosePaginate);
 	schema.set('timestamps', options?.timestamps ?? true);
 	customMongooseOptions.beforeModelBuild?.(schema);
-	return (options?.connection || mongooseConnections.default || (mongooseConnections.default = mongoose.createConnection(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017'))).model<DocType, Model, QueryHelpers>(name, schema, collection);
+	return (options?.connection || mongooseConnections.default || (mongooseConnections.default = mongoose.createConnection(env.MONGODB_URI || 'mongodb://127.0.0.1:27017'))).model<DocType, Model, QueryHelpers>(name, schema, collection);
 }
 
 /**
@@ -71,7 +72,7 @@ export function buildMongooseModel<DocType, Model extends BaseMongoosePaginateMo
 export async function mongooseDocumentOrObjectIdToDocument<D extends MongooseHydratedDocument<DocType, InstanceMethodsAndOverrides, QueryHelpers>, DocType, InstanceMethodsAndOverrides, QueryHelpers>(
 	documentOrObjectId: MongooseDocumentOrObjectId<D>,
 	model: BaseMongoosePaginateModel<DocType, InstanceMethodsAndOverrides, QueryHelpers>,
-	selectFields?: string[]
+	selectFields?: string[],
 ): Promise<D | null> {
 	if (typeof documentOrObjectId === 'string' || documentOrObjectId instanceof Types.ObjectId) return (await model.findById(documentOrObjectId).select(selectFields || [])) as D | null;
 	return documentOrObjectId;

@@ -1,24 +1,25 @@
-import type { DefaultType, DateSchemaDefinition, IndexDirection, IndexOptions } from 'mongoose';
+import type { DateSchemaDefinition, DefaultType, IndexDirection, IndexOptions } from 'mongoose';
 import type { Merge } from 'type-fest';
 
-import { createBaseSchemaBuilderFactory } from './base';
 import type { Readonlyable } from '../types/utils';
 
-type BaseProps = { type: DateSchemaDefinition };
+import { createBaseSchemaBuilderFactory } from './base';
+
 export type ExtendDateSchemaBuilder<Props extends BaseProps, ExtraOmitFields extends string> = Omit<DateSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
+
+interface BaseProps {
+	type: DateSchemaDefinition;
+}
 
 export interface DateSchemaBuilder<Props extends { type: DateSchemaDefinition } = { type: DateSchemaDefinition }, ExtraOmitFields extends string = never> {
 	default: <T extends DefaultType<D> | ((this: any, doc: any) => DefaultType<D>) | null, D extends NativeDate>(value: T) => ExtendDateSchemaBuilder<Merge<Props, { default: T }>, ExtraOmitFields>;
 	enum: <
 		T extends
-			| Readonlyable<Array<D | null>>
-			| {
-					message?: M;
-					values: Readonlyable<Array<D | null>>;
-			  }
-			| { [path: string]: D | null },
+		| Readonlyable<Array<D | null>>
+		| { message?: M; values: Readonlyable<Array<D | null>> }
+		| { [path: string]: D | null },
 		D extends NativeDate,
-		M extends string
+		M extends string,
 	>(
 		value: T
 	) => ExtendDateSchemaBuilder<Merge<Props, { enum: T }>, ExtraOmitFields>;

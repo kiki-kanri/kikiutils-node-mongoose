@@ -1,4 +1,5 @@
 import { model, Schema } from 'mongoose';
+
 import { refSchemaBuilder } from '../../src/schema-builders/ref';
 
 describe('refSchemaBuilder', () => {
