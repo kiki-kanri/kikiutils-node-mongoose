@@ -47,7 +47,9 @@
   "scripts": {
     "build": "ts-project-builder ./src/constants.ts ./src/options.ts ./src/schema-builders/index.ts ./src/utils.ts --clean --preserve-modules",
     "bumplog": "changelogen --bump",
-    "release": "pnpm run build && pnpm run test && changelogen --push --release && sh ./build-and-publish.sh",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "release": "pnpm run lint && pnpm run build && pnpm run test && changelogen --push --release && sh ./build-and-publish.sh",
     "test": "jest --coverage"
   },
   "dependencies": {
