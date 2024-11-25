@@ -8,7 +8,7 @@ export type {} from './paginate';
 export interface BaseModelStatics<RawDocType, InstanceMethodsAndOverrides = object, QueryHelpers = object> {}
 
 export interface MongooseConnections {
-	default?: Connection;
+    default?: Connection;
 }
 
 declare global {

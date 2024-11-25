@@ -9,7 +9,7 @@
  * @template UpdatedAtField - A boolean flag indicating whether the `updatedAt` field should be included.
  */
 interface LocalBaseMongooseModelData<CreatedAtField extends boolean = true, UpdatedAtField extends boolean = true> extends LocalWithTimestampFieldsData<CreatedAtField, UpdatedAtField> {
-	id: string;
+    id: string;
 }
 
 /**
@@ -23,8 +23,8 @@ interface LocalBaseMongooseModelData<CreatedAtField extends boolean = true, Upda
  * @template UpdatedAt - A boolean flag indicating whether the `updatedAt` field should be included.
  */
 interface LocalWithTimestampFieldsData<CreatedAt extends boolean = true, UpdatedAt extends boolean = true> {
-	createdAt: CreatedAt extends true ? string : never;
-	updatedAt: UpdatedAt extends true ? string : never;
+    createdAt: CreatedAt extends true ? string : never;
+    updatedAt: UpdatedAt extends true ? string : never;
 }
 
 /**

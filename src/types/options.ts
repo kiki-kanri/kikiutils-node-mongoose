@@ -12,41 +12,41 @@ export type DoNotRemoveOrUseThisType = typeof buildMongooseModel;
  * connection, enabling the normalize plugin, and configuring timestamp fields.
  */
 export interface BuildMongooseModelOptions {
-	/**
-	 * The Mongoose connection to be used for the model.
-	 *
-	 * This is an optional setting that allows specifying a custom connection
-	 * for the model.
-	 */
-	connection?: Connection;
+    /**
+     * The Mongoose connection to be used for the model.
+     *
+     * This is an optional setting that allows specifying a custom connection
+     * for the model.
+     */
+    connection?: Connection;
 
-	/**
-	 * Flag to enable or disable the normalize plugin.
-	 *
-	 * This flag indicates whether the normalize plugin should be enabled.
-	 * The default value is `true`.
-	 *
-	 * @default true
-	 */
-	enableNormalizePlugin?: boolean;
+    /**
+     * Flag to enable or disable the normalize plugin.
+     *
+     * This flag indicates whether the normalize plugin should be enabled.
+     * The default value is `true`.
+     *
+     * @default true
+     */
+    enableNormalizePlugin?: boolean;
 
-	/**
-	 * Configuration for Mongoose timestamps.
-	 *
-	 * This option allows enabling or disabling timestamps, or providing a
-	 * custom timestamp configuration using `SchemaTimestampsConfig`.
-	 * The default value is `true`.
-	 *
-	 * @default true
-	 */
-	timestamps?: SchemaTimestampsConfig | boolean;
+    /**
+     * Configuration for Mongoose timestamps.
+     *
+     * This option allows enabling or disabling timestamps, or providing a
+     * custom timestamp configuration using `SchemaTimestampsConfig`.
+     * The default value is `true`.
+     *
+     * @default true
+     */
+    timestamps?: SchemaTimestampsConfig | boolean;
 }
 
 export interface CustomMongooseOptions {
-	/**
-	 * A function that will be executed before the final build when using {@link buildMongooseModel}.
-	 */
-	beforeModelBuild?: <DocType, Model extends BaseMongoosePaginateModel<DocType, InstanceMethodsAndOverrides, QueryHelpers>, InstanceMethodsAndOverrides = object, QueryHelpers = object>(
-		schema: Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>
-	) => void;
+    /**
+     * A function that will be executed before the final build when using {@link buildMongooseModel}.
+     */
+    beforeModelBuild?: <DocType, Model extends BaseMongoosePaginateModel<DocType, InstanceMethodsAndOverrides, QueryHelpers>, InstanceMethodsAndOverrides = object, QueryHelpers = object>(
+        schema: Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>
+    ) => void;
 }

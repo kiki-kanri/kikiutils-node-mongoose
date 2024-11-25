@@ -8,79 +8,79 @@
 import type { AggregatePaginateOptions, Schema } from 'mongoose';
 
 declare module 'mongoose' {
-	interface AggregateCustomLabels<T = boolean | string | undefined> {
-		docs?: T;
-		hasNextPage?: T;
-		hasPrevPage?: T;
-		limit?: T;
-		meta?: T;
-		nextPage?: T;
-		page?: T;
-		pagingCounter?: T;
-		prevPage?: T;
-		totalDocs?: T;
-		totalPages?: T;
-	}
+    interface AggregateCustomLabels<T = boolean | string | undefined> {
+        docs?: T;
+        hasNextPage?: T;
+        hasPrevPage?: T;
+        limit?: T;
+        meta?: T;
+        nextPage?: T;
+        page?: T;
+        pagingCounter?: T;
+        prevPage?: T;
+        totalDocs?: T;
+        totalPages?: T;
+    }
 
-	interface AggregatePaginateOptions {
-		allowDiskUse?: boolean;
-		countQuery?: object;
-		customLabels?: AggregateCustomLabels;
-		limit?: number;
-		offset?: number;
-		page?: number;
+    interface AggregatePaginateOptions {
+        allowDiskUse?: boolean;
+        countQuery?: object;
+        customLabels?: AggregateCustomLabels;
+        limit?: number;
+        offset?: number;
+        page?: number;
 
-		/**
-		 *  If pagination is set to `false`, it will return all docs without adding limit condition.
-		 *
-		 * @default true
-		 */
-		pagination?: boolean;
-		sort?: object | string;
-		useFacet?: boolean;
-	}
+        /**
+         *  If pagination is set to `false`, it will return all docs without adding limit condition.
+         *
+         * @default true
+         */
+        pagination?: boolean;
+        sort?: object | string;
+        useFacet?: boolean;
+    }
 
-	interface AggregatePaginateQueryPopulateOptions {
-		/** optional query conditions to match */
-		match?: any;
-		/** optional model to use for population */
-		model?: Model<any> | string;
-		/** optional query options like sort, limit, etc */
-		options?: any;
-		/** space delimited path(s) to populate */
-		path: string;
-		/** deep populate */
-		populate?: AggregatePaginateQueryPopulateOptions | AggregatePaginateQueryPopulateOptions[];
-		/** optional fields to select */
-		select?: any;
-	}
+    interface AggregatePaginateQueryPopulateOptions {
+        /** optional query conditions to match */
+        match?: any;
+        /** optional model to use for population */
+        model?: Model<any> | string;
+        /** optional query options like sort, limit, etc */
+        options?: any;
+        /** space delimited path(s) to populate */
+        path: string;
+        /** deep populate */
+        populate?: AggregatePaginateQueryPopulateOptions | AggregatePaginateQueryPopulateOptions[];
+        /** optional fields to select */
+        select?: any;
+    }
 
-	interface AggregatePaginateResult<T> {
-		[customLabel: string]: T[] | boolean | null | number | undefined;
-		docs: T[];
-		hasNextPage: boolean;
-		hasPrevPage: boolean;
-		limit: number;
-		meta?: any;
-		nextPage?: null | number;
-		page?: number;
-		pagingCounter: number;
-		prevPage?: null | number;
-		totalDocs: number;
-		totalPages: number;
-	}
+    interface AggregatePaginateResult<T> {
+        [customLabel: string]: T[] | boolean | null | number | undefined;
+        docs: T[];
+        hasNextPage: boolean;
+        hasPrevPage: boolean;
+        limit: number;
+        meta?: any;
+        nextPage?: null | number;
+        page?: number;
+        pagingCounter: number;
+        prevPage?: null | number;
+        totalDocs: number;
+        totalPages: number;
+    }
 
-	interface AggregatePaginateModel<RawDocType, QueryHelpers = object, InstanceMethodsAndOverrides = object> extends Model<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> {
-		aggregatePaginate: <T>(query?: Aggregate<T[]>, options?: AggregatePaginateOptions, callback?: (err: any, result: AggregatePaginateResult<T>) => void) => Promise<AggregatePaginateResult<T>>;
-	}
+    interface AggregatePaginateModel<RawDocType, QueryHelpers = object, InstanceMethodsAndOverrides = object> extends Model<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> {
+        aggregatePaginate: <T>(query?: Aggregate<T[]>, options?: AggregatePaginateOptions, callback?: (err: any, result: AggregatePaginateResult<T>) => void) => Promise<AggregatePaginateResult<T>>;
+    }
 }
 
 declare function mongooseAggregatePaginate(schema: Schema): void;
 
 // eslint-disable-next-line ts/no-namespace
 declare namespace mongooseAggregatePaginate {
-	const PREPAGINATION_PLACEHOLDER: string;
-	const aggregatePaginate: { options: AggregatePaginateOptions };
+    const PREPAGINATION_PLACEHOLDER: string;
+    const aggregatePaginate: { options: AggregatePaginateOptions };
 }
 
 export default mongooseAggregatePaginate;

@@ -14,13 +14,13 @@ export * from './ref';
 export * from './string';
 
 export const schemaBuilders = {
-	boolean: booleanSchemaBuilder,
-	date: dateSchemaBuilder,
-	decimal128: decimal128SchemaBuilder,
-	number: numberSchemaBuilder,
-	objectId: objectIdSchemaBuilder,
-	ref: refSchemaBuilder,
-	string: stringSchemaBuilder,
+    boolean: booleanSchemaBuilder,
+    date: dateSchemaBuilder,
+    decimal128: decimal128SchemaBuilder,
+    number: numberSchemaBuilder,
+    objectId: objectIdSchemaBuilder,
+    ref: refSchemaBuilder,
+    string: stringSchemaBuilder,
 };
 
 export default schemaBuilders;
