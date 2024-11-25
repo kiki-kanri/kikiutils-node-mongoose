@@ -77,7 +77,7 @@ declare module 'mongoose' {
 
 declare function mongooseAggregatePaginate(schema: Schema): void;
 
-/* eslint-disable-next-line ts/no-namespace */
+// eslint-disable-next-line ts/no-namespace
 declare namespace mongooseAggregatePaginate {
 	const PREPAGINATION_PLACEHOLDER: string;
 	const aggregatePaginate: { options: AggregatePaginateOptions };

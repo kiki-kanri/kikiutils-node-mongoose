@@ -113,7 +113,7 @@ declare module 'mongoose' {
 
 declare function _(schema: Schema): void;
 
-/* eslint-disable-next-line ts/no-namespace */
+// eslint-disable-next-line ts/no-namespace
 declare namespace _ {
 	const paginate: { options: PaginateOptions };
 	const paginateSubDocs: { options: PaginateOptions };
