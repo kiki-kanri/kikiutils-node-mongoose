@@ -69,7 +69,19 @@ declare global {
      * @template QueryHelpers - Optional type parameter for additional query helper methods.
      * @template InstanceMethodsAndOverrides - Optional type parameter for specifying custom instance methods and overrides on the document.
      */
-    type MongooseFindOneReturnType<RawDocType, DocType, QueryHelpers = object, InstanceMethodsAndOverrides = object> = QueryWithHelpers<DocType | null, DocType, QueryHelpers, RawDocType, 'findOne', InstanceMethodsAndOverrides>;
+    type MongooseFindOneReturnType<
+        RawDocType,
+        DocType,
+        QueryHelpers = object,
+        InstanceMethodsAndOverrides = object,
+    > = QueryWithHelpers<
+        DocType | null,
+        DocType,
+        QueryHelpers,
+        RawDocType,
+        'findOne',
+        InstanceMethodsAndOverrides
+    >;
 
     /**
      * Type definition for a hydrated Mongoose document.

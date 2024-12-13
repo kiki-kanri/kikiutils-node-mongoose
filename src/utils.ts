@@ -38,7 +38,12 @@ export type DoNotRemoveOrUseThisType = typeof setCustomMongooseOptions;
  *
  * @returns The created Mongoose model.
  */
-export function buildMongooseModel<DocType, Model extends BaseMongoosePaginateModel<DocType, InstanceMethodsAndOverrides, QueryHelpers>, InstanceMethodsAndOverrides = object, QueryHelpers = object>(
+export function buildMongooseModel<
+    DocType,
+    Model extends BaseMongoosePaginateModel<DocType, InstanceMethodsAndOverrides, QueryHelpers>,
+    InstanceMethodsAndOverrides = object,
+    QueryHelpers = object,
+>(
     collection: string,
     name: string,
     schema: mongoose.Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>,
@@ -69,7 +74,12 @@ export function buildMongooseModel<DocType, Model extends BaseMongoosePaginateMo
  *
  * @returns The corresponding document or null if not found.
  */
-export async function mongooseDocumentOrObjectIdToDocument<D extends MongooseHydratedDocument<DocType, InstanceMethodsAndOverrides, QueryHelpers>, DocType, InstanceMethodsAndOverrides, QueryHelpers>(
+export async function mongooseDocumentOrObjectIdToDocument<
+    D extends MongooseHydratedDocument<DocType, InstanceMethodsAndOverrides, QueryHelpers>,
+    DocType,
+    InstanceMethodsAndOverrides,
+    QueryHelpers,
+>(
     documentOrObjectId: MongooseDocumentOrObjectId<D>,
     model: BaseMongoosePaginateModel<DocType, InstanceMethodsAndOverrides, QueryHelpers>,
     selectFields?: string[],

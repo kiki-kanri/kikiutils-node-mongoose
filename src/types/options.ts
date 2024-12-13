@@ -50,7 +50,12 @@ export interface CustomMongooseOptions {
     /**
      * A function that will be executed before the final build when using {@link buildMongooseModel}.
      */
-    beforeModelBuild?: <DocType, Model extends BaseMongoosePaginateModel<DocType, InstanceMethodsAndOverrides, QueryHelpers>, InstanceMethodsAndOverrides = object, QueryHelpers = object>(
+    beforeModelBuild?: <
+        DocType,
+        Model extends BaseMongoosePaginateModel<DocType, InstanceMethodsAndOverrides, QueryHelpers>,
+        InstanceMethodsAndOverrides = object,
+        QueryHelpers = object,
+    >(
         schema: Schema<DocType, Model, InstanceMethodsAndOverrides, QueryHelpers>
     ) => void;
 }

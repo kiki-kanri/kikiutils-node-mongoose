@@ -75,21 +75,24 @@ const baseBuilderFactory = createBaseSchemaBuilderFactory(Schema.Types.Decimal12
 export function decimal128SchemaBuilder() {
     const schema: Record<string, any> = {};
     const baseBuilder = baseBuilderFactory(schema);
-    return new Proxy(baseBuilder, {
-        get(target, key, receiver) {
-            if (key === 'setRoundAndToFixedSetter') {
-                return (places: number = 2, rounding: Decimal.Rounding = Decimal.ROUND_DOWN) => {
-                    schema.set = (value: { toString: () => string }) => new Decimal(value.toString()).toFixed(places, rounding);
+    return new Proxy(
+        baseBuilder,
+        {
+            get(target, key, receiver) {
+                if (key === 'setRoundAndToFixedSetter') {
+                    return (places: number = 2, rounding: Decimal.Rounding = Decimal.ROUND_DOWN) => {
+                        schema.set = (value: { toString: () => string }) => new Decimal(value.toString()).toFixed(places, rounding);
+                        return receiver;
+                    };
+                }
+
+                if (key === 'setToStringGetter') {
+                    schema.get = (value: Types.Decimal128) => value.toString();
                     return receiver;
-                };
-            }
+                }
 
-            if (key === 'setToStringGetter') {
-                schema.get = (value: Types.Decimal128) => value.toString();
-                return receiver;
-            }
-
-            return Reflect.get(target, key, receiver);
+                return Reflect.get(target, key, receiver);
+            },
         },
-    }) as Decimal128SchemaBuilder;
+    ) as Decimal128SchemaBuilder;
 }

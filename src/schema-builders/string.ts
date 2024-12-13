@@ -86,40 +86,43 @@ const defaultIPv6ValidateMessage = '`{VALUE}` is not a valid IPv6 address for pa
 export function stringSchemaBuilder() {
     const schema: Record<string, any> = {};
     const baseBuilder = baseBuilderFactory(schema);
-    return new Proxy(baseBuilder, {
-        get(target, key, receiver) {
-            if (key === 'ipv4') {
-                return (message: string = defaultIPv4ValidateMessage) => {
-                    schema.trim = true;
-                    schema.validate = {
-                        message,
-                        validator: (value: string) => net.isIPv4(value),
+    return new Proxy(
+        baseBuilder,
+        {
+            get(target, key, receiver) {
+                if (key === 'ipv4') {
+                    return (message: string = defaultIPv4ValidateMessage) => {
+                        schema.trim = true;
+                        schema.validate = {
+                            message,
+                            validator: (value: string) => net.isIPv4(value),
+                        };
+
+                        return receiver;
                     };
+                }
 
-                    return receiver;
-                };
-            }
+                if (key === 'ipv6') {
+                    return (message: string = defaultIPv6ValidateMessage) => {
+                        schema.trim = true;
+                        schema.validate = {
+                            message,
+                            validator: (value: string) => net.isIPv6(value),
+                        };
 
-            if (key === 'ipv6') {
-                return (message: string = defaultIPv6ValidateMessage) => {
-                    schema.trim = true;
-                    schema.validate = {
-                        message,
-                        validator: (value: string) => net.isIPv6(value),
+                        return receiver;
                     };
+                }
 
-                    return receiver;
-                };
-            }
+                if (key === 'length') {
+                    return (value: any) => {
+                        schema.maxlength = schema.minlength = value;
+                        return receiver;
+                    };
+                }
 
-            if (key === 'length') {
-                return (value: any) => {
-                    schema.maxlength = schema.minlength = value;
-                    return receiver;
-                };
-            }
-
-            return Reflect.get(target, key, receiver);
+                return Reflect.get(target, key, receiver);
+            },
         },
-    }) as StringSchemaBuilder;
+    ) as StringSchemaBuilder;
 }
