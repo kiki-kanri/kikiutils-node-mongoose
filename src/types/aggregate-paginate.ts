@@ -5,7 +5,10 @@
 // and LiRen Tu <https://github.com/tuliren> for their contribution
 // Used with mongoose-paginate, redefined and renamed here to avoid conflicts.
 
-import type { AggregatePaginateOptions, Schema } from 'mongoose';
+import type {
+    AggregatePaginateOptions,
+    Schema,
+} from 'mongoose';
 
 declare module 'mongoose' {
     interface AggregateCustomLabels<T = boolean | string | undefined> {
@@ -56,7 +59,7 @@ declare module 'mongoose' {
     }
 
     interface AggregatePaginateResult<T> {
-        [customLabel: string]: T[] | boolean | null | number | undefined;
+        [customLabel: string]: boolean | null | number | T[] | undefined;
         docs: T[];
         hasNextPage: boolean;
         hasPrevPage: boolean;

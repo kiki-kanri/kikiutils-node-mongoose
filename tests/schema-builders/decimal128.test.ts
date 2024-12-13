@@ -1,5 +1,8 @@
 import Decimal from 'decimal.js';
-import { Schema, Types } from 'mongoose';
+import {
+    Schema,
+    Types,
+} from 'mongoose';
 
 import { decimal128SchemaBuilder } from '../../src/schema-builders/decimal128';
 

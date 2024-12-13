@@ -1,4 +1,8 @@
-import type { Connection, Schema, SchemaTimestampsConfig } from 'mongoose';
+import type {
+    Connection,
+    Schema,
+    SchemaTimestampsConfig,
+} from 'mongoose';
 
 import type { buildMongooseModel } from '../utils';
 
@@ -39,7 +43,7 @@ export interface BuildMongooseModelOptions {
      *
      * @default true
      */
-    timestamps?: SchemaTimestampsConfig | boolean;
+    timestamps?: boolean | SchemaTimestampsConfig;
 }
 
 export interface CustomMongooseOptions {

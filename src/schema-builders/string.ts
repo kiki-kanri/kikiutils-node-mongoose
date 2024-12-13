@@ -1,4 +1,9 @@
-import type { DefaultType, IndexDirection, IndexOptions, StringSchemaDefinition } from 'mongoose';
+import type {
+    DefaultType,
+    IndexDirection,
+    IndexOptions,
+    StringSchemaDefinition,
+} from 'mongoose';
 import net from 'node:net';
 import type { Merge } from 'type-fest';
 
@@ -21,16 +26,16 @@ export interface StringSchemaBuilder<Props extends { type: StringSchemaDefinitio
     default: <T extends ((this: any, doc: any) => DefaultType<D>) | DefaultType<D> | null, D extends string>(value: T) => ExtendStringSchemaBuilder<Merge<Props, { default: T }>, ExtraOmitFields>;
     enum: <
         T extends
-        | { [path: string]: S | null }
-        | { message?: M; values: Readonlyable<Array<S | null>> }
-        | Readonlyable<Array<S | null>>,
+        | Readonlyable<Array<null | S>>
+        | { [path: string]: null | S }
+        | { message?: M; values: Readonlyable<Array<null | S>> },
         M extends string,
         S extends string,
     >(
         value: T
     ) => ExtendStringSchemaBuilder<Merge<Props, { enum: T }>, ExtraOmitFields>;
 
-    index: <T extends IndexDirection | IndexOptions | boolean>(value: T) => ExtendStringSchemaBuilder<Merge<Props, { index: T }>, ExtraOmitFields>;
+    index: <T extends boolean | IndexDirection | IndexOptions>(value: T) => ExtendStringSchemaBuilder<Merge<Props, { index: T }>, ExtraOmitFields>;
 
     /**
      * Adds IPv4 validation to the string schema.
@@ -86,7 +91,11 @@ export function stringSchemaBuilder() {
             if (key === 'ipv4') {
                 return (message: string = defaultIPv4ValidateMessage) => {
                     schema.trim = true;
-                    schema.validate = { message, validator: (value: string) => net.isIPv4(value) };
+                    schema.validate = {
+                        message,
+                        validator: (value: string) => net.isIPv4(value),
+                    };
+
                     return receiver;
                 };
             }
@@ -94,14 +103,18 @@ export function stringSchemaBuilder() {
             if (key === 'ipv6') {
                 return (message: string = defaultIPv6ValidateMessage) => {
                     schema.trim = true;
-                    schema.validate = { message, validator: (value: string) => net.isIPv6(value) };
+                    schema.validate = {
+                        message,
+                        validator: (value: string) => net.isIPv6(value),
+                    };
+
                     return receiver;
                 };
             }
 
             if (key === 'length') {
                 return (value: any) => {
-                    (schema.maxlength = schema.minlength = value);
+                    schema.maxlength = schema.minlength = value;
                     return receiver;
                 };
             }

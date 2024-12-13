@@ -25,7 +25,13 @@ export function createBaseSchemaBuilderFactory<Builder = Readonly<Record<string,
                 }
 
                 if (key === 'nonRequired') return { ...schema };
-                if (key === 'required') return { ...schema, required: true };
+                if (key === 'required') {
+                    return {
+                        ...schema,
+                        required: true,
+                    };
+                }
+
                 schema[key] = true;
                 return receiver;
             },

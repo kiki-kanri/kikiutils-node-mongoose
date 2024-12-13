@@ -1,4 +1,9 @@
-import type { FilterQuery, mongo, PaginateOptions, Schema } from 'mongoose';
+import type {
+    FilterQuery,
+    mongo,
+    PaginateOptions,
+    Schema,
+} from 'mongoose';
 
 declare module 'mongoose' {
     interface PaginateCustomLabels<T = boolean | string | undefined> {
@@ -62,7 +67,7 @@ declare module 'mongoose' {
     }
 
     interface PaginateResult<T> {
-        [customLabel: string]: T[] | boolean | null | number | undefined;
+        [customLabel: string]: boolean | null | number | T[] | undefined;
         docs: T[];
         hasNextPage: boolean;
         hasPrevPage: boolean;
@@ -77,7 +82,7 @@ declare module 'mongoose' {
         totalPages: number;
     }
 
-    type PaginateDocument<T, TMethods, TQueryHelpers, O extends PaginateOptions = object> = O['lean'] extends true ? (O['leanWithId'] extends true ? { id: string } & T : T) : HydratedDocument<T, TMethods, TQueryHelpers>;
+    type PaginateDocument<T, TMethods, TQueryHelpers, O extends PaginateOptions = object> = O['lean'] extends true ? (O['leanWithId'] extends true ? T & { id: string } : T) : HydratedDocument<T, TMethods, TQueryHelpers>;
 
     interface PaginateModel<T, TQueryHelpers = object, TMethods = object> extends Model<T, TQueryHelpers, TMethods> {
         paginate: {

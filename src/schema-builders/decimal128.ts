@@ -1,6 +1,11 @@
 import Decimal from 'decimal.js';
 import { Schema } from 'mongoose';
-import type { DefaultType, IndexDirection, IndexOptions, Types } from 'mongoose';
+import type {
+    DefaultType,
+    IndexDirection,
+    IndexOptions,
+    Types,
+} from 'mongoose';
 import type { Merge } from 'type-fest';
 
 import type { Readonlyable } from '../types/utils';
@@ -25,16 +30,16 @@ export interface Decimal128SchemaBuilder<Props extends { type: Schema.Types.Deci
     default: <T extends ((this: any, doc: any) => DefaultType<D>) | DefaultType<D> | null, D extends Types.Decimal128>(value: T) => ExtendDecimal128SchemaBuilder<Merge<Props, { default: T }>, ExtraOmitFields>;
     enum: <
         T extends
+        | Readonlyable<Array<D | null>>
         | { [path: string]: D | null }
-        | { message?: M; values: Readonlyable<Array<D | null>> }
-        | Readonlyable<Array<D | null>>,
+        | { message?: M; values: Readonlyable<Array<D | null>> },
         D extends Types.Decimal128,
         M extends string,
     >(
         value: T
     ) => ExtendDecimal128SchemaBuilder<Merge<Props, { enum: T }>, ExtraOmitFields>;
 
-    index: <T extends IndexDirection | IndexOptions | boolean>(value: T) => ExtendDecimal128SchemaBuilder<Merge<Props, { index: T }>, ExtraOmitFields>;
+    index: <T extends boolean | IndexDirection | IndexOptions>(value: T) => ExtendDecimal128SchemaBuilder<Merge<Props, { index: T }>, ExtraOmitFields>;
     nonRequired: Props;
     private: ExtendDecimal128SchemaBuilder<Merge<Props, { private: true }>, ExtraOmitFields>;
     required: Merge<Props, { required: true }>;
@@ -80,7 +85,7 @@ export function decimal128SchemaBuilder() {
             }
 
             if (key === 'setToStringGetter') {
-                (schema.get = (value: Types.Decimal128) => value.toString());
+                schema.get = (value: Types.Decimal128) => value.toString();
                 return receiver;
             }
 

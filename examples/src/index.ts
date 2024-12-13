@@ -2,15 +2,17 @@
 
 import { setCustomMongooseOptions } from '@kikiutils/mongoose/options';
 import s from '@kikiutils/mongoose/schema-builders';
-import { buildMongooseModel } from '@kikiutils/mongoose/utils';
-import { Schema } from 'mongoose';
-import type { ProjectionType, QueryOptions, Types } from 'mongoose';
-import { env } from 'node:process';
-import type { Except } from 'type-fest';
-
-// Load global types
 import type {} from '@kikiutils/mongoose/types';
 import type {} from '@kikiutils/mongoose/types/data';
+import { buildMongooseModel } from '@kikiutils/mongoose/utils';
+import { Schema } from 'mongoose';
+import type {
+    ProjectionType,
+    QueryOptions,
+    Types,
+} from 'mongoose';
+import { env } from 'node:process';
+import type { Except } from 'type-fest';
 
 /**
  * Set mongodb uri env.
@@ -81,7 +83,7 @@ interface UserMethodsAndOverrides {
 
 interface UserModel extends BaseMongoosePaginateModel<User, UserMethodsAndOverrides> {
     // Model static methods
-    findByAccount: (account: string, projection?: ProjectionType<User> | null, options?: QueryOptions<User> | null) => MongooseFindOneReturnType<User, UserDocument, object, UserMethodsAndOverrides>;
+    findByAccount: (account: string, projection?: null | ProjectionType<User>, options?: null | QueryOptions<User>) => MongooseFindOneReturnType<User, UserDocument, object, UserMethodsAndOverrides>;
 }
 
 export type UserDocument = MongooseHydratedDocument<User, UserMethodsAndOverrides>;
@@ -103,7 +105,7 @@ userSchema.method<UserDocument>('verifyPassword', function (password: string) {
 });
 
 // Set static methods
-userSchema.static('findByAccount', function (account: string, projection?: ProjectionType<User> | null, options?: QueryOptions<User> | null) {
+userSchema.static('findByAccount', function (account: string, projection?: null | ProjectionType<User>, options?: null | QueryOptions<User>) {
     return this.findOne({ account }, projection, options);
 });
 
