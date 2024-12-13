@@ -1,5 +1,25 @@
 # Changelog
 
+## v2.1.2
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v2.1.1...v2.1.2)
+
+### 🏡 Chore
+
+- Update eslint-config and format codes ([6c60cc9](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/6c60cc9))
+- Modify `eslint-disable-next-line` comment style ([0a7b15e](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/0a7b15e))
+- Upgrade dependencies ([226faf1](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/226faf1))
+- Upgrade dependencies ([553fc56](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/553fc56))
+
+### 🎨 Styles
+
+- Change all indentation to 4 spaces ([62c0f45](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/62c0f45))
+- Format and lint all files ([777467a](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/777467a))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v2.1.1
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v2.1.0...v2.1.1)
