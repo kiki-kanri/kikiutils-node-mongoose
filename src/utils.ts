@@ -1,7 +1,6 @@
 import mongoose, { Types } from 'mongoose';
 import mongooseAggregatePaginate from 'mongoose-aggregate-paginate-v2';
 import mongoosePaginate from 'mongoose-paginate-v2';
-import { env } from 'node:process';
 
 import { customMongooseOptions } from './_internals';
 import { mongooseConnections } from './constants';
@@ -54,7 +53,7 @@ export function buildMongooseModel<
     schema.plugin(mongoosePaginate);
     schema.set('timestamps', options?.timestamps ?? true);
     customMongooseOptions.beforeModelBuild?.(schema);
-    return (options?.connection || mongooseConnections.default || (mongooseConnections.default = mongoose.createConnection(env.MONGODB_URI || 'mongodb://127.0.0.1:27017'))).model<DocType, Model, QueryHelpers>(name, schema, collection);
+    return (options?.connection || mongooseConnections.default || (mongooseConnections.default = mongoose.createConnection(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017'))).model<DocType, Model, QueryHelpers>(name, schema, collection);
 }
 
 /**

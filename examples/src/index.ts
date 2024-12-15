@@ -11,7 +11,6 @@ import type {
     QueryOptions,
     Types,
 } from 'mongoose';
-import { env } from 'node:process';
 import type { Except } from 'type-fest';
 
 /**
@@ -21,7 +20,7 @@ import type { Except } from 'type-fest';
  * the actual project shouldn't have this line
  * (unless you want to handle it the same way as the default).
  */
-env.MONGODB_URI ||= 'mongodb://127.0.0.1:27017/kikiutils-mongoose-example?directConnection=true';
+process.env.MONGODB_URI ||= 'mongodb://127.0.0.1:27017/kikiutils-mongoose-example?directConnection=true';
 
 /**
  * Set custom mongoose options.
