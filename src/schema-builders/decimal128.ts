@@ -19,7 +19,7 @@ interface BaseProps {
 }
 
 interface ToStringGetterSchema {
-    get: (value: Types.Decimal128) => string;
+    get: (value?: Types.Decimal128) => string | undefined;
 }
 
 interface ToStringSetterSchema {
@@ -87,7 +87,7 @@ export function decimal128SchemaBuilder() {
                 }
 
                 if (key === 'setToStringGetter') {
-                    schema.get = (value: Types.Decimal128) => value.toString();
+                    schema.get = (value?: Types.Decimal128) => value?.toString();
                     return receiver;
                 }
 

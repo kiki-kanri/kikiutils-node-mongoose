@@ -16,6 +16,11 @@ describe('decimal128SchemaBuilder', () => {
         expect(schema.get(new Types.Decimal128('114514.1919810'))).toEqual('114514.1919810');
     });
 
+    it('should return the undefined representation of Decimal128 when using setToStringGetter', () => {
+        const schema = decimal128SchemaBuilder().setToStringGetter.nonRequired;
+        expect(schema.get()).toBeUndefined();
+    });
+
     it('should set the value correctly with rounding and fixed decimal places', () => {
         const schema1 = decimal128SchemaBuilder().setRoundAndToFixedSetter().nonRequired;
         expect(schema1.set('114514.1919810')).toEqual('114514.19');
