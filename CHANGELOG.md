@@ -1,5 +1,29 @@
 # Changelog
 
+## v2.1.3
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v2.1.2...v2.1.3)
+
+### 🩹 Fixes
+
+- Resolve issue in decimal128 schema builder's `setToStringGetter` not handling undefined input ([10434c6](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/10434c6))
+
+### 💅 Refactors
+
+- Enforce usage of global process instead of local process ([ae1e1d2](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/ae1e1d2))
+
+### 🏡 Chore
+
+- Upgrade dependencies ([7ce9b4f](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/7ce9b4f))
+
+### 🎨 Styles
+
+- Format codes ([980a557](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/980a557))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v2.1.2
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v2.1.1...v2.1.2)
