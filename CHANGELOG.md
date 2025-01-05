@@ -1,5 +1,22 @@
 # Changelog
 
+## v2.1.4
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v2.1.3...v2.1.4)
+
+### 📦 Build
+
+- Enable sourcemap output in build process ([ad9cc4e](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/ad9cc4e))
+
+### 🏡 Chore
+
+- Upgrade dependencies ([2061a4f](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/2061a4f))
+- Modify pack file structure and update package.json.exports configuration ([a7605a8](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/a7605a8))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v2.1.3
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v2.1.2...v2.1.3)
