@@ -1,6 +1,7 @@
 {
   "extends": "@kikiutils/tsconfigs/esnext/es2022.json",
   "compilerOptions": {
+    "moduleResolution": "bundler",
     "paths": {
       "@/*": ["./src/*"]
     },
