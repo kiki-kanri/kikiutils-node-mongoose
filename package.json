@@ -20,9 +20,9 @@
   ],
   "exports": {
     "./*": {
-      "types": "./*.d.ts",
-      "import": "./*.mjs",
-      "require": "./*.cjs"
+      "types": "./dist/*.d.ts",
+      "import": "./dist/*.mjs",
+      "require": "./dist/*.cjs"
     },
     "./_internals": {
       "types": null,
@@ -30,17 +30,21 @@
       "require": null
     },
     "./schema-builders": {
-      "types": "./schema-builders/index.d.ts",
-      "import": "./schema-builders/index.mjs",
-      "require": "./schema-builders/index.cjs"
+      "types": "./dist/schema-builders/index.d.ts",
+      "import": "./dist/schema-builders/index.mjs",
+      "require": "./dist/schema-builders/index.cjs"
     },
     "./types": {
-      "types": "./types/index.d.ts"
+      "types": "./dist/types/index.d.ts"
     },
     "./types/*": {
-      "types": "./types/*.d.ts"
+      "types": "./dist/types/*.d.ts"
     }
   },
+  "files": [
+    "./dist",
+    "./src"
+  ],
   "engines": {
     "node": ">=18.12.1"
   },
@@ -49,7 +53,7 @@
     "bumplog": "changelogen --bump",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "release": "pnpm run lint && pnpm run build && pnpm run test && changelogen --push --release && sh ./build-and-publish.sh",
+    "release": "pnpm run lint && pnpm run build && pnpm run test && changelogen --push --release && npm publish",
     "test": "jest --coverage"
   },
   "dependencies": {
