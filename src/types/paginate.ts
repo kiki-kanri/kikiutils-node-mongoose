@@ -5,7 +5,7 @@ import type {
     Schema,
 } from 'mongoose';
 
-type IfElse<Condition, Then, Else> = Condition extends true ? Then : Else;
+import type { IfElse } from './utils';
 
 declare module 'mongoose' {
     interface PaginateCustomLabels<T = boolean | string | undefined> {

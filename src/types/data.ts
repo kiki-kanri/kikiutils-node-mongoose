@@ -1,3 +1,5 @@
+import type { IfElse } from './utils';
+
 /**
  * Interface for the base data of a Mongoose model, optionally including timestamp fields.
  *
@@ -23,8 +25,8 @@ interface LocalBaseMongooseModelData<CreatedAtField extends boolean = true, Upda
  * @template UpdatedAt - A boolean flag indicating whether the `updatedAt` field should be included.
  */
 interface LocalWithTimestampFieldsData<CreatedAt extends boolean = true, UpdatedAt extends boolean = true> {
-    createdAt: CreatedAt extends true ? string : never;
-    updatedAt: UpdatedAt extends true ? string : never;
+    createdAt: IfElse<CreatedAt, string, never>;
+    updatedAt: IfElse<UpdatedAt, string, never>;
 }
 
 /**
@@ -35,7 +37,7 @@ interface LocalWithTimestampFieldsData<CreatedAt extends boolean = true, Updated
  *
  * @template T - The type from which to omit `never` properties.
  */
-type OmitNever<T> = { [P in keyof T as T[P] extends never ? never : P]: T[P] };
+type OmitNever<T> = { [P in keyof T as IfElse<T[P], never, P, never>]: T[P] };
 
 declare global {
     /**

@@ -7,6 +7,8 @@ import type {
     Types,
 } from 'mongoose';
 
+import type { IfElse } from './utils';
+
 export type {} from './aggregate-paginate';
 export type {} from './paginate';
 
@@ -30,7 +32,10 @@ declare global {
      * @template CreatedAtField - A boolean flag indicating whether the `createdAt` field should be included.
      * @template UpdatedAtField - A boolean flag indicating whether the `updatedAt` field should be included.
      */
-    type BaseMongooseDocType<T, CreatedAtField extends boolean = true, UpdatedAtField extends boolean = true> = (CreatedAtField extends true ? { createdAt: Date } : object) & Omit<T, 'createdAt' | 'id' | 'updatedAt'> & (UpdatedAtField extends true ? { updatedAt: Date } : object);
+    type BaseMongooseDocType<T, CreatedAtField extends boolean = true, UpdatedAtField extends boolean = true> =
+      & IfElse<CreatedAtField, { createdAt: Date }, object>
+      & IfElse<UpdatedAtField, { updatedAt: Date }, object>
+      & Omit<T, 'createdAt' | 'id' | 'updatedAt'>;
 
     /**
      * Type definition for a Mongoose model with pagination and aggregation capabilities.
@@ -42,7 +47,10 @@ declare global {
      * @template InstanceMethodsAndOverrides - Optional type parameter for instance methods and overrides.
      * @template QueryHelpers - Optional type parameter for additional query helper methods.
      */
-    type BaseMongoosePaginateModel<RawDocType, InstanceMethodsAndOverrides = object, QueryHelpers = object> = AggregatePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> & BaseModelStatics<RawDocType, InstanceMethodsAndOverrides, QueryHelpers> & PaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>;
+    type BaseMongoosePaginateModel<RawDocType, InstanceMethodsAndOverrides = object, QueryHelpers = object> =
+      & AggregatePaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>
+      & BaseModelStatics<RawDocType, InstanceMethodsAndOverrides, QueryHelpers>
+      & PaginateModel<RawDocType, QueryHelpers, InstanceMethodsAndOverrides>;
 
     /**
      * Type definition for a Mongoose document or ObjectId.
