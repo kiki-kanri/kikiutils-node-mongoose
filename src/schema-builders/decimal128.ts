@@ -15,7 +15,7 @@ import { createBaseSchemaBuilderFactory } from './base';
 export type ExtendDecimal128SchemaBuilder<Props extends BaseProps, ExtraOmitFields extends string> = Omit<Decimal128SchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
 
 interface BaseProps {
-    type: Schema.Types.Decimal128;
+    type: typeof Schema.Types.Decimal128;
 }
 
 interface ToStringGetterSchema {
@@ -26,7 +26,7 @@ interface ToStringSetterSchema {
     set: (value: { toString: () => string }) => string;
 }
 
-export interface Decimal128SchemaBuilder<Props extends { type: Schema.Types.Decimal128 } = { type: Schema.Types.Decimal128 }, ExtraOmitFields extends string = never> {
+export interface Decimal128SchemaBuilder<Props extends { type: typeof Schema.Types.Decimal128 } = { type: typeof Schema.Types.Decimal128 }, ExtraOmitFields extends string = never> {
     default: <T extends ((this: any, doc: any) => DefaultType<D>) | DefaultType<D> | null, D extends Types.Decimal128>(value: T) => ExtendDecimal128SchemaBuilder<Merge<Props, { default: T }>, ExtraOmitFields>;
     enum: <
         T extends

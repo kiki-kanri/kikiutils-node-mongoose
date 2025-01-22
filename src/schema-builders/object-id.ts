@@ -3,7 +3,6 @@ import type {
     DefaultType,
     IndexDirection,
     IndexOptions,
-    ObjectIdSchemaDefinition,
     Types,
 } from 'mongoose';
 import type { Merge } from 'type-fest';
@@ -15,10 +14,10 @@ import { createBaseSchemaBuilderFactory } from './base';
 export type ExtendObjectIdSchemaBuilder<Props extends BaseProps, ExtraOmitFields extends string> = Omit<ObjectIdSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
 
 interface BaseProps {
-    type: ObjectIdSchemaDefinition;
+    type: typeof Schema.Types.ObjectId;
 }
 
-export interface ObjectIdSchemaBuilder<Props extends { type: ObjectIdSchemaDefinition } = { type: ObjectIdSchemaDefinition }, ExtraOmitFields extends string = never> {
+export interface ObjectIdSchemaBuilder<Props extends { type: typeof Schema.Types.ObjectId } = { type: typeof Schema.Types.ObjectId }, ExtraOmitFields extends string = never> {
     default: <T extends ((this: any, doc: any) => DefaultType<D>) | DefaultType<D> | null, D extends Types.ObjectId>(value: T) => ExtendObjectIdSchemaBuilder<Merge<Props, { default: T }>, ExtraOmitFields>;
     enum: <
         T extends

@@ -4,7 +4,6 @@ import type {
     IndexDirection,
     IndexOptions,
     Model,
-    ObjectIdSchemaDefinition,
     Types,
 } from 'mongoose';
 import type { Merge } from 'type-fest';
@@ -16,10 +15,10 @@ import { createBaseSchemaBuilderFactory } from './base';
 export type ExtendRefSchemaBuilder<Props extends BaseProps, ExtraOmitFields extends string> = Omit<RefSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
 
 interface BaseProps {
-    type: ObjectIdSchemaDefinition;
+    type: typeof Schema.Types.ObjectId;
 }
 
-export interface RefSchemaBuilder<Props extends { type: ObjectIdSchemaDefinition } = { type: ObjectIdSchemaDefinition }, ExtraOmitFields extends string = never> {
+export interface RefSchemaBuilder<Props extends { type: typeof Schema.Types.ObjectId } = { type: typeof Schema.Types.ObjectId }, ExtraOmitFields extends string = never> {
     default: <T extends ((this: any, doc: any) => DefaultType<D>) | DefaultType<D> | null, D extends Types.ObjectId>(value: T) => ExtendRefSchemaBuilder<Merge<Props, { default: T }>, ExtraOmitFields>;
     enum: <
         T extends
@@ -41,4 +40,4 @@ export interface RefSchemaBuilder<Props extends { type: ObjectIdSchemaDefinition
 }
 
 const baseBuilderFactory = createBaseSchemaBuilderFactory(Schema.Types.ObjectId);
-export const refSchemaBuilder = <T extends ((this: any, doc: any) => Model<any> | string) | Model<any> | string>(ref: T) => baseBuilderFactory({ ref }) as RefSchemaBuilder<{ ref: T; type: ObjectIdSchemaDefinition }>;
+export const refSchemaBuilder = <T extends ((this: any, doc: any) => Model<any> | string) | Model<any> | string>(ref: T) => baseBuilderFactory({ ref }) as RefSchemaBuilder<{ ref: T; type: typeof Schema.Types.ObjectId }>;
