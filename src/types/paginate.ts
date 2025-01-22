@@ -5,6 +5,8 @@ import type {
     Schema,
 } from 'mongoose';
 
+type IfElse<Condition, Then, Else> = Condition extends true ? Then : Else;
+
 declare module 'mongoose' {
     interface PaginateCustomLabels<T = boolean | string | undefined> {
         docs?: T;
@@ -32,6 +34,7 @@ declare module 'mongoose' {
         forceCountFn?: boolean;
         lean?: boolean;
         leanWithId?: boolean;
+        leanWithVirtuals?: boolean ;
         limit?: number;
         offset?: number;
         options?: QueryOptions;
@@ -54,7 +57,7 @@ declare module 'mongoose' {
 
     interface SubPaginateOptions {
         pagination?: boolean;
-        pagingOptions: SubDocumentPagingOptions | undefined;
+        pagingOptions?: SubDocumentPagingOptions;
         populate?: PopulateOptions | PopulateOptions[] | string | string[];
         read?: PaginateReadOptions;
         select?: object | string;
@@ -82,7 +85,24 @@ declare module 'mongoose' {
         totalPages: number;
     }
 
-    type PaginateDocument<T, TMethods, TQueryHelpers, O extends PaginateOptions = object> = O['lean'] extends true ? (O['leanWithId'] extends true ? T & { id: string } : T) : HydratedDocument<T, TMethods, TQueryHelpers>;
+    type PaginateDocument<
+        T,
+        TMethods,
+        TQueryHelpers,
+        O extends PaginateOptions = object,
+    > = IfElse<
+        O['lean'],
+        IfElse<
+            O['leanWithId'],
+            T & { id: string },
+            IfElse<
+                O['leanWithVirtuals'],
+                T & { [key: string]: any },
+                T
+            >
+        >,
+        HydratedDocument<T, TMethods, TQueryHelpers>
+    >;
 
     interface PaginateModel<T, TQueryHelpers = object, TMethods = object> extends Model<T, TQueryHelpers, TMethods> {
         paginate: {
