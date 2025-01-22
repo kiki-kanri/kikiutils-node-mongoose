@@ -1,5 +1,28 @@
 # Changelog
 
+## v2.1.5
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v2.1.4...v2.1.5)
+
+### 🩹 Fixes
+
+- Correct `type` types in `SchemaBuilder` ([6e554ca](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/6e554ca))
+
+### 💅 Refactors
+
+- Replace ternary type expressions with `IfElse` type ([2391988](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/2391988))
+
+### 🏡 Chore
+
+- Upgrade examples dependencies ([15b1fcb](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/15b1fcb))
+- Set `tsconfig.json.moduleResolution` to bundler in examples folder ([3102c1f](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/3102c1f))
+- Upgrade dependencies ([bc5892d](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/bc5892d))
+- Update `paginate` type definition file ([aea186a](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/aea186a))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v2.1.4
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v2.1.3...v2.1.4)
