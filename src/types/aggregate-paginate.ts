@@ -11,6 +11,8 @@ import type {
 } from 'mongoose';
 
 declare module 'mongoose' {
+    type PrePaginatePipelineStage = '__PREPAGINATE__' | PipelineStage;
+
     interface AggregateCustomLabels<T = boolean | string | undefined> {
         docs?: T;
         hasNextPage?: T;
@@ -74,7 +76,11 @@ declare module 'mongoose' {
     }
 
     interface AggregatePaginateModel<RawDocType, QueryHelpers = object, InstanceMethodsAndOverrides = object> extends Model<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> {
-        aggregatePaginate: <T>(query?: Aggregate<T[]>, options?: AggregatePaginateOptions, callback?: (err: any, result: AggregatePaginateResult<T>) => void) => Promise<AggregatePaginateResult<T>>;
+        aggregatePaginate: <T>(
+            query?: Aggregate<T[]> | PrePaginatePipelineStage[],
+            options?: AggregatePaginateOptions,
+            callback?: (err: any, result: AggregatePaginateResult<T>) => void,
+        ) => Promise<AggregatePaginateResult<T>>;
     }
 }
 
@@ -83,6 +89,10 @@ declare function mongooseAggregatePaginate(schema: Schema): void;
 // eslint-disable-next-line ts/no-namespace
 declare namespace mongooseAggregatePaginate {
     const PREPAGINATION_PLACEHOLDER: string;
+}
+
+// eslint-disable-next-line ts/no-namespace
+declare namespace _ {
     const aggregatePaginate: { options: AggregatePaginateOptions };
 }
 

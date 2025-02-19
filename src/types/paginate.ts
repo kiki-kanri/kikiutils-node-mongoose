@@ -34,7 +34,7 @@ declare module 'mongoose' {
         forceCountFn?: boolean;
         lean?: boolean;
         leanWithId?: boolean;
-        leanWithVirtuals?: boolean ;
+        leanWithVirtuals?: boolean;
         limit?: number;
         offset?: number;
         options?: QueryOptions;
