@@ -1,5 +1,18 @@
 # Changelog
 
+## v2.1.6
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v2.1.5...v2.1.6)
+
+### 🏡 Chore
+
+- Upgrade dependencies ([ca0b34d](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/ca0b34d))
+- Update aggregate-paginate related types ([208dabf](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/208dabf))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v2.1.5
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v2.1.4...v2.1.5)
