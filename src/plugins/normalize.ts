@@ -25,12 +25,12 @@ const {
  * @param schema - The Mongoose schema to apply the plugin to.
  */
 export function mongooseNormalizePlugin<S extends Schema>(schema: S) {
-    const toJSON = schema.get('toJSON');
-    const toJSONTransform = toJSON?.transform;
+    const toJson = schema.get('toJSON');
+    const toJsonTransform = toJson?.transform;
     schema.set(
         'toJSON',
         {
-            ...toJSON,
+            ...toJson,
             transform(doc: any, ret: any, options: any) {
                 const copiedRet = { ...ret };
                 copiedRet.id = copiedRet._id?.toHexString();
@@ -44,7 +44,7 @@ export function mongooseNormalizePlugin<S extends Schema>(schema: S) {
                 }
 
                 delete copiedRet.__v;
-                if (toJSONTransform && typeof toJSONTransform !== 'boolean') return toJSONTransform(doc, copiedRet, options);
+                if (toJsonTransform && typeof toJsonTransform !== 'boolean') return toJsonTransform(doc, copiedRet, options);
                 return copiedRet;
             },
         },

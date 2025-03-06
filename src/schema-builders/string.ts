@@ -17,7 +17,7 @@ interface BaseProps {
     type: StringSchemaDefinition;
 }
 
-interface IPSchema<T extends string> {
+interface IpSchema<T extends string> {
     trim: true;
     validate: { message: T; validator: (value: string) => boolean };
 }
@@ -45,7 +45,7 @@ export interface StringSchemaBuilder<Props extends { type: StringSchemaDefinitio
      *
      * @returns A schema builder with IPv4 validation and the `trim` option enabled.
      */
-    ipv4: <T extends string = typeof defaultIPv4ValidateMessage>(message?: T) => ExtendStringSchemaBuilder<Merge<Props, IPSchema<T>>, 'ipv4' | 'ipv6' | ExtraOmitFields>;
+    ipv4: <T extends string = typeof defaultIpv4ValidateMessage>(message?: T) => ExtendStringSchemaBuilder<Merge<Props, IpSchema<T>>, 'ipv4' | 'ipv6' | ExtraOmitFields>;
 
     /**
      * Adds IPv6 validation to the string schema.
@@ -55,7 +55,7 @@ export interface StringSchemaBuilder<Props extends { type: StringSchemaDefinitio
      *
      * @returns A schema builder with IPv6 validation and the `trim` option enabled.
      */
-    ipv6: <T extends string = typeof defaultIPv6ValidateMessage>(message?: T) => ExtendStringSchemaBuilder<Merge<Props, IPSchema<T>>, 'ipv4' | 'ipv6' | ExtraOmitFields>;
+    ipv6: <T extends string = typeof defaultIpv6ValidateMessage>(message?: T) => ExtendStringSchemaBuilder<Merge<Props, IpSchema<T>>, 'ipv4' | 'ipv6' | ExtraOmitFields>;
 
     /**
      * Sets both the maximum and minimum length of the string.
@@ -80,8 +80,8 @@ export interface StringSchemaBuilder<Props extends { type: StringSchemaDefinitio
 }
 
 const baseBuilderFactory = createBaseSchemaBuilderFactory(String);
-const defaultIPv4ValidateMessage = '`{VALUE}` is not a valid IPv4 address for path `{PATH}`.';
-const defaultIPv6ValidateMessage = '`{VALUE}` is not a valid IPv6 address for path `{PATH}`.';
+const defaultIpv4ValidateMessage = '`{VALUE}` is not a valid IPv4 address for path `{PATH}`.';
+const defaultIpv6ValidateMessage = '`{VALUE}` is not a valid IPv6 address for path `{PATH}`.';
 
 export function stringSchemaBuilder() {
     const schema: Record<string, any> = {};
@@ -91,7 +91,7 @@ export function stringSchemaBuilder() {
         {
             get(target, key, receiver) {
                 if (key === 'ipv4') {
-                    return (message: string = defaultIPv4ValidateMessage) => {
+                    return (message: string = defaultIpv4ValidateMessage) => {
                         schema.trim = true;
                         schema.validate = {
                             message,
@@ -103,7 +103,7 @@ export function stringSchemaBuilder() {
                 }
 
                 if (key === 'ipv6') {
-                    return (message: string = defaultIPv6ValidateMessage) => {
+                    return (message: string = defaultIpv6ValidateMessage) => {
                         schema.trim = true;
                         schema.validate = {
                             message,
