@@ -29,4 +29,9 @@ describe('decimal128SchemaBuilder', () => {
         const schema3 = decimal128SchemaBuilder().setRoundAndToFixedSetter(undefined, Decimal.ROUND_UP).nonRequired;
         expect(schema3.set({ toString: () => '114514.1919810' })).toEqual('114514.20');
     });
+
+    it('should return undefined when setting undefined with setRoundAndToFixedSetter', () => {
+        const schema = decimal128SchemaBuilder().setRoundAndToFixedSetter().nonRequired;
+        expect(schema.set(undefined)).toBeUndefined();
+    });
 });
