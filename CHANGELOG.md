@@ -1,5 +1,25 @@
 # Changelog
 
+## v2.1.7
+
+[compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v2.1.6...v2.1.7)
+
+### 🩹 Fixes
+
+- Resolve issue in `decimal128SchemaBuilder` where `undefined` values cause errors after using `setRoundAndToFixedSetter` ([e861db2](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/e861db2))
+
+### 💅 Refactors
+
+- Enforce camelCase naming for all variables, classes, methods, types, etc., ignoring abbreviations ([29698c5](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/29698c5))
+
+### 🏡 Chore
+
+- Upgrade dependencies ([6edcf10](https://github.com/kiki-kanri/kikiutils-node-mongoose/commit/6edcf10))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v2.1.6
 
 [compare changes](https://github.com/kiki-kanri/kikiutils-node-mongoose/compare/v2.1.5...v2.1.6)
