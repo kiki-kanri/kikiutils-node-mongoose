@@ -51,8 +51,8 @@ Please refer to the [examples](./examples/README.md) folder for usage instructio
 [npm-downloads-href]: https://npmjs.com/package/@kikiutils/mongoose
 [npm-downloads-src]: https://img.shields.io/npm/dm/@kikiutils/mongoose.svg?style=flat&colorA=18181B&colorB=28CF8D
 
-[codecov-href]: https://codecov.io/github/kiki-kanri/kikiutils-node-mongoose
-[codecov-src]: https://codecov.io/github/kiki-kanri/kikiutils-node-mongoose/graph/badge.svg?token=GRSQ7JO39E
+[codecov-href]: https://codecov.io/github/kikiutils/node-mongoose
+[codecov-src]: https://codecov.io/github/kikiutils/node-mongoose/graph/badge.svg?token=GRSQ7JO39E
 
-[license-href]: https://github.com/kiki-kanri/kikiutils-node-mongoose/blob/main/LICENSE
+[license-href]: https://github.com/kikiutils/node-mongoose/blob/main/LICENSE
 [license-src]: https://img.shields.io/npm/l/@kikiutils/mongoose.svg?style=flat&colorA=18181B&colorB=28CF8D

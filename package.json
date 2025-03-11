@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kiki-kanri/kikiutils-node-mongoose.git"
+    "url": "git+https://github.com/kikiutils/node-mongoose.git"
   },
   "keywords": [
     "Decimal128",
