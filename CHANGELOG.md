@@ -1,5 +1,19 @@
 # Changelog
 
+## v2.1.8
+
+[compare changes](https://github.com/kikiutils/node-mongoose/compare/v2.1.7...v2.1.8)
+
+### 🏡 Chore
+
+- Upgrade dependencies ([c4cd6b0](https://github.com/kikiutils/node-mongoose/commit/c4cd6b0))
+- Update repository URL ([2204dc8](https://github.com/kikiutils/node-mongoose/commit/2204dc8))
+- Set `hideAuthorEmail` arg in changelogen command ([f8413d3](https://github.com/kikiutils/node-mongoose/commit/f8413d3))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v2.1.7
 
 [compare changes](https://github.com/kikiutils/node-mongoose/compare/v2.1.6...v2.1.7)
