@@ -1,5 +1,22 @@
 # Changelog
 
+## v2.2.0
+
+[compare changes](https://github.com/kikiutils/node-mongoose/compare/v2.1.8...v2.2.0)
+
+### 🚀 Enhancements
+
+- Enhance `buildMongooseModel` to configure `schema.timestamps` ([17f5124](https://github.com/kikiutils/node-mongoose/commit/17f5124))
+
+### 🏡 Chore
+
+- Upgrade dependencies ([a0c4ff2](https://github.com/kikiutils/node-mongoose/commit/a0c4ff2))
+- Format and lint codes ([55a1743](https://github.com/kikiutils/node-mongoose/commit/55a1743))
+
+### ❤️ Contributors
+
+- kiki-kanri
+
 ## v2.1.8
 
 [compare changes](https://github.com/kikiutils/node-mongoose/compare/v2.1.7...v2.1.8)
