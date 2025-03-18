@@ -51,7 +51,7 @@ export function buildMongooseModel<
     if (options?.enableNormalizePlugin !== false) schema.plugin(mongooseNormalizePlugin);
     schema.plugin(mongooseAggregatePaginate);
     schema.plugin(mongoosePaginate);
-    schema.set('timestamps', options?.timestamps ?? true);
+    schema.set('timestamps', options?.timestamps ?? schema.get('timestamps') ?? true);
     customMongooseOptions.beforeModelBuild?.(schema);
     // eslint-disable-next-line style/max-len
     const connection = options?.connection || (mongooseConnections.default ||= mongoose.createConnection(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017'));

@@ -35,11 +35,14 @@ export interface BuildMongooseModelOptions {
     enableNormalizePlugin?: boolean;
 
     /**
-     * Configuration for Mongoose timestamps.
+     * Configures Mongoose timestamps.
      *
-     * This option allows enabling or disabling timestamps, or providing a
-     * custom timestamp configuration using `SchemaTimestampsConfig`.
-     * The default value is `true`.
+     * This option enables or disables timestamps, or allows specifying a
+     * custom timestamp configuration via {@link SchemaTimestampsConfig}.
+     *
+     * - If `timestamps` is explicitly set, it will be used.
+     * - If `timestamps` is not provided, the schema's existing setting is used.
+     * - If the schema has no existing setting, `true` is the default value.
      *
      * @default true
      */
