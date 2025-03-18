@@ -1,5 +1,12 @@
 import type { Schema } from 'mongoose';
 
+type BaseSchemaType =
+  | BooleanConstructor
+  | DateConstructor
+  | NumberConstructor
+  | Schema.Types.ObjectId['constructor']
+  | StringConstructor;
+
 const isFunctionKeys = new Set([
     'default',
     'enum',
@@ -10,7 +17,7 @@ const isFunctionKeys = new Set([
     'minlength',
 ]);
 
-export function createBaseSchemaBuilderFactory<Builder = Readonly<Record<string, any>>>(type: BooleanConstructor | DateConstructor | NumberConstructor | Schema.Types.ObjectId['constructor'] | StringConstructor) {
+export function createBaseSchemaBuilderFactory<Builder = Readonly<Record<string, any>>>(type: BaseSchemaType) {
     return (schema: Record<string, any> = {}) => {
         schema.type = type;
         return new Proxy(

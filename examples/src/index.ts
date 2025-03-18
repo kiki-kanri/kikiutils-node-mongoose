@@ -82,7 +82,16 @@ interface UserMethodsAndOverrides {
 
 interface UserModel extends BaseMongoosePaginateModel<User, UserMethodsAndOverrides> {
     // Model static methods
-    findByAccount: (account: string, projection?: null | ProjectionType<User>, options?: null | QueryOptions<User>) => MongooseFindOneReturnType<User, UserDocument, object, UserMethodsAndOverrides>;
+    findByAccount: (
+        account: string,
+        projection?: null | ProjectionType<User>,
+        options?: null | QueryOptions<User>
+    ) => MongooseFindOneReturnType<
+        User,
+        UserDocument,
+        object,
+        UserMethodsAndOverrides
+    >;
 }
 
 export type UserDocument = MongooseHydratedDocument<User, UserMethodsAndOverrides>;
@@ -104,17 +113,25 @@ userSchema.method<UserDocument>('verifyPassword', function (password: string) {
 });
 
 // Set static methods
-userSchema.static('findByAccount', function (account: string, projection?: null | ProjectionType<User>, options?: null | QueryOptions<User>) {
-    return this.findOne({ account }, projection, options);
-});
+userSchema.static(
+    'findByAccount',
+    function (account: string, projection?: null | ProjectionType<User>, options?: null | QueryOptions<User>) {
+        return this.findOne({ account }, projection, options);
+    },
+);
 
 // Build model
 const UserModel = buildMongooseModel<User, UserModel, UserMethodsAndOverrides>('user.users', 'User', userSchema);
 
 // Create document
 console.log('creating user');
+const userAccount = Array.from(
+    { length: 8 },
+    () => String.fromCharCode((Math.random() > 0.5 ? 97 : 65) + Math.floor(Math.random() * 26)),
+).join('');
+
 const user = await UserModel.create({
-    account: Array.from({ length: 8 }, () => String.fromCharCode((Math.random() > 0.5 ? 97 : 65) + Math.floor(Math.random() * 26))).join(''),
+    account: userAccount,
     balance: '1000.501',
     email: 'example@example.com',
     password: 'test-password',

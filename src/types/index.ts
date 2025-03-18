@@ -75,7 +75,8 @@ declare global {
      * @template RawDocType - The raw document type as stored in MongoDB.
      * @template DocType - The Mongoose document type after applying schema transformations.
      * @template QueryHelpers - Optional type parameter for additional query helper methods.
-     * @template InstanceMethodsAndOverrides - Optional type parameter for specifying custom instance methods and overrides on the document.
+     * @template InstanceMethodsAndOverrides - Optional type parameter for specifying custom instance methods
+     * and overrides on the document.
      */
     type MongooseFindOneReturnType<
         RawDocType,
@@ -103,5 +104,9 @@ declare global {
      * @template InstanceMethodsAndOverrides - Optional type parameter for instance methods and overrides.
      * @template QueryHelpers - Optional type parameter for additional query helper methods.
      */
-    type MongooseHydratedDocument<DocType, InstanceMethodsAndOverrides = object, QueryHelpers = object> = HydratedDocument<DocType, InstanceMethodsAndOverrides, QueryHelpers>;
+    type MongooseHydratedDocument<
+        DocType,
+        InstanceMethodsAndOverrides = object,
+        QueryHelpers = object,
+    > = HydratedDocument<DocType, InstanceMethodsAndOverrides, QueryHelpers>;
 }

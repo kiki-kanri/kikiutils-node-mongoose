@@ -1,17 +1,21 @@
+import net from 'node:net';
+
 import type {
     DefaultType,
     IndexDirection,
     IndexOptions,
     StringSchemaDefinition,
 } from 'mongoose';
-import net from 'node:net';
 import type { Merge } from 'type-fest';
 
 import type { Readonlyable } from '../types/utils';
 
 import { createBaseSchemaBuilderFactory } from './base';
 
-export type ExtendStringSchemaBuilder<Props extends BaseProps, ExtraOmitFields extends string> = Omit<StringSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
+export type ExtendStringSchemaBuilder<
+    Props extends BaseProps,
+    ExtraOmitFields extends string,
+> = Omit<StringSchemaBuilder<Props, ExtraOmitFields>, ExtraOmitFields | keyof Props>;
 
 interface BaseProps {
     type: StringSchemaDefinition;
@@ -22,8 +26,18 @@ interface IpSchema<T extends string> {
     validate: { message: T; validator: (value: string) => boolean };
 }
 
-export interface StringSchemaBuilder<Props extends { type: StringSchemaDefinition } = { type: StringSchemaDefinition }, ExtraOmitFields extends string = never> {
-    default: <T extends ((this: any, doc: any) => DefaultType<D>) | DefaultType<D> | null, D extends string>(value: T) => ExtendStringSchemaBuilder<Merge<Props, { default: T }>, ExtraOmitFields>;
+export interface StringSchemaBuilder<
+    Props extends { type: StringSchemaDefinition } = { type: StringSchemaDefinition },
+    ExtraOmitFields extends string = never,
+> {
+    default: <
+        T extends ((this: any, doc: any) => DefaultType<D>) | DefaultType<D> | null,
+        D extends string,
+    >(value: T) => ExtendStringSchemaBuilder<
+        Merge<Props, { default: T }>,
+        ExtraOmitFields
+    >;
+
     enum: <
         T extends
         | Readonlyable<Array<null | S>>
@@ -35,27 +49,38 @@ export interface StringSchemaBuilder<Props extends { type: StringSchemaDefinitio
         value: T
     ) => ExtendStringSchemaBuilder<Merge<Props, { enum: T }>, ExtraOmitFields>;
 
-    index: <T extends boolean | IndexDirection | IndexOptions>(value: T) => ExtendStringSchemaBuilder<Merge<Props, { index: T }>, ExtraOmitFields>;
+    index: <T extends boolean | IndexDirection | IndexOptions>(value: T) => ExtendStringSchemaBuilder<
+        Merge<Props, { index: T }>,
+        ExtraOmitFields
+    >;
 
     /**
      * Adds IPv4 validation to the string schema.
      * Ensures the string is a valid IPv4 address and trims the input. The validation message can be customized.
      *
-     * @param message - The custom error message to return if validation fails. Defaults to a standard IPv4 validation message.
+     * @param message - The custom error message to return if validation fails. Defaults to a standard
+     * IPv4 validation message.
      *
      * @returns A schema builder with IPv4 validation and the `trim` option enabled.
      */
-    ipv4: <T extends string = typeof defaultIpv4ValidateMessage>(message?: T) => ExtendStringSchemaBuilder<Merge<Props, IpSchema<T>>, 'ipv4' | 'ipv6' | ExtraOmitFields>;
+    ipv4: <T extends string = typeof defaultIpv4ValidateMessage>(message?: T) => ExtendStringSchemaBuilder<
+        Merge<Props, IpSchema<T>>,
+        'ipv4' | 'ipv6' | ExtraOmitFields
+    >;
 
     /**
      * Adds IPv6 validation to the string schema.
      * Ensures the string is a valid IPv6 address and trims the input. The validation message can be customized.
      *
-     * @param message - The custom error message to return if validation fails. Defaults to a standard IPv6 validation message.
+     * @param message - The custom error message to return if validation fails. Defaults to a standard
+     * IPv6 validation message.
      *
      * @returns A schema builder with IPv6 validation and the `trim` option enabled.
      */
-    ipv6: <T extends string = typeof defaultIpv6ValidateMessage>(message?: T) => ExtendStringSchemaBuilder<Merge<Props, IpSchema<T>>, 'ipv4' | 'ipv6' | ExtraOmitFields>;
+    ipv6: <T extends string = typeof defaultIpv6ValidateMessage>(message?: T) => ExtendStringSchemaBuilder<
+        Merge<Props, IpSchema<T>>,
+        'ipv4' | 'ipv6' | ExtraOmitFields
+    >;
 
     /**
      * Sets both the maximum and minimum length of the string.
@@ -65,10 +90,34 @@ export interface StringSchemaBuilder<Props extends { type: StringSchemaDefinitio
      *
      * @returns A schema builder with both `maxlength` and `minlength` options applied.
      */
-    length: <T extends L | Readonlyable<[L, S]>, L extends number, S extends string>(value: T) => ExtendStringSchemaBuilder<Merge<Props, { maxlength: T; minlength: T }>, ExtraOmitFields>;
+    length: <
+        T extends L | Readonlyable<[L, S]>,
+        L extends number,
+        S extends string,
+    >(value: T) => ExtendStringSchemaBuilder<
+        Merge<Props, { maxlength: T; minlength: T }>,
+        ExtraOmitFields
+    >;
+
     lowercase: ExtendStringSchemaBuilder<Merge<Props, { lowercase: true }>, ExtraOmitFields>;
-    maxlength: <T extends L | Readonlyable<[L, S]>, L extends number, S extends string>(value: T) => ExtendStringSchemaBuilder<Merge<Props, { maxlength: T }>, ExtraOmitFields>;
-    minlength: <T extends L | Readonlyable<[L, S]>, L extends number, S extends string>(value: T) => ExtendStringSchemaBuilder<Merge<Props, { minlength: T }>, ExtraOmitFields>;
+    maxlength: <
+        T extends L | Readonlyable<[L, S]>,
+        L extends number,
+        S extends string,
+    >(value: T) => ExtendStringSchemaBuilder<
+        Merge<Props, { maxlength: T }>,
+        ExtraOmitFields
+    >;
+
+    minlength: <
+        T extends L | Readonlyable<[L, S]>,
+        L extends number,
+        S extends string,
+    >(value: T) => ExtendStringSchemaBuilder<
+        Merge<Props, { minlength: T }>,
+        ExtraOmitFields
+    >;
+
     nonRequired: Props;
     private: ExtendStringSchemaBuilder<Merge<Props, { private: true }>, ExtraOmitFields>;
     required: Merge<Props, { required: true }>;

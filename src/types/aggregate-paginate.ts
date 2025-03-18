@@ -75,7 +75,11 @@ declare module 'mongoose' {
         totalPages: number;
     }
 
-    interface AggregatePaginateModel<RawDocType, QueryHelpers = object, InstanceMethodsAndOverrides = object> extends Model<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> {
+    interface AggregatePaginateModel<
+        RawDocType,
+        QueryHelpers = object,
+        InstanceMethodsAndOverrides = object,
+    > extends Model<RawDocType, QueryHelpers, InstanceMethodsAndOverrides> {
         aggregatePaginate: <T>(
             query?: Aggregate<T[]> | PrePaginatePipelineStage[],
             options?: AggregatePaginateOptions,

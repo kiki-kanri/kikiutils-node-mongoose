@@ -10,7 +10,10 @@ import type { IfElse } from './utils';
  * @template CreatedAtField - A boolean flag indicating whether the `createdAt` field should be included.
  * @template UpdatedAtField - A boolean flag indicating whether the `updatedAt` field should be included.
  */
-interface LocalBaseMongooseModelData<CreatedAtField extends boolean = true, UpdatedAtField extends boolean = true> extends LocalWithTimestampFieldsData<CreatedAtField, UpdatedAtField> {
+interface LocalBaseMongooseModelData<
+    CreatedAtField extends boolean = true,
+    UpdatedAtField extends boolean = true,
+> extends LocalWithTimestampFieldsData<CreatedAtField, UpdatedAtField> {
     id: string;
 }
 
@@ -49,7 +52,10 @@ declare global {
      * @template CreatedAtField - A boolean flag indicating whether the `createdAt` field should be included.
      * @template UpdatedAtField - A boolean flag indicating whether the `updatedAt` field should be included.
      */
-    type BaseMongooseModelData<CreatedAtField extends boolean = true, UpdatedAtField extends boolean = true> = OmitNever<LocalBaseMongooseModelData<CreatedAtField, UpdatedAtField>>;
+    type BaseMongooseModelData<
+        CreatedAtField extends boolean = true,
+        UpdatedAtField extends boolean = true,
+    > = OmitNever<LocalBaseMongooseModelData<CreatedAtField, UpdatedAtField>>;
 
     /**
      * Type definition to omit timestamp fields (`createdAt`, `updatedAt`)
@@ -67,7 +73,10 @@ declare global {
      * @template T - The type from which to omit fields.
      * @template OT - Additional fields to omit, specified as a union of string, number, or symbol keys.
      */
-    type OmitMongooseTimestampAndOtherFields<T, OT extends number | string | symbol = never> = Omit<T, 'createdAt' | 'updatedAt' | OT>;
+    type OmitMongooseTimestampAndOtherFields<
+        T,
+        OT extends number | string | symbol = never,
+    > = Omit<T, 'createdAt' | 'updatedAt' | OT>;
 
     /**
      * Type definition for including timestamp fields conditionally based on the provided flags.
@@ -78,7 +87,10 @@ declare global {
      * @template CreatedAt - A boolean flag indicating whether the `createdAt` field should be included.
      * @template UpdatedAt - A boolean flag indicating whether the `updatedAt` field should be included.
      */
-    type WithMongooseTimestampFieldsData<CreatedAt extends boolean = true, UpdatedAt extends boolean = true> = OmitNever<LocalWithTimestampFieldsData<CreatedAt, UpdatedAt>>;
+    type WithMongooseTimestampFieldsData<
+        CreatedAt extends boolean = true,
+        UpdatedAt extends boolean = true,
+    > = OmitNever<LocalWithTimestampFieldsData<CreatedAt, UpdatedAt>>;
 }
 
 export {};

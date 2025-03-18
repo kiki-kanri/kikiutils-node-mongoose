@@ -7,6 +7,7 @@ describe('createBaseSchemaBuilderFactory', () => {
         expect(createBaseSchemaBuilderFactory(Boolean)().nonRequired).toEqual({ type: Boolean });
         expect(createBaseSchemaBuilderFactory(Date)().nonRequired).toEqual({ type: Date });
         expect(createBaseSchemaBuilderFactory(Number)().nonRequired).toEqual({ type: Number });
+        // eslint-disable-next-line style/max-len
         expect(createBaseSchemaBuilderFactory(Schema.Types.ObjectId)().nonRequired).toEqual({ type: Schema.Types.ObjectId });
         expect(createBaseSchemaBuilderFactory(String)().nonRequired).toEqual({ type: String });
     });

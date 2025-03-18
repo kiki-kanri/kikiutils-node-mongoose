@@ -44,7 +44,10 @@ export function mongooseNormalizePlugin<S extends Schema>(schema: S) {
                 }
 
                 delete copiedRet.__v;
-                if (toJsonTransform && typeof toJsonTransform !== 'boolean') return toJsonTransform(doc, copiedRet, options);
+                if (toJsonTransform && typeof toJsonTransform !== 'boolean') {
+                    return toJsonTransform(doc, copiedRet, options);
+                }
+
                 return copiedRet;
             },
         },

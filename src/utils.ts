@@ -53,7 +53,9 @@ export function buildMongooseModel<
     schema.plugin(mongoosePaginate);
     schema.set('timestamps', options?.timestamps ?? true);
     customMongooseOptions.beforeModelBuild?.(schema);
-    return (options?.connection || mongooseConnections.default || (mongooseConnections.default = mongoose.createConnection(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017'))).model<DocType, Model, QueryHelpers>(name, schema, collection);
+    // eslint-disable-next-line style/max-len
+    const connection = options?.connection || (mongooseConnections.default ||= mongoose.createConnection(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017'));
+    return connection.model<DocType, Model, QueryHelpers>(name, schema, collection);
 }
 
 /**
@@ -83,6 +85,9 @@ export async function mongooseDocumentOrObjectIdToDocument<
     model: BaseMongoosePaginateModel<DocType, InstanceMethodsAndOverrides, QueryHelpers>,
     selectFields?: string[],
 ): Promise<D | null> {
-    if (typeof documentOrObjectId === 'string' || documentOrObjectId instanceof Types.ObjectId) return (await model.findById(documentOrObjectId).select(selectFields || [])) as D | null;
+    if (typeof documentOrObjectId === 'string' || documentOrObjectId instanceof Types.ObjectId) {
+        return (await model.findById(documentOrObjectId).select(selectFields || [])) as D | null;
+    }
+
     return documentOrObjectId;
 }

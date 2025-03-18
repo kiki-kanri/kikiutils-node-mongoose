@@ -115,23 +115,44 @@ declare module 'mongoose' {
             <UserType = T, O extends PaginateOptions = PaginateOptions>(
                 query?: FilterQuery<T>,
                 options?: O,
-                callback?: (err: any, result: PaginateResult<PaginateDocument<UserType, TMethods, TQueryHelpers, O>>) => void
+                callback?: (
+                    err: any,
+                    result: PaginateResult<PaginateDocument<UserType, TMethods, TQueryHelpers, O>>
+                ) => void
             ): Promise<PaginateResult<PaginateDocument<UserType, TMethods, TQueryHelpers, O>>>;
 
             <UserType = T>(
                 query?: FilterQuery<T>,
                 options?: PaginateOptions,
-                callback?: (err: any, result: PaginateResult<PaginateDocument<UserType, TMethods, TQueryHelpers, PaginateOptions>>) => void
+                callback?: (
+                    err: any,
+                    result: PaginateResult<PaginateDocument<UserType, TMethods, TQueryHelpers, PaginateOptions>>
+                ) => void
             ): Promise<PaginateResult<PaginateDocument<UserType, TMethods, TQueryHelpers, PaginateOptions>>>;
         };
     }
 
     // @ts-expect-error Ignore this error.
-    interface Query<ResultType, DocType, THelpers = NonNullable<unknown>, RawDocType = DocType, _QueryOp = 'find', TInstanceMethods = Record<string, never>> {
+    interface Query<
+        ResultType,
+        DocType,
+        THelpers = NonNullable<unknown>,
+        RawDocType = DocType,
+        _QueryOp = 'find',
+        TInstanceMethods = Record<string, never>,
+    > {
         paginate: {
-            <O extends PaginateOptions>(options?: O): Promise<PaginateResult<PaginateDocument<RawDocType, TInstanceMethods, THelpers, O>>>;
-            <UserType = ResultType, O extends PaginateOptions = PaginateOptions>(options?: O): Promise<PaginateResult<PaginateDocument<UserType, TInstanceMethods, THelpers, O>>>;
-            <UserType = ResultType>(options?: PaginateOptions): Promise<PaginateResult<PaginateDocument<UserType, TInstanceMethods, THelpers, PaginateOptions>>>;
+            <O extends PaginateOptions>(options?: O): Promise<
+                PaginateResult<PaginateDocument<RawDocType, TInstanceMethods, THelpers, O>>
+            >;
+
+            <UserType = ResultType, O extends PaginateOptions = PaginateOptions>(options?: O): Promise<
+                PaginateResult<PaginateDocument<UserType, TInstanceMethods, THelpers, O>>
+            >;
+
+            <UserType = ResultType>(options?: PaginateOptions): Promise<
+                PaginateResult<PaginateDocument<UserType, TInstanceMethods, THelpers, PaginateOptions>>
+            >;
         };
     }
 }
